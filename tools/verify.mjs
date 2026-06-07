@@ -1,5 +1,5 @@
 /* ============================================================
-   verify.mjs  —  Anti-Bug-Prüfsuite für Gioeles Abschluss-App
+   verify.mjs  —  Anti-Bug-Prüfsuite für Maxs Abschluss-App
    Ausführen:  node tools/verify.mjs
    Exit-Code != 0, wenn irgendeine Prüfung fehlschlägt.
    Keine externen Abhängigkeiten (nur Node-Standardbibliothek).

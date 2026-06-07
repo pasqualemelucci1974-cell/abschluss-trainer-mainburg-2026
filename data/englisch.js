@@ -339,7 +339,7 @@ APP.register({
             "Please bring warm clothes and a rain jacket, because the weather in the mountains can change very quickly. Comfortable walking shoes are a good idea, too.<br><br>" +
             "By the way, how long are you going to stay? Let me know so I can plan everything.<br><br>" +
             "Looking forward to seeing you!<br><br>" +
-            "Best wishes,<br>Gioele</i></p>" },
+            "Best wishes,<br>Max</i></p>" },
         { title: "Thema 2 &ndash; Opinion / Blog comment (Aufgabe + Mustertext)",
           html:
             "<p><b>Task:</b> A blog asks: &bdquo;Should students wear school uniforms?&ldquo; Write a comment (about 150&ndash;180 words) in which you give your opinion. Include at least one argument <b>for</b> and one <b>against</b>, and end with your own conclusion.</p>" +
@@ -410,7 +410,7 @@ APP.register({
             "Use full sentences and connectors (and, because, in the future).",
             "Add a reason or detail to each point."
           ],
-          answer: "Sample: &bdquo;Hello, my name is Gioele. I&rsquo;m sixteen years old and I go to the Realschule in Mainburg. In my free time I enjoy playing football and listening to music. In the future, I would like to do an apprenticeship, because I prefer practical work to studying at university.&ldquo;" },
+          answer: "Sample: &bdquo;Hello, my name is Max. I&rsquo;m sixteen years old and I go to the Realschule in Mainburg. In my free time I enjoy playing football and listening to music. In the future, I would like to do an apprenticeship, because I prefer practical work to studying at university.&ldquo;" },
 
         { id: "e-sp-02", area: "speaking", difficulty: 2,
           prompt: "Your partner suggests: &bdquo;Let&rsquo;s do our homework first.&ldquo; You disagree politely and make a different suggestion. What could you say?",

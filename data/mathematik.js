@@ -2,7 +2,7 @@
    FACH: Mathematik II  ·  Abschlusspr&uuml;fung 29.06.2026
    Realschule Mainburg (Bayern) · Wahlpflichtf&auml;chergruppe IIIa
    Klassisches <script>, KEIN ES-Modul. Ruft genau einmal APP.register auf.
-   Inhalte aus dem verifizierten Seed (Gioele_Mathe_Trainer.html),
+   Inhalte aus dem verifizierten Seed (Max_Mathe_Trainer.html),
    aus dem Italienischen ins Deutsche &uuml;bersetzt. Mathematik unver&auml;ndert.
    ============================================================ */
 APP.register({

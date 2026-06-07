@@ -259,7 +259,7 @@ APP.register({
         "</ul>",
       examples: [
         { title: "Beispiel: sich vorstellen (Mes loisirs)",
-          html: "<p style='font-style:italic'>&laquo;&nbsp;Bonjour&nbsp;! Je m&rsquo;appelle Gioele et j&rsquo;ai seize ans. J&rsquo;habite &agrave; Mainburg, en Bavi&egrave;re. " +
+          html: "<p style='font-style:italic'>&laquo;&nbsp;Bonjour&nbsp;! Je m&rsquo;appelle Max et j&rsquo;ai seize ans. J&rsquo;habite &agrave; Mainburg, en Bavi&egrave;re. " +
                 "Pendant mon temps libre, j&rsquo;aime faire du sport et &eacute;couter de la musique. Mon passe-temps pr&eacute;f&eacute;r&eacute; est le foot, parce que j&rsquo;aime jouer en &eacute;quipe. " +
                 "Le week-end, je sors souvent avec mes amis. &Agrave; mon avis, c&rsquo;est important d&rsquo;avoir des loisirs pour se d&eacute;tendre.&nbsp;&raquo;</p>" }
       ],
