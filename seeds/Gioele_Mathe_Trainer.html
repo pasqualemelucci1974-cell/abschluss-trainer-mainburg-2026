@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathe-Trainer für Gioele · Realschulabschluss Mathematik II</title>
+<style>
+  :root{
+    --paper:#f6f1e7; --paper2:#fbf8f1; --ink:#1f2a30; --ink-soft:#46555c;
+    --teal:#13565b; --teal-d:#0d3f43; --amber:#e7a614; --amber-d:#c4880a;
+    --line:#ddd2bd; --good:#2f7d4f; --bad:#b23b3b; --shadow:0 1px 2px rgba(31,42,48,.08),0 8px 24px rgba(31,42,48,.06);
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:var(--sans);color:var(--ink);background:var(--paper);
+    background-image:radial-gradient(circle at 1px 1px,rgba(31,42,48,.04) 1px,transparent 0);background-size:22px 22px;line-height:1.55}
+  a{color:var(--teal)}
+  /* Header */
+  header{background:linear-gradient(135deg,var(--teal),var(--teal-d));color:#f3efe4;padding:18px 22px;position:sticky;top:0;z-index:20;box-shadow:var(--shadow)}
+  .h-wrap{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:space-between}
+  .h-title{font-family:var(--serif);font-size:1.5rem;font-weight:700;letter-spacing:.2px}
+  .h-title small{display:block;font-family:var(--sans);font-weight:400;font-size:.74rem;opacity:.8;letter-spacing:.5px;text-transform:uppercase;margin-top:2px}
+  .count{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);padding:8px 14px;border-radius:12px}
+  .count b{font-family:var(--serif);font-size:1.7rem;color:var(--amber);line-height:1}
+  .count span{font-size:.72rem;opacity:.85;text-transform:uppercase;letter-spacing:.5px}
+  /* Layout */
+  .shell{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:226px 1fr;gap:22px;padding:22px}
+  nav{position:sticky;top:96px;align-self:start;display:flex;flex-direction:column;gap:4px}
+  nav button{font-family:var(--sans);text-align:left;border:1px solid transparent;background:transparent;color:var(--ink-soft);
+    padding:10px 14px;border-radius:10px;cursor:pointer;font-size:.95rem;display:flex;align-items:center;gap:10px;transition:.15s}
+  nav button .ic{width:22px;text-align:center;font-size:1.05rem}
+  nav button:hover{background:var(--paper2);color:var(--ink)}
+  nav button.active{background:var(--teal);color:#f3efe4;border-color:var(--teal-d);font-weight:600;box-shadow:var(--shadow)}
+  nav .navsep{height:1px;background:var(--line);margin:8px 6px}
+  main{min-width:0}
+  .view{display:none;animation:fade .3s ease}
+  .view.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  /* Cards */
+  .card{background:var(--paper2);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:18px;box-shadow:var(--shadow)}
+  .card h2{font-family:var(--serif);font-size:1.45rem;margin:0 0 4px}
+  .card h3{font-family:var(--serif);font-size:1.15rem;margin:18px 0 6px;color:var(--teal-d)}
+  .eyebrow{font-size:.72rem;text-transform:uppercase;letter-spacing:1.2px;color:var(--amber-d);font-weight:700;margin-bottom:6px}
+  .lead{color:var(--ink-soft);margin:.2rem 0 0}
+  .de{font-style:italic;color:var(--teal-d)}
+  /* Formula box */
+  .formula{background:#fff;border:1px solid var(--line);border-left:4px solid var(--amber);border-radius:8px;
+    padding:10px 14px;margin:10px 0;font-size:1.05rem;font-family:var(--serif);overflow-x:auto}
+  .formula b{color:var(--teal-d)}
+  .frac{display:inline-flex;flex-direction:column;text-align:center;vertical-align:middle;margin:0 2px}
+  .frac .num{border-bottom:1.5px solid currentColor;padding:0 4px}
+  .frac .den{padding:0 4px}
+  .tagrow{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+  .tag{background:#eef3ee;color:var(--teal-d);border:1px solid #cfe0cf;border-radius:999px;padding:3px 11px;font-size:.8rem;font-weight:600}
+  /* Figures */
+  .fig{display:block;max-width:360px;width:100%;margin:8px 0;background:#fff;border:1px solid var(--line);border-radius:10px}
+  .fig .grid{stroke:#eadfca;stroke-width:1}
+  .fig .axis{stroke:#9aa7a0;stroke-width:1.4}
+  .fig .curve{fill:none;stroke:var(--teal);stroke-width:2.4}
+  .fig .pt{fill:var(--amber);stroke:var(--amber-d)}
+  .fig .lbl{font:600 12px var(--sans);fill:var(--ink)}
+  .fig .shape{fill:rgba(19,86,91,.08);stroke:var(--teal);stroke-width:1.8}
+  .fig .edge{fill:none;stroke:var(--teal);stroke-width:1.8}
+  .fig .edge-d{fill:none;stroke:var(--teal);stroke-width:1.4;stroke-dasharray:4 3}
+  .fig .grey{fill:rgba(31,42,48,.16);stroke:var(--ink-soft);stroke-width:1.4}
+  .fig .node{fill:#fff;stroke:var(--teal);stroke-width:1.6}
+  .fig .tline{stroke:var(--ink-soft);stroke-width:1.3}
+  /* Exercises */
+  .ex{border:1px solid var(--line);border-radius:12px;margin:14px 0;overflow:hidden;background:#fff}
+  .ex-head{display:flex;align-items:flex-start;gap:10px;padding:14px 16px;cursor:default;border-bottom:1px solid transparent}
+  .ex-num{flex:0 0 auto;width:30px;height:30px;border-radius:8px;background:var(--teal);color:#f3efe4;display:flex;align-items:center;justify-content:center;font-weight:700;font-family:var(--serif)}
+  .ex-q{flex:1}
+  .ex-q .meta{font-size:.74rem;color:var(--amber-d);text-transform:uppercase;letter-spacing:.6px;font-weight:700;margin-bottom:3px}
+  .ex-q .points{float:right;color:var(--ink-soft);font-weight:600;font-size:.85rem}
+  .btn{font-family:var(--sans);border:1px solid var(--line);background:var(--paper2);color:var(--ink);border-radius:8px;padding:7px 14px;cursor:pointer;font-size:.88rem;font-weight:600;transition:.15s}
+  .btn:hover{border-color:var(--teal);color:var(--teal)}
+  .btn.primary{background:var(--teal);color:#f3efe4;border-color:var(--teal-d)}
+  .btn.primary:hover{background:var(--teal-d);color:#fff}
+  .btn.amber{background:var(--amber);color:#3a2a04;border-color:var(--amber-d)}
+  .btn.good{border-color:var(--good);color:var(--good)} .btn.good.sel{background:var(--good);color:#fff}
+  .btn.bad{border-color:var(--bad);color:var(--bad)} .btn.bad.sel{background:var(--bad);color:#fff}
+  .ex-actions{padding:0 16px 14px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .ex-actions .rate{margin-left:auto;display:flex;gap:8px;align-items:center}
+  .ex-actions .rate span{font-size:.8rem;color:var(--ink-soft)}
+  .sol{display:none;padding:0 16px 16px;border-top:1px dashed var(--line);margin-top:4px}
+  .sol.show{display:block;animation:fade .25s ease}
+  .sol ol{margin:12px 0;padding-left:22px}
+  .sol li{margin:9px 0}
+  .sol li .why{color:var(--ink-soft);font-size:.92rem}
+  .sol li .calc{font-family:var(--serif);background:#fbf6ea;border-radius:6px;padding:2px 8px;display:inline-block;margin-top:3px}
+  .answer{background:#eef3ee;border:1px solid #cfe0cf;border-radius:8px;padding:10px 14px;margin-top:10px;font-family:var(--serif)}
+  .answer b{color:var(--good)}
+  .pill{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--line);margin-right:7px;vertical-align:middle}
+  .pill.correct{background:var(--good)} .pill.wrong{background:var(--bad)}
+  /* Progress */
+  .prog-bar{height:14px;border-radius:999px;background:#e7ddc8;overflow:hidden;border:1px solid var(--line)}
+  .prog-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--amber));width:0;transition:width .5s}
+  .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-top:14px}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center}
+  .stat b{font-family:var(--serif);font-size:1.8rem;display:block;color:var(--teal-d)}
+  .stat span{font-size:.78rem;color:var(--ink-soft)}
+  /* Plan / today */
+  .day{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+  .day:last-child{border-bottom:0}
+  .day .date{flex:0 0 86px;font-weight:700;color:var(--teal-d);font-size:.9rem}
+  .day.today{background:#fff7e6;border-radius:10px;padding:12px;border:1px solid #f0d999}
+  .day.done .date{opacity:.5}
+  .day .ttl{font-weight:600}
+  .day .desc{font-size:.9rem;color:var(--ink-soft)}
+  .today-hero{background:linear-gradient(135deg,#fff,#fdf6e6);border:1px solid #f0d999}
+  .today-hero .big{font-family:var(--serif);font-size:1.6rem;color:var(--teal-d);margin:4px 0}
+  /* Simulation */
+  .sim-timer{font-family:var(--serif);font-size:2.6rem;color:var(--teal-d);text-align:center;letter-spacing:1px}
+  .sim-timer.warn{color:var(--bad)}
+  .center{text-align:center}
+  .muted{color:var(--ink-soft);font-size:.9rem}
+  footer{max-width:1120px;margin:0 auto;padding:18px 22px 40px;color:var(--ink-soft);font-size:.82rem;text-align:center}
+  .mobile-only{display:none}
+  @media(max-width:760px){
+    .shell{grid-template-columns:1fr;padding:14px}
+    nav{position:static;flex-direction:row;overflow-x:auto;gap:6px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+    nav button{white-space:nowrap;flex:0 0 auto}
+    nav .navsep{display:none}
+    .h-title{font-size:1.2rem}
+  }
+  @media print{
+    header,nav,footer,.ex-actions,.btn{display:none!important}
+    .view{display:block!important}
+    .sol{display:block!important}
+    body{background:#fff}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="h-wrap">
+    <div class="h-title">Mathe-Trainer für Gioele
+      <small>Realschulabschluss · Mathematik II · Bayern</small>
+    </div>
+    <div class="count">
+      <b id="cd-num">–</b>
+      <span>giorni alla<br>Prüfung<br><b style="font-size:.8rem;color:#f3efe4">Mo 29.06.2026 · 08:30</b></span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav id="nav">
+    <button data-v="heute" class="active"><span class="ic">📅</span> Oggi</button>
+    <button data-v="plan"><span class="ic">🗺️</span> Piano 3 settimane</button>
+    <div class="navsep"></div>
+    <button data-v="funktionen"><span class="ic">📈</span> Funktionen</button>
+    <button data-v="geometrie"><span class="ic">📐</span> Geometrie &amp; Trig</button>
+    <button data-v="raum"><span class="ic">🧊</span> Raumgeometrie</button>
+    <button data-v="daten"><span class="ic">🎲</span> Daten &amp; Zufall</button>
+    <div class="navsep"></div>
+    <button data-v="simulation"><span class="ic">⏱️</span> Simulazione</button>
+    <button data-v="fehler"><span class="ic">🔁</span> Da rivedere</button>
+    <button data-v="fortschritt"><span class="ic">📊</span> Progresso</button>
+  </nav>
+
+  <main>
+    <!-- OGGI -->
+    <section class="view active" id="view-heute"></section>
+
+    <!-- PIANO -->
+    <section class="view" id="view-plan">
+      <div class="card">
+        <div class="eyebrow">Lernplan</div>
+        <h2>Piano di studio · 3 settimane</h2>
+        <p class="lead">Un argomento al giorno, dal facile al difficile. La <span class="de">Raumgeometrie</span> (geometria solida) ha più spazio perché è la parte che pesa di più all'esame.</p>
+        <div id="plan-list" style="margin-top:14px"></div>
+      </div>
+    </section>
+
+    <!-- FUNKTIONEN -->
+    <section class="view" id="view-funktionen"></section>
+    <!-- GEOMETRIE -->
+    <section class="view" id="view-geometrie"></section>
+    <!-- RAUM -->
+    <section class="view" id="view-raum"></section>
+    <!-- DATEN -->
+    <section class="view" id="view-daten"></section>
+
+    <!-- SIMULATION -->
+    <section class="view" id="view-simulation">
+      <div class="card" id="sim-card">
+        <div class="eyebrow">Modalità esame</div>
+        <h2>Simulazione</h2>
+        <p class="lead">Un mini-esame con <b>Teil A</b> (senza calcolatrice, solo Formelsammlung) e <b>Teil B</b> (con calcolatrice). All'esame vero hai <b>170 minuti</b>. Qui parte un timer: lavora su carta, poi controlla le soluzioni.</p>
+        <div class="center" style="margin-top:16px">
+          <button class="btn primary" id="sim-start">▶︎ Inizia simulazione (170 min)</button>
+          <button class="btn" id="sim-short">Versione breve (45 min)</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEHLER -->
+    <section class="view" id="view-fehler">
+      <div class="card">
+        <div class="eyebrow">Ripasso mirato</div>
+        <h2>Esercizi da rivedere</h2>
+        <p class="lead">Qui finiscono gli esercizi che hai segnato come sbagliati. Rifalli finché non li segni "giusto".</p>
+        <div id="fehler-list" style="margin-top:14px"></div>
+      </div>
+    </section>
+
+    <!-- FORTSCHRITT -->
+    <section class="view" id="view-fortschritt">
+      <div class="card">
+        <div class="eyebrow">Progresso</div>
+        <h2>A che punto sei</h2>
+        <div style="margin:16px 0 8px"><div class="prog-bar"><div class="prog-fill" id="prog-fill"></div></div></div>
+        <p class="muted" id="prog-text">–</p>
+        <div class="stat-grid" id="stat-grid"></div>
+        <div style="margin-top:18px;display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn" onclick="window.print()">🖨️ Stampa / PDF</button>
+          <button class="btn bad" id="reset-btn">↺ Azzera progresso</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  App offline per Gioele · soluzioni verificate a mano · spiegazioni in italiano, termini matematici in tedesco<br>
+  Esercizi <em>nello stile</em> delle prove ufficiali bavaresi (ISB) 2020–2025 — originali, non copiati.
+</footer>
+
+<script>
+/* ---------- Storage (works offline; falls back to memory) ---------- */
+const Store=(function(){let mem={},ok=true;try{localStorage.setItem('__t','1');localStorage.removeItem('__t');}catch(e){ok=false;}
+  return{get(k){try{if(ok)return localStorage.getItem(k);}catch(e){}return (k in mem)?mem[k]:null;},
+         set(k,v){try{if(ok){localStorage.setItem(k,v);return;}}catch(e){}mem[k]=v;}};})();
+function getProg(){try{return JSON.parse(Store.get('gioele_prog')||'{}');}catch(e){return{};}}
+function setProg(p){Store.set('gioele_prog',JSON.stringify(p));}
+
+/* ---------- Countdown ---------- */
+function updateCountdown(){
+  const exam=new Date(2026,5,29,8,30,0); // 29 June 2026
+  const now=new Date();
+  const d=Math.max(0,Math.ceil((exam-now)/(1000*60*60*24)));
+  document.getElementById('cd-num').textContent=d;
+  return d;
+}
+
+/* ---------- Math helper ---------- */
+function frac(n,d){return '<span class="frac"><span class="num">'+n+'</span><span class="den">'+d+'</span></span>';}
+
+/* ---------- SVG figure generators ---------- */
+function plot(fn,xmin,xmax,ymin,ymax,opts){
+  opts=opts||{};const W=360,H=280,pad=26;
+  const sx=v=>pad+(v-xmin)/(xmax-xmin)*(W-2*pad);
+  const sy=v=>H-pad-(v-ymin)/(ymax-ymin)*(H-2*pad);
+  let g='';
+  for(let gx=Math.ceil(xmin);gx<=xmax;gx++)g+=`<line class="grid" x1="${sx(gx)}" y1="${pad}" x2="${sx(gx)}" y2="${H-pad}"/>`;
+  for(let gy=Math.ceil(ymin);gy<=ymax;gy++)g+=`<line class="grid" x1="${pad}" y1="${sy(gy)}" x2="${W-pad}" y2="${sy(gy)}"/>`;
+  if(0>=ymin&&0<=ymax)g+=`<line class="axis" x1="${pad}" y1="${sy(0)}" x2="${W-pad}" y2="${sy(0)}"/>`;
+  if(0>=xmin&&0<=xmax)g+=`<line class="axis" x1="${sx(0)}" y1="${pad}" x2="${sx(0)}" y2="${H-pad}"/>`;
+  let pts=[];const N=160;
+  for(let i=0;i<=N;i++){const x=xmin+(xmax-xmin)*i/N,y=fn(x);if(y>=ymin-.5&&y<=ymax+.5)pts.push(sx(x)+','+sy(y));}
+  g+=`<polyline class="curve" points="${pts.join(' ')}"/>`;
+  if(opts.vertex){g+=`<circle class="pt" r="4" cx="${sx(opts.vertex[0])}" cy="${sy(opts.vertex[1])}"/>`+
+    `<text class="lbl" x="${sx(opts.vertex[0])+7}" y="${sy(opts.vertex[1])-7}">S(${opts.vertex[0]}|${opts.vertex[1]})</text>`;}
+  return `<svg class="fig" viewBox="0 0 ${W} ${H}">${g}</svg>`;
+}
+const FIG={
+  pyramid:`<svg class="fig" viewBox="0 0 300 240"><polygon class="shape" points="60,180 200,170 250,200 110,210"/>
+    <line class="edge" x1="155" y1="40" x2="60" y2="180"/><line class="edge" x1="155" y1="40" x2="200" y2="170"/>
+    <line class="edge" x1="155" y1="40" x2="250" y2="200"/><line class="edge-d" x1="155" y1="40" x2="110" y2="210"/>
+    <line class="edge-d" x1="60" y1="180" x2="250" y2="200"/><line class="edge-d" x1="200" y1="170" x2="110" y2="210"/>
+    <line class="edge-d" x1="155" y1="40" x2="155" y2="190"/><circle class="pt" r="3" cx="155" cy="190"/>
+    <text class="lbl" x="150" y="34">S</text><text class="lbl" x="44" y="184">A</text><text class="lbl" x="205" y="166">B</text>
+    <text class="lbl" x="255" y="204">C</text><text class="lbl" x="96" y="224">D</text><text class="lbl" x="160" y="196">M</text>
+    <text class="lbl" x="162" y="120">h</text></svg>`,
+  kegel:`<svg class="fig" viewBox="0 0 260 240"><ellipse class="edge-d" cx="130" cy="190" rx="80" ry="22"/>
+    <path class="shape" d="M130 40 L50 190 A80 22 0 0 0 210 190 Z"/><line class="edge-d" x1="130" y1="40" x2="130" y2="190"/>
+    <line class="tline" x1="130" y1="190" x2="210" y2="190"/><text class="lbl" x="160" y="118">s</text>
+    <text class="lbl" x="118" y="120">h</text><text class="lbl" x="165" y="206">r</text></svg>`,
+  zylinder:`<svg class="fig" viewBox="0 0 240 240"><ellipse class="edge-d" cx="120" cy="60" rx="70" ry="20"/>
+    <path class="shape" d="M50 60 L50 190 A70 20 0 0 0 190 190 L190 60"/><ellipse class="shape" cx="120" cy="60" rx="70" ry="20"/>
+    <line class="edge-d" x1="120" y1="60" x2="120" y2="190"/><text class="lbl" x="124" y="130">h</text>
+    <text class="lbl" x="150" y="76">r</text><line class="tline" x1="120" y1="60" x2="190" y2="60"/></svg>`,
+  kugel:`<svg class="fig" viewBox="0 0 220 220"><circle class="shape" cx="110" cy="110" r="80"/>
+    <ellipse class="edge-d" cx="110" cy="110" rx="80" ry="24"/><line class="tline" x1="110" y1="110" x2="190" y2="110"/>
+    <circle class="pt" r="3" cx="110" cy="110"/><text class="lbl" x="145" y="104">r</text></svg>`,
+  rot:`<svg class="fig" viewBox="0 0 260 230"><path class="grey" d="M50 60 L130 60 L130 150 A60 60 0 0 1 10 150 Z"/>
+    <path class="shape" d="M130 60 L130 150 L50 150 Z" transform="translate(0,0)"/>
+    <ellipse class="edge-d" cx="130" cy="105" rx="14" ry="45"/>
+    <line class="axis" x1="130" y1="20" x2="130" y2="210"/><text class="lbl" x="118" y="30">Achse</text>
+    <text class="lbl" x="40" y="54">Zylinder + Halbkugel</text></svg>`,
+  trig:`<svg class="fig" viewBox="0 0 300 220"><polygon class="shape" points="40,180 260,180 180,50"/>
+    <text class="lbl" x="30" y="196">A</text><text class="lbl" x="262" y="196">B</text><text class="lbl" x="184" y="44">C</text>
+    <text class="lbl" x="150" y="196">c</text><text class="lbl" x="232" y="118">a</text><text class="lbl" x="98" y="110">b</text>
+    <text class="lbl" x="58" y="172">α</text><text class="lbl" x="238" y="172">β</text><text class="lbl" x="176" y="70">γ</text></svg>`,
+  trapez:`<svg class="fig" viewBox="0 0 300 200"><polygon class="shape" points="30,170 270,170 200,50 100,50"/>
+    <line class="edge-d" x1="100" y1="50" x2="100" y2="170"/><rect x="100" y="155" width="14" height="14" fill="none" stroke="var(--teal)" stroke-width="1.2"/>
+    <text class="lbl" x="22" y="186">A</text><text class="lbl" x="272" y="186">B</text><text class="lbl" x="205" y="46">C</text>
+    <text class="lbl" x="86" y="46">D</text><text class="lbl" x="92" y="186">E</text><text class="lbl" x="78" y="115">h</text>
+    <text class="lbl" x="60" y="172">α</text></svg>`,
+  drachen:`<svg class="fig" viewBox="0 0 300 200"><path class="edge-d" d="M40 120 A110 110 0 0 1 260 120" fill="rgba(19,86,91,.05)"/>
+    <line class="axis" x1="40" y1="120" x2="260" y2="120"/><polygon class="shape" points="150,120 95,70 150,30 205,70"/>
+    <circle class="pt" r="3" cx="150" cy="120"/><text class="lbl" x="34" y="136">A</text><text class="lbl" x="262" y="136">B</text>
+    <text class="lbl" x="150" y="136">M</text><text class="lbl" x="78" y="68">P</text><text class="lbl" x="150" y="24">Q</text>
+    <text class="lbl" x="210" y="68">R</text></svg>`,
+  baum:`<svg class="fig" viewBox="0 0 300 220" style="max-width:300px"><line class="tline" x1="50" y1="110" x2="150" y2="55"/>
+    <line class="tline" x1="50" y1="110" x2="150" y2="165"/><line class="tline" x1="150" y1="55" x2="250" y2="30"/>
+    <line class="tline" x1="150" y1="55" x2="250" y2="80"/><line class="tline" x1="150" y1="165" x2="250" y2="140"/>
+    <line class="tline" x1="150" y1="165" x2="250" y2="190"/>
+    <circle class="node" r="15" cx="50" cy="110"/><circle class="node" r="15" cx="150" cy="55"/><circle class="node" r="15" cx="150" cy="165"/>
+    <circle class="node" r="13" cx="250" cy="30"/><circle class="node" r="13" cx="250" cy="80"/><circle class="node" r="13" cx="250" cy="140"/><circle class="node" r="13" cx="250" cy="190"/>
+    <text class="lbl" x="44" y="115">●</text><text class="lbl" x="145" y="60">r</text><text class="lbl" x="145" y="170">s</text>
+    <text class="lbl" x="100" y="76">p</text><text class="lbl" x="100" y="148">1−p</text></svg>`
+};
+
+/* ---------- Content: areas with theory + worked example + exercises ---------- */
+/* Every solution below has been verified by hand. */
+const AREAS={
+ funktionen:{
+  icon:'📈',title:'Funktionen',sub:'Parabole ed esponenziali',
+  theory:`<p class="lead">Due famiglie di funzioni: le <span class="de">Parabeln</span> (parabole, grado 2) e le <span class="de">Exponentialfunktionen</span> (crescita/decadimento).</p>
+  <h3>Parabel — le tre forme</h3>
+  <div class="formula"><b>Normalform:</b> y = a·x² + b·x + c</div>
+  <div class="formula"><b>Scheitelpunktform</b> (vertice S(x₀|y₀)): y = a·(x − x₀)² + y₀</div>
+  <p class="muted">Il <span class="de">Scheitelpunkt</span> è il vertice. Da Scheitelpunktform a Normalform: si sviluppa il quadrato.</p>
+  <div class="formula"><b>Mitternachtsformel</b> (zeri di a·x²+b·x+c=0):<br>x₁,₂ = ${frac('−b ± √(b² − 4ac)','2a')}</div>
+  ${plot(x=>-0.25*(x+1)*(x+1)+3,-5,3,-2,4,{vertex:[-1,3]})}
+  <p class="muted">Esempio in figura: y = −0,25·(x+1)² + 3 — vertice S(−1|3), aperta verso il basso (a&lt;0).</p>
+  <h3>Exponentialfunktion</h3>
+  <div class="formula">y = a · q<sup>x</sup> &nbsp;·&nbsp; <span class="muted">q&gt;1 → <span class="de">Wachstum</span> (crescita), 0&lt;q&lt;1 → <span class="de">Zerfall</span> (decadimento)</span></div>
+  <p class="muted">Variazione annua in %: (q − 1)·100. Es. q=1,1 → +10% l'anno; q=0,97 → −3% l'anno.</p>
+  <div class="tagrow"><span class="tag">Scheitelpunktform</span><span class="tag">Mitternachtsformel</span><span class="tag">Nullstellen</span><span class="tag">Wertemenge</span><span class="tag">Wachstum/Zerfall</span></div>`,
+  worked:{titel:'Musterlösung — da Scheitelpunktform a Normalform',
+   frage:`La parabola p ha vertice <b>S(−2 | 1,5)</b> e forma y = −0,5·x² + b·x + c. Trova b e c.`,
+   steps:[
+    {why:'Scrivo la Scheitelpunktform con a = −0,5 e vertice S(−2|1,5).',calc:'y = −0,5·(x + 2)² + 1,5'},
+    {why:'Sviluppo il quadrato (x+2)² = x² + 4x + 4.',calc:'y = −0,5·(x² + 4x + 4) + 1,5'},
+    {why:'Distribuisco −0,5 e sommo i termini noti.',calc:'y = −0,5x² − 2x − 2 + 1,5 = −0,5x² − 2x − 0,5'}
+   ],answer:'b = −2 &nbsp;e&nbsp; c = −0,5'},
+  ex:[
+   {pts:'1 P',meta:'Nullstellen · Teil A senza calcolatrice',q:`Trova gli zeri (<span class="de">Nullstellen</span>) di &nbsp; 0,5·x² + x − 4 = 0.`,
+    steps:[{why:'Moltiplico tutto per 2 per togliere la frazione.',calc:'x² + 2x − 8 = 0'},
+           {why:'Scompongo (cerco due numeri: prodotto −8, somma +2 → +4 e −2).',calc:'(x + 4)(x − 2) = 0'},
+           {why:'Un prodotto è 0 se un fattore è 0.',calc:'x + 4 = 0  oppure  x − 2 = 0'}],
+    answer:'x₁ = −4 &nbsp;;&nbsp; x₂ = 2'},
+   {pts:'1 P',meta:'Scheitelpunktform',q:`Scrivi y = −0,25·(x + 1)² + 3 in <span class="de">Normalform</span> e indica il vertice.`,
+    steps:[{why:'Sviluppo (x+1)² = x² + 2x + 1.',calc:'y = −0,25·(x² + 2x + 1) + 3'},
+           {why:'Distribuisco e sommo.',calc:'y = −0,25x² − 0,5x − 0,25 + 3'}],
+    answer:'y = −0,25x² − 0,5x + 2,75 &nbsp;;&nbsp; vertice S(−1 | 3)'},
+   {pts:'1,5 P',meta:'Exponentialfunktion · Zerfall',q:`Un'auto elettrica perde valore: y = 450 · 0,97<sup>x</sup> (y in €·100, x in anni). Di quanti % cala ogni anno? Quanto vale dopo 5 anni?`,
+    steps:[{why:'Il fattore q = 0,97. Variazione = (q−1)·100.',calc:'(0,97 − 1)·100 = −3 % → cala del 3% l\'anno'},
+           {why:'Dopo 5 anni: x = 5.',calc:'y = 450 · 0,97⁵ = 450 · 0,8587 ≈ 386,4'}],
+    answer:'−3 % l\'anno &nbsp;;&nbsp; dopo 5 anni ≈ 386 (cioè ≈ 38.640 €)'},
+   {pts:'2 P',meta:'Exponentialfunktion · Wachstum',q:`Le foche (<span class="de">Kegelrobben</span>) crescono: y = 3300 · 1,1<sup>x</sup> dal 2011 (x in anni). In quale anno superano <b>20.000</b> foche?`,
+    steps:[{why:'Imposto la disuguaglianza.',calc:'3300 · 1,1ˣ > 20000'},
+           {why:'Divido per 3300.',calc:'1,1ˣ > 6,0606'},
+           {why:'Logaritmo: x > ln(6,0606) / ln(1,1).',calc:'x > 1,8018 / 0,0953 ≈ 18,9'},
+           {why:'Serve un anno intero → x = 19. Anno = 2011 + 19.',calc:'2011 + 19 = 2030'}],
+    answer:'Dal 2030 (x = 19)'},
+   {pts:'2 P',meta:'Exponentialfunktion · Staatsverschuldung',q:`Debito pubblico: y = 1600 · 1,03<sup>x</sup> (miliardi €, dal 2025). Di quanti % cresce ogni anno? Quanto vale all'1.1.2045?`,
+    steps:[{why:'q = 1,03 → variazione (q−1)·100.',calc:'(1,03 − 1)·100 = +3 % l\'anno'},
+           {why:'1.1.2045 → x = 20.',calc:'y = 1600 · 1,03²⁰ = 1600 · 1,8061'}],
+    answer:'+3 % l\'anno &nbsp;;&nbsp; ≈ 2890 miliardi €'}
+  ]},
+
+ geometrie:{
+  icon:'📐',title:'Ebene Geometrie & Trigonometrie',sub:'Triangoli, cerchio, quadrilateri',
+  theory:`<p class="lead">Calcoli su triangoli qualsiasi (<span class="de">Sinussatz/Kosinussatz</span>), settori di cerchio e quadrilateri speciali.</p>
+  <h3>Triangolo qualsiasi</h3>
+  ${FIG.trig}
+  <div class="formula"><b>Sinussatz:</b> ${frac('a','sin α')} = ${frac('b','sin β')} = ${frac('c','sin γ')}</div>
+  <div class="formula"><b>Kosinussatz:</b> a² = b² + c² − 2·b·c·cos α</div>
+  <p class="muted">Kosinussatz quando conosci 2 lati + l'angolo tra loro, oppure 3 lati. Sinussatz quando hai un lato col suo angolo opposto.</p>
+  <div class="formula"><b>Fläche:</b> A = ${frac('1','2')}·a·b·sin γ</div>
+  <h3>Kreis — settore e arco</h3>
+  <div class="formula">Arco <b>(Kreisbogen)</b> b = 2·π·r·${frac('α','360°')} &nbsp;·&nbsp; Settore <b>(Kreissektor)</b> A = π·r²·${frac('α','360°')}</div>
+  <h3>Quadrilateri speciali</h3>
+  ${FIG.trapez}
+  <p class="muted"><span class="de">Trapez</span> (trapezio): A = ${frac('(a + c)','2')}·h. <span class="de">Drachenviereck</span> (aquilone), <span class="de">Raute</span> (rombo): A = ${frac('e·f','2')} (diagonali).</p>
+  <div class="tagrow"><span class="tag">Sinussatz</span><span class="tag">Kosinussatz</span><span class="tag">Kreissektor</span><span class="tag">Trapez</span><span class="tag">Pythagoras</span><span class="tag">Thaleskreis</span></div>`,
+  worked:{titel:'Musterlösung — Kosinussatz + Sinussatz',
+   frage:`In un triangolo: b = 10 cm, c = 8 cm, angolo α = 70° (tra b e c). Calcola il lato a e l'angolo β.`,
+   steps:[
+    {why:'Ho due lati e l\'angolo compreso → Kosinussatz.',calc:'a² = 10² + 8² − 2·10·8·cos70°'},
+    {why:'Calcolo (cos70° ≈ 0,342).',calc:'a² = 100 + 64 − 160·0,342 = 164 − 54,72 = 109,28'},
+    {why:'Radice.',calc:'a = √109,28 ≈ 10,45 cm'},
+    {why:'Ora Sinussatz per β (lato b col suo angolo).',calc:'sin β = b·sin α / a = 10·0,9397 / 10,45 ≈ 0,8992'},
+    {why:'Arcoseno.',calc:'β = sin⁻¹(0,8992) ≈ 64,0°'}
+   ],answer:'a ≈ 10,45 cm &nbsp;;&nbsp; β ≈ 64,0°'},
+  ex:[
+   {pts:'3,5 P',meta:'Gleichschenkliges Trapez',q:`Trapezio isoscele ABCD: |AB| = 11 cm, |AE| = 4 cm (proiezione del lato), angolo BAD = 60°, altezza DE. Calcola DE, il lato corto DC e l'area A.`,
+    steps:[{why:'Nel triangolo rettangolo ADE: DE = cateto opposto a 60°.',calc:'DE = AE·tan60° = 4·√3 ≈ 6,93 cm'},
+           {why:'Il lato corto = base lunga meno due proiezioni uguali.',calc:'DC = AB − 2·AE = 11 − 8 = 3 cm'},
+           {why:'Area trapezio = (somma basi)/2 · altezza.',calc:'A = (11 + 3)/2 · 4√3 = 7·4√3 = 28√3'}],
+    answer:'DE = 4√3 ≈ 6,93 cm &nbsp;;&nbsp; DC = 3 cm &nbsp;;&nbsp; A = 28√3 ≈ 48,50 cm²'},
+   {pts:'2,5 P',meta:'Kreissektor',q:`Settore circolare con raggio r = 4 cm e angolo al centro α = 100°. Calcola l'arco (<span class="de">Kreisbogen</span>) e l'area del settore.`,
+    steps:[{why:'Arco = circonferenza · frazione di angolo.',calc:'b = 2·π·4·(100/360) = 8π·0,2778 ≈ 6,98 cm'},
+           {why:'Area settore = area cerchio · frazione.',calc:'A = π·4²·(100/360) = 16π·0,2778 ≈ 13,96 cm²'}],
+    answer:'Arco ≈ 6,98 cm &nbsp;;&nbsp; A_Sektor ≈ 13,96 cm²'},
+   {pts:'3 P',meta:'Kosinussatz · 3 lati',q:`Triangolo con lati a = 7, b = 9, c = 6. Calcola l'angolo α (opposto ad a).`,
+    steps:[{why:'Kosinussatz risolto per cos α.',calc:'cos α = (b² + c² − a²) / (2·b·c)'},
+           {why:'Sostituisco.',calc:'cos α = (81 + 36 − 49)/(2·9·6) = 68/108 = 0,6296'},
+           {why:'Arcocoseno.',calc:'α = cos⁻¹(0,6296) ≈ 50,96°'}],
+    answer:'α ≈ 50,96°'},
+   {pts:'2 P',meta:'Halbkreis & Drachenviereck',q:`Semicerchio di raggio |AM| = 4 cm. Calcola l'arco completo BA (mezza circonferenza) e l'<span class="de">Umfang</span> (perimetro) della figura semicerchio = arco + diametro.`,
+    steps:[{why:'Mezza circonferenza = metà di 2πr.',calc:'arco = π·r = π·4 ≈ 12,57 cm'},
+           {why:'Diametro = 2r.',calc:'d = 2·4 = 8 cm'},
+           {why:'Perimetro = arco + diametro.',calc:'u = 12,57 + 8 = 20,57 cm'}],
+    answer:'arco ≈ 12,57 cm &nbsp;;&nbsp; u ≈ 20,57 cm'}
+  ]},
+
+ raum:{
+  icon:'🧊',title:'Raumgeometrie',sub:'I corpi solidi — la parte più importante',
+  theory:`<p class="lead">È il blocco che pesa di più (i grossi quesiti B). Impara a memoria queste formule dalla <span class="de">Formelsammlung</span>.</p>
+  <h3>Prisma & Zylinder</h3>
+  ${FIG.zylinder}
+  <div class="formula"><b>Prisma:</b> V = G·h &nbsp;·&nbsp; O = 2·G + M (M = u·h)</div>
+  <div class="formula"><b>Zylinder:</b> V = π·r²·h &nbsp;·&nbsp; O = 2·π·r·(r + h)</div>
+  <h3>Pyramide</h3>
+  ${FIG.pyramid}
+  <div class="formula"><b>Pyramide:</b> V = ${frac('1','3')}·G·h &nbsp;·&nbsp; O = G + M</div>
+  <p class="muted">Per O servono le altezze delle facce (<span class="de">ha = Höhe der Seitenfläche</span>), trovate con Pythagoras. Apotema base quadrata: ha = √(h² + (a/2)²).</p>
+  <h3>Kegel & Kugel</h3>
+  ${FIG.kegel}
+  <div class="formula"><b>Kegel:</b> V = ${frac('1','3')}·π·r²·h &nbsp;·&nbsp; O = π·r·(r + s) &nbsp;·&nbsp; s = √(r² + h²)</div>
+  ${FIG.kugel}
+  <div class="formula"><b>Kugel:</b> V = ${frac('4','3')}·π·r³ &nbsp;·&nbsp; O = 4·π·r²</div>
+  <h3>Rotationskörper & altro</h3>
+  ${FIG.rot}
+  <p class="muted">Un <span class="de">Rotationskörper</span> nasce ruotando una figura attorno a un asse: scomponilo in cilindro + cono + (mezza) sfera e somma i volumi. <span class="de">Zentrische Streckung</span> (omotetia): se scali per k, le aree fanno A′ = k²·A e i volumi V′ = k³·V.</p>
+  <div class="tagrow"><span class="tag">Pyramide</span><span class="tag">Kegel</span><span class="tag">Kugel</span><span class="tag">Zylinder</span><span class="tag">Rotationskörper</span><span class="tag">Schrägbild</span><span class="tag">V(x) Extremwert</span></div>`,
+  worked:{titel:'Musterlösung — Pyramide: Volumen & Oberfläche',
+   frage:`Piramide a base quadrata: lato a = 6 cm, altezza h = 4 cm. Calcola volume V e superficie totale O.`,
+   steps:[
+    {why:'Base quadrata: G = a².',calc:'G = 6² = 36 cm²'},
+    {why:'Volume della piramide.',calc:'V = ⅓·G·h = ⅓·36·4 = 48 cm³'},
+    {why:'Apotema della faccia (Pythagoras): ha = √(h² + (a/2)²).',calc:'ha = √(4² + 3²) = √25 = 5 cm'},
+    {why:'Mantello = 4 triangoli: M = ½·perimetro·ha = ½·(4·6)·5.',calc:'M = ½·24·5 = 60 cm²'},
+    {why:'Superficie = base + mantello.',calc:'O = G + M = 36 + 60 = 96 cm²'}
+   ],answer:'V = 48 cm³ &nbsp;;&nbsp; O = 96 cm²'},
+  ex:[
+   {pts:'2 P',meta:'Pyramide · Volumen',q:`Piramide a base quadrata con lato a = 8 cm e altezza h = 9 cm. Calcola il volume.`,
+    steps:[{why:'Base.',calc:'G = 8² = 64 cm²'},{why:'Volume.',calc:'V = ⅓·64·9 = 192 cm³'}],
+    answer:'V = 192 cm³'},
+   {pts:'2 P',meta:'Zylinder',q:`Cilindro con raggio r = 3 cm e altezza h = 6 cm. Calcola V e O.`,
+    steps:[{why:'Volume.',calc:'V = π·3²·6 = 54π ≈ 169,65 cm³'},
+           {why:'Superficie totale.',calc:'O = 2π·3·(3 + 6) = 54π ≈ 169,65 cm²'}],
+    answer:'V ≈ 169,65 cm³ &nbsp;;&nbsp; O ≈ 169,65 cm²'},
+   {pts:'2,5 P',meta:'Kegel',q:`Cono con r = 3 cm e h = 4 cm. Calcola l'apotema s, il volume V e la superficie O.`,
+    steps:[{why:'Apotema (Pythagoras).',calc:'s = √(3² + 4²) = √25 = 5 cm'},
+           {why:'Volume.',calc:'V = ⅓·π·3²·4 = 12π ≈ 37,70 cm³'},
+           {why:'Superficie.',calc:'O = π·3·(3 + 5) = 24π ≈ 75,40 cm²'}],
+    answer:'s = 5 cm &nbsp;;&nbsp; V ≈ 37,70 cm³ &nbsp;;&nbsp; O ≈ 75,40 cm²'},
+   {pts:'1,5 P',meta:'Kugel',q:`Sfera con raggio r = 3 cm. Calcola V e O.`,
+    steps:[{why:'Volume.',calc:'V = ⁴⁄₃·π·3³ = 36π ≈ 113,10 cm³'},
+           {why:'Superficie.',calc:'O = 4·π·3² = 36π ≈ 113,10 cm²'}],
+    answer:'V ≈ 113,10 cm³ &nbsp;;&nbsp; O ≈ 113,10 cm²'},
+   {pts:'3 P',meta:'Rotationskörper · composto',q:`Un corpo nasce ruotando: un cilindro (r = 3, h = 6) con sopra un cono (r = 3, h = 4). Calcola il volume totale.`,
+    steps:[{why:'Volume del cilindro.',calc:'V₁ = π·3²·6 = 54π ≈ 169,65 cm³'},
+           {why:'Volume del cono.',calc:'V₂ = ⅓·π·3²·4 = 12π ≈ 37,70 cm³'},
+           {why:'Sommo.',calc:'V = 54π + 12π = 66π ≈ 207,35 cm³'}],
+    answer:'V ≈ 207,35 cm³'},
+   {pts:'1,5 P',meta:'Kegel per rotazione (come la prova 2020)',q:`Ruotando un triangolo rettangolo attorno a un cateto nasce un cono di volume 134 cm³ e raggio r = 4 cm. Calcola l'altezza (cateto AE).`,
+    steps:[{why:'Formula del cono risolta per h.',calc:'134 = ⅓·π·4²·h'},
+           {why:'Isolo h.',calc:'h = 134·3 / (16·π) = 402 / 50,27 ≈ 8,0'}],
+    answer:'AE ≈ 8,00 cm'},
+   {pts:'3 P',meta:'Rotationskörper · Sanduhr (clessidra)',q:`Una clessidra nasce ruotando due triangoli: sono <b>due coni uguali uniti per la punta</b>, ognuno con r = 3 cm e h = 5 cm. Calcola il volume totale.`,
+    steps:[{why:'Volume di un cono.',calc:'V_Kegel = ⅓·π·3²·5 = 15π ≈ 47,12 cm³'},
+           {why:'Sono due coni uguali.',calc:'V = 2·15π = 30π'}],
+    answer:'V = 30π ≈ 94,25 cm³'},
+   {pts:'3 P',meta:'Rotationskörper · Spielzeugkreisel (trottola)',q:`Una trottola = <b>cilindro</b> (r = 2 cm, h = 3 cm) con sopra un <b>cono</b> (r = 2 cm, h = 6 cm). Calcola il volume.`,
+    steps:[{why:'Cilindro.',calc:'V₁ = π·2²·3 = 12π ≈ 37,70 cm³'},
+           {why:'Cono.',calc:'V₂ = ⅓·π·2²·6 = 8π ≈ 25,13 cm³'},
+           {why:'Sommo.',calc:'V = 12π + 8π = 20π'}],
+    answer:'V = 20π ≈ 62,83 cm³'},
+   {pts:'2,5 P',meta:'Rotationskörper · Pflanzschale (semisfera)',q:`Una vaschetta è una <b>semisfera</b> (mezza sfera) con raggio r = 6 cm. Calcola il volume.`,
+    steps:[{why:'Volume sfera intera.',calc:'V_Kugel = ⁴⁄₃·π·6³ = 288π'},
+           {why:'Metà.',calc:'V = ½·288π = 144π'}],
+    answer:'V = 144π ≈ 452,39 cm³'},
+   {pts:'3 P',meta:'Rotationskörper · cilindro + semisfera',q:`Un corpo è un <b>cilindro</b> (r = 3 cm, h = 4 cm) con sopra una <b>semisfera</b> (r = 3 cm). Calcola il volume totale.`,
+    steps:[{why:'Cilindro.',calc:'V₁ = π·3²·4 = 36π ≈ 113,10 cm³'},
+           {why:'Semisfera = metà sfera.',calc:'V₂ = ½·⁴⁄₃·π·3³ = 18π ≈ 56,55 cm³'},
+           {why:'Sommo.',calc:'V = 36π + 18π = 54π'}],
+    answer:'V = 54π ≈ 169,65 cm³'},
+   {pts:'3 P',meta:'Pyramide mit x · Extremwert',q:`Il volume di una piramide dipende da x: V(x) = −0,25·x² + 3·x &nbsp;(0 &lt; x &lt; 12, in cm³). Per quale x il volume è <b>massimo</b> (<span class="de">maximales Volumen</span>)? Quanto vale?`,
+    steps:[{why:'V(x) è una parabola verso il basso (a&lt;0): il massimo è nel vertice.',calc:'x = −b/(2a) = −3 / (2·(−0,25))'},
+           {why:'Calcolo.',calc:'x = −3 / (−0,5) = 6'},
+           {why:'Sostituisco x = 6 in V(x).',calc:'V(6) = −0,25·36 + 3·6 = −9 + 18 = 9'}],
+    answer:'Massimo per x = 6 cm &nbsp;;&nbsp; V_max = 9 cm³'},
+   {pts:'3 P',meta:'Pyramide mit x · Extremwert',q:`Per i punti P_n il volume è V(x) = −2·x² + 12·x &nbsp;(0 &lt; x &lt; 6). Trova il <span class="de">maximale Volumen</span> e il valore di x.`,
+    steps:[{why:'Vertice della parabola (massimo).',calc:'x = −b/(2a) = −12 / (2·(−2)) = 3'},
+           {why:'Sostituisco.',calc:'V(3) = −2·9 + 12·3 = −18 + 36 = 18'}],
+    answer:'Massimo per x = 3 &nbsp;;&nbsp; V_max = 18 cm³'},
+   {pts:'4 P',meta:'Pyramide mit x · "Zeigen Sie V(x)"',q:`Una piramide ha base rettangolare di lati x e 6 cm e altezza h = (10 − 0,5·x) cm. <b>Mostra</b> (zeigen) che V(x) = 20x − x², poi calcola V per x = 4.`,
+    steps:[{why:'Area di base G = lato · lato.',calc:'G = x · 6 = 6x'},
+           {why:'Volume piramide = ⅓·G·h.',calc:'V(x) = ⅓·6x·(10 − 0,5x)'},
+           {why:'Semplifico ⅓·6x = 2x e moltiplico.',calc:'V(x) = 2x·(10 − 0,5x) = 20x − x²'},
+           {why:'Per x = 4 (controprova: G=24, h=8, V=⅓·24·8=64).',calc:'V(4) = 20·4 − 4² = 80 − 16 = 64'}],
+    answer:'V(x) = 20x − x² &nbsp;;&nbsp; V(4) = 64 cm³'},
+   {pts:'2 P',meta:'Zentrische Streckung · Volumen',q:`Una piramide ha volume V = 240 cm³. Viene <b>rimpicciolita</b> con fattore k = 0,5 (<span class="de">zentrische Streckung</span>). Che volume ha la piramide piccola?`,
+    steps:[{why:'I volumi scalano con k³ (tre dimensioni).',calc:'V′ = k³·V = 0,5³·240'},
+           {why:'Calcolo 0,5³ = 0,125.',calc:'V′ = 0,125·240 = 30'}],
+    answer:'V′ = 30 cm³'},
+   {pts:'2 P',meta:'Zentrische Streckung · Oberfläche',q:`Una superficie misura A = 80 cm². Viene <b>ingrandita</b> con fattore k = 1,5. Quanto vale la nuova superficie?`,
+    steps:[{why:'Le aree scalano con k² (due dimensioni).',calc:'A′ = k²·A = 1,5²·80'},
+           {why:'Calcolo 1,5² = 2,25.',calc:'A′ = 2,25·80 = 180'}],
+    answer:'A′ = 180 cm²'}
+  ]},
+
+ daten:{
+  icon:'🎲',title:'Daten und Zufall',sub:'Probabilità e combinatoria',
+  theory:`<p class="lead">Diagrammi ad albero (<span class="de">Baumdiagramm</span>), regole dei cammini e conteggio dei casi.</p>
+  ${FIG.baum}
+  <h3>Le regole</h3>
+  <div class="formula"><b>Pfadregel</b> (lungo un cammino): si <b>moltiplica</b> · <b>Summenregel</b> (più cammini): si <b>somma</b></div>
+  <div class="formula"><b>Gegenereignis</b> ("almeno uno"): P("almeno 1") = 1 − P("nessuno")</div>
+  <p class="muted"><span class="de">Mit Zurücklegen</span> (con reimmissione): le probabilità restano uguali. <span class="de">Ohne Zurücklegen</span> (senza): cambiano (un elemento in meno).</p>
+  <h3>Kombinatorik</h3>
+  <div class="formula">Se scegli tra n possibilità per k posti, con ripetizione: <b>n<sup>k</sup></b> combinazioni</div>
+  <p class="muted">Es. 5 tasti, melodia di 4 note (ripetizioni ok) → 5⁴ = 625. Oppure 5 animali, 3 parti → 5³ = 125 figure.</p>
+  <div class="tagrow"><span class="tag">Baumdiagramm</span><span class="tag">Pfadregel</span><span class="tag">Gegenereignis</span><span class="tag">mit/ohne Zurücklegen</span><span class="tag">Kombinatorik</span></div>`,
+  worked:{titel:'Musterlösung — Baumdiagramm con e senza reimmissione',
+   frage:`Un'urna ha 3 palline rosse e 2 blu. Estrai 2 palline. Calcola P(2 rosse) e P(almeno 1 rossa) — sia <span class="de">mit</span> che <span class="de">ohne Zurücklegen</span>.`,
+   steps:[
+    {why:'Con reimmissione: P(rossa) = 3/5 ogni volta. Pfadregel (moltiplico).',calc:'P(2 rosse) = (3/5)·(3/5) = 9/25 = 0,36'},
+    {why:'"Almeno 1 rossa" = 1 − P(nessuna rossa) = 1 − (2/5)².',calc:'1 − 4/25 = 21/25 = 0,84'},
+    {why:'Senza reimmissione: la 2ª estrazione ha un elemento in meno.',calc:'P(2 rosse) = (3/5)·(2/4) = 6/20 = 0,30'},
+    {why:'"Almeno 1" = 1 − P(nessuna) = 1 − (2/5)·(1/4).',calc:'1 − 2/20 = 1 − 0,10 = 0,90'}
+   ],answer:'Mit Z.: 0,36 e 0,84 &nbsp;|&nbsp; Ohne Z.: 0,30 e 0,90'},
+  ex:[
+   {pts:'2 P',meta:'Kombinatorik · Teil A',q:`Una melodia usa i tasti C, D, E, G, A (5 tasti). È lunga 4 note e ogni tasto può ripetersi. Quante melodie diverse sono possibili?`,
+    steps:[{why:'5 scelte per ognuna delle 4 note → n^k.',calc:'5⁴ = 5·5·5·5'}],
+    answer:'625 melodie diverse'},
+   {pts:'1 P',meta:'Kombinatorik · Tierbilder',q:`Un gioco compone animali da Kopf, Rumpf, Beine (testa/corpo/zampe), ciascuno scelto tra 5 animali. Quante figure diverse? E la probabilità di pescare proprio un animale "originale" (3 parti uguali)?`,
+    steps:[{why:'3 parti, 5 scelte ciascuna.',calc:'5³ = 125 figure'},
+           {why:'Originali = 5 (tutte e 3 dello stesso animale). Probabilità = favorevoli/totali.',calc:'P = 5/125 = 1/25 = 0,04'}],
+    answer:'125 figure &nbsp;;&nbsp; P(originale) = 0,04 = 4 %'},
+   {pts:'1 P',meta:'Gegenereignis',q:`Stesso gioco (125 figure). Qual è la probabilità di ottenere un <span class="de">Fantasietier</span> (figura "di fantasia", cioè NON un animale originale)?`,
+    steps:[{why:'Evento contrario dell\'originale.',calc:'P = 1 − 5/125 = 120/125'}],
+    answer:'P(Fantasietier) = 120/125 = 24/25 = 0,96 = 96 %'},
+   {pts:'1 P',meta:'Pfadregel · solo parti speciali',q:`Sempre 125 figure. Due dei 5 animali sono predatori (Löwe, Tiger). Probabilità che TUTTE e 3 le parti vengano da predatori?`,
+    steps:[{why:'2 predatori su 5 per ciascuna delle 3 parti (Pfadregel).',calc:'P = (2/5)³ = 8/125'}],
+    answer:'P = 8/125 = 0,064 = 6,4 %'}
+  ]}
+};
+
+/* simulation set: ids referencing area+index, mixing Teil A and B */
+const SIM=[
+ {label:'Teil A · 1',from:'funktionen',i:0},
+ {label:'Teil A · 2',from:'daten',i:0},
+ {label:'Teil A · 3',from:'geometrie',i:1},
+ {label:'Teil B · 1',from:'raum',i:0},
+ {label:'Teil B · 2',from:'geometrie',i:0},
+ {label:'Teil B · 3',from:'raum',i:4},
+ {label:'Teil B · 4',from:'raum',i:10}
+];
+const SIM_SHORT=[{label:'A·1',from:'funktionen',i:0},{label:'A·2',from:'daten',i:1},{label:'B·1',from:'raum',i:2}];
+
+/* ---------- Lernplan ---------- */
+const PLAN=[
+ ['2026-06-08','Parabeln: Scheitelpunkt- & Normalform','Le forme della parabola e il vertice.','funktionen'],
+ ['2026-06-09','Nullstellen & Mitternachtsformel','Trovare gli zeri, anche senza calcolatrice.','funktionen'],
+ ['2026-06-10','Exponentialfunktionen','Crescita e decadimento, % annua.','funktionen'],
+ ['2026-06-11','Ripasso Funktionen','Esercizi misti sulle funzioni.','funktionen'],
+ ['2026-06-12','Sinussatz & Kosinussatz','Triangoli qualsiasi.','geometrie'],
+ ['2026-06-13','Kreissektor, Kreisbogen, Umfang','Settore, arco e perimetro del cerchio.','geometrie'],
+ ['2026-06-14','Vierecke: Trapez, Drachen, Raute','Quadrilateri speciali e aree.','geometrie'],
+ ['2026-06-15','Prisma & Zylinder','Volume e superficie.','raum'],
+ ['2026-06-16','Pyramide: Volumen & Oberfläche','La piramide a fondo, con le altezze.','raum'],
+ ['2026-06-17','Kegel & Kugel','Cono e sfera.','raum'],
+ ['2026-06-18','Rotationskörper ⚠️','Punto delicato: scomporre in cilindro/cono/sfera.','raum'],
+ ['2026-06-19','Pyramide mit x — V(x), Extremwert','Volume in funzione di x, massimi/minimi.','raum'],
+ ['2026-06-20','Schrägbild & zentrische Streckung','Disegno in prospettiva, scala (k²/k³).','raum'],
+ ['2026-06-21','Ripasso Raumgeometrie','Esercizi sui solidi.','raum'],
+ ['2026-06-22','Baumdiagramm & Pfadregel','Probabilità con alberi.','daten'],
+ ['2026-06-23','Kombinatorik & "mindestens"','Conteggio casi ed evento contrario.','daten'],
+ ['2026-06-24','Teil A senza calcolatrice','Allenamento veloce, misto.','funktionen'],
+ ['2026-06-25','Simulazione completa','Esame finto cronometrato.','simulation'],
+ ['2026-06-26','Correggere gli errori','Rifai gli sbagli della simulazione.','fehler'],
+ ['2026-06-27','Ripasso punti deboli','Focus dove serve di più.','raum'],
+ ['2026-06-28','Ripasso leggero + Formelsammlung','Rivedi le formule, riposati.','funktionen'],
+ ['2026-06-29','🎓 PRÜFUNG · 08:30','In bocca al lupo, Gioele!','']
+];
+
+/* ---------- Render exercises ---------- */
+let exCounter=0;
+function exId(area,i){return area+'_'+i;}
+function renderEx(area,exObj,i,opts){
+  opts=opts||{};
+  const id=exId(area,i);
+  const prog=getProg();
+  const status=prog[id]||'';
+  const sid='sol_'+area+'_'+i+'_'+(opts.ns||'');
+  let steps=exObj.steps.map(s=>`<li><span class="why">${s.why}</span><br><span class="calc">${s.calc}</span></li>`).join('');
+  return `<div class="ex" id="wrap_${id}_${opts.ns||''}">
+    <div class="ex-head">
+      <div class="ex-num">${opts.label||(i+1)}</div>
+      <div class="ex-q"><span class="points">${exObj.pts||''}</span><div class="meta">${exObj.meta||''}</div>${exObj.q}</div>
+    </div>
+    <div class="ex-actions">
+      <button class="btn primary" onclick="toggleSol('${sid}')">Mostra soluzione</button>
+      <div class="rate">
+        <span><span class="pill ${status==='correct'?'correct':status==='wrong'?'wrong':''}" id="pill_${id}_${opts.ns||''}"></span>Come è andata?</span>
+        <button class="btn good ${status==='correct'?'sel':''}" id="g_${id}_${opts.ns||''}" onclick="rate('${id}','correct','${opts.ns||''}')">✓ Giusto</button>
+        <button class="btn bad ${status==='wrong'?'sel':''}" id="b_${id}_${opts.ns||''}" onclick="rate('${id}','wrong','${opts.ns||''}')">✗ Sbagliato</button>
+      </div>
+    </div>
+    <div class="sol" id="${sid}">
+      <ol>${steps}</ol>
+      <div class="answer">Risultato: <b>${exObj.answer}</b></div>
+    </div>
+  </div>`;
+}
+function toggleSol(id){document.getElementById(id).classList.toggle('show');}
+function rate(id,val,ns){
+  const prog=getProg();prog[id]=val;setProg(prog);
+  // update all pills/buttons for this id across views
+  document.querySelectorAll('[id^="pill_'+id+'_"]').forEach(p=>{p.className='pill '+val;});
+  document.querySelectorAll('[id^="g_'+id+'_"]').forEach(b=>b.classList.toggle('sel',val==='correct'));
+  document.querySelectorAll('[id^="b_'+id+'_"]').forEach(b=>b.classList.toggle('sel',val==='wrong'));
+  renderProgress();renderFehler();
+}
+
+/* ---------- Build area views ---------- */
+function buildAreaView(area){
+  const A=AREAS[area];const root=document.getElementById('view-'+area);
+  let exHtml=A.ex.map((e,i)=>renderEx(area,e,i,{ns:'main'})).join('');
+  root.innerHTML=`
+   <div class="card">
+     <div class="eyebrow">${A.icon} Bereich</div>
+     <h2>${A.title}</h2><p class="lead">${A.sub}</p>
+     ${A.theory}
+   </div>
+   <div class="card">
+     <div class="eyebrow">Esempio svolto</div>
+     <h2>${A.worked.titel}</h2>
+     <div class="ex" style="margin-top:12px">
+       <div class="ex-head"><div class="ex-num" style="background:var(--amber);color:#3a2a04">★</div>
+       <div class="ex-q">${A.worked.frage}</div></div>
+       <div class="sol show" style="border-top:1px dashed var(--line)">
+         <ol>${A.worked.steps.map(s=>`<li><span class="why">${s.why}</span><br><span class="calc">${s.calc}</span></li>`).join('')}</ol>
+         <div class="answer">Risultato: <b>${A.worked.answer}</b></div>
+       </div>
+     </div>
+   </div>
+   <div class="card">
+     <div class="eyebrow">Esercizi · soluzioni verificate</div>
+     <h2>Übungen</h2>
+     <p class="lead">Prova prima su carta. Poi apri la soluzione e segna se hai fatto giusto: serve a riempire la barra dei progressi e la lista "Da rivedere".</p>
+     ${exHtml}
+   </div>`;
+}
+
+/* ---------- Oggi ---------- */
+function isoToday(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function buildHeute(){
+  const today=isoToday();const root=document.getElementById('view-heute');
+  let entry=PLAN.find(p=>p[0]===today);
+  let head;
+  const days=updateCountdown();
+  if(!entry){
+    // before plan or unknown: pick nearest upcoming
+    const up=PLAN.find(p=>p[0]>=today);
+    if(up&&today<PLAN[0][0]){entry=PLAN[0];head=`Il piano parte l'8 giugno. Intanto puoi già dare un'occhiata al primo argomento:`;}
+    else if(up){entry=up;head=`Oggi non c'è una tappa fissa. Prossimo argomento in programma:`;}
+    else {entry=PLAN[PLAN.length-1];head=`Ci siamo.`;}
+  } else head=`Programma di oggi:`;
+  const area=entry[3];
+  const areaBtn=(area&&AREAS[area])?`<button class="btn primary" onclick="go('${area}')">Vai a ${AREAS[area].title} →</button>`
+                :(area==='simulation'?`<button class="btn primary" onclick="go('simulation')">Vai alla simulazione →</button>`
+                :(area==='fehler'?`<button class="btn primary" onclick="go('fehler')">Vai agli errori →</button>`:''));
+  root.innerHTML=`
+   <div class="card today-hero">
+     <div class="eyebrow">${days>0?days+' giorni alla Prüfung':'Oggi è il giorno'}</div>
+     <p class="muted" style="margin:0">${head}</p>
+     <div class="big">${entry[1]}</div>
+     <p class="lead" style="margin:.2rem 0 14px">${entry[2]}</p>
+     ${areaBtn}
+   </div>
+   <div class="card">
+     <div class="eyebrow">Come usare questo trainer</div>
+     <h3 style="margin-top:6px">In breve</h3>
+     <ul class="lead">
+       <li>Ogni giorno apri <b>Oggi</b>: ti dice cosa ripassare.</li>
+       <li>In ogni argomento trovi <b>teoria + figura</b>, un <b>esempio svolto</b> e gli <b>esercizi</b> con soluzione passo-passo.</li>
+       <li>Dopo ogni esercizio segna <b>✓ Giusto</b> o <b>✗ Sbagliato</b>: gli sbagliati finiscono in <b>Da rivedere</b>.</li>
+       <li>Quando ti senti pronto, fai una <b>Simulazione</b> cronometrata.</li>
+       <li>Spiegazioni in italiano, ma i <span class="de">termini matematici</span> sono in tedesco, come all'esame.</li>
+     </ul>
+   </div>`;
+}
+
+/* ---------- Piano ---------- */
+function buildPlan(){
+  const today=isoToday();
+  document.getElementById('plan-list').innerHTML=PLAN.map(p=>{
+    const cls=p[0]===today?'day today':(p[0]<today?'day done':'day');
+    const dt=p[0].slice(8)+'.'+p[0].slice(5,7)+'.';
+    return `<div class="${cls}"><div class="date">${dt}</div><div><div class="ttl">${p[1]}</div><div class="desc">${p[2]}</div></div></div>`;
+  }).join('');
+}
+
+/* ---------- Fehler ---------- */
+function renderFehler(){
+  const prog=getProg();const root=document.getElementById('fehler-list');
+  let items=[];
+  Object.keys(prog).forEach(id=>{if(prog[id]==='wrong'){
+    const [area,i]=[id.slice(0,id.lastIndexOf('_')),parseInt(id.slice(id.lastIndexOf('_')+1))];
+    if(AREAS[area]&&AREAS[area].ex[i])items.push({area,i});
+  }});
+  if(items.length===0){root.innerHTML=`<p class="muted">Nessun esercizio da rivedere 🎉 (segna gli esercizi sbagliati e compariranno qui).</p>`;return;}
+  root.innerHTML=items.map(it=>renderEx(it.area,AREAS[it.area].ex[it.i],it.i,{ns:'feh',label:AREAS[it.area].icon})).join('');
+}
+
+/* ---------- Progress ---------- */
+function totalEx(){let t=0;for(const a in AREAS)t+=AREAS[a].ex.length;return t;}
+function renderProgress(){
+  const prog=getProg();const total=totalEx();
+  let correct=0,wrong=0;
+  for(const a in AREAS)AREAS[a].ex.forEach((e,i)=>{const s=prog[exId(a,i)];if(s==='correct')correct++;else if(s==='wrong')wrong++;});
+  const done=correct+wrong;
+  document.getElementById('prog-fill').style.width=(total?Math.round(correct/total*100):0)+'%';
+  document.getElementById('prog-text').textContent=`Risolti ${done} di ${total} esercizi · ${correct} giusti, ${wrong} da rivedere.`;
+  let perArea='';for(const a in AREAS){let c=0,n=AREAS[a].ex.length;AREAS[a].ex.forEach((e,i)=>{if(prog[exId(a,i)]==='correct')c++;});
+    perArea+=`<div class="stat"><b>${c}/${n}</b><span>${AREAS[a].icon} ${AREAS[a].title.split(' ')[0]}</span></div>`;}
+  document.getElementById('stat-grid').innerHTML=
+    `<div class="stat"><b>${correct}</b><span>✓ giusti</span></div>
+     <div class="stat"><b>${wrong}</b><span>✗ da rivedere</span></div>
+     <div class="stat"><b>${total-done}</b><span>ancora da fare</span></div>`+perArea;
+}
+
+/* ---------- Simulation ---------- */
+let simTimer=null;
+function buildSimRun(set,minutes){
+  let secs=minutes*60;
+  const card=document.getElementById('sim-card');
+  let exHtml=set.map((s,k)=>{const e=AREAS[s.from].ex[s.i];return renderEx(s.from,e,s.i,{ns:'sim',label:k+1});}).join('');
+  card.innerHTML=`
+    <div class="eyebrow">Simulazione in corso</div>
+    <div class="sim-timer" id="sim-clock">--:--</div>
+    <p class="center muted">Lavora su carta. Le soluzioni sono nascoste: aprile solo alla fine.</p>
+    <div class="center" style="margin:10px 0 18px"><button class="btn bad" id="sim-stop">■ Termina e mostra soluzioni</button>
+      <button class="btn" id="sim-restart">↺ Nuova simulazione</button></div>
+    <div class="muted center" style="margin-bottom:6px">📋 ${set.length} quesiti — alterna Teil A (senza calcolatrice) e Teil B (con).</div>
+    ${exHtml}`;
+  function tick(){
+    const m=Math.floor(secs/60),s=secs%60;
+    const cl=document.getElementById('sim-clock');if(!cl)return clearInterval(simTimer);
+    cl.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+    cl.classList.toggle('warn',secs<300);
+    if(secs<=0){clearInterval(simTimer);revealSim();}
+    secs--;
+  }
+  clearInterval(simTimer);tick();simTimer=setInterval(tick,1000);
+  document.getElementById('sim-stop').onclick=()=>{clearInterval(simTimer);revealSim();};
+  document.getElementById('sim-restart').onclick=()=>{clearInterval(simTimer);resetSimCard();};
+}
+function resetSimCard(){
+  const card=document.getElementById('sim-card');
+  card.innerHTML=`
+    <div class="eyebrow">Modalità esame</div>
+    <h2>Simulazione</h2>
+    <p class="lead">Un mini-esame con <b>Teil A</b> (senza calcolatrice, solo Formelsammlung) e <b>Teil B</b> (con calcolatrice). All'esame vero hai <b>170 minuti</b>. Qui parte un timer: lavora su carta, poi controlla le soluzioni.</p>
+    <div class="center" style="margin-top:16px">
+      <button class="btn primary" id="sim-start">▶︎ Inizia simulazione (170 min)</button>
+      <button class="btn" id="sim-short">Versione breve (45 min)</button>
+    </div>`;
+  document.getElementById('sim-start').onclick=()=>buildSimRun(SIM,170);
+  document.getElementById('sim-short').onclick=()=>buildSimRun(SIM_SHORT,45);
+}
+function revealSim(){document.querySelectorAll('#view-simulation .sol').forEach(s=>s.classList.add('show'));
+  const cl=document.getElementById('sim-clock');if(cl){cl.textContent='Fatto ✓';cl.classList.remove('warn');}}
+
+/* ---------- Navigation ---------- */
+function go(v){
+  document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
+  document.getElementById('view-'+v).classList.add('active');
+  document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
+  if(v==='fortschritt')renderProgress();
+  if(v==='fehler')renderFehler();
+  if(v==='heute')buildHeute();
+  if(v==='plan')buildPlan();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---------- Init (con protezione anti-blocco) ---------- */
+try{
+  updateCountdown();
+  ['funktionen','geometrie','raum','daten'].forEach(buildAreaView);
+  buildHeute();buildPlan();renderFehler();renderProgress();
+  document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>go(b.dataset.v));
+  document.getElementById('sim-start').onclick=()=>buildSimRun(SIM,170);
+  document.getElementById('sim-short').onclick=()=>buildSimRun(SIM_SHORT,45);
+  document.getElementById('reset-btn').onclick=()=>{if(confirm('Azzerare tutto il progresso?')){setProg({});
+    ['funktionen','geometrie','raum','daten'].forEach(buildAreaView);renderFehler();renderProgress();}};
+  setInterval(updateCountdown,60000);
+}catch(err){
+  var box=document.createElement('div');
+  box.style.cssText='margin:20px;padding:16px;border:1px solid #b23b3b;border-radius:10px;background:#fdeeee;color:#7a1f1f;font-family:system-ui';
+  box.innerHTML='<b>Si è verificato un problema all\'avvio.</b><br>Prova a ricaricare la pagina. Se persiste, riscarica il file.<br><span style="font-size:.8em;opacity:.7">'+(err&&err.message?err.message:err)+'</span>';
+  (document.querySelector('main')||document.body).prepend(box);
+  if(window.console)console.error(err);
+}
+</script>
+</body>
+</html>

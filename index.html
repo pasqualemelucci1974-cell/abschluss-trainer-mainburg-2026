@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gioele · Realschule Mainburg · Abschlussprüfung 2026</title>
+<style>
+/* ============================================================
+   GIOELE ABSCHLUSS-APP  —  Engine-Stylesheet
+   Offline-first, vanilla, kein Framework. UI 100% Deutsch.
+   ============================================================ */
+:root{
+  --bg:#0f1a2b; --panel:#16263e; --panel2:#1d3050; --ink:#eaf1fb; --mut:#9fb3cf;
+  --acc:#4f8cff; --acc2:#37c2a8; --warn:#ffb454; --bad:#ff6b6b; --good:#37c2a8;
+  --line:#27406a; --radius:14px; --shadow:0 6px 20px rgba(0,0,0,.28);
+  --maxw:980px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--ink);
+  font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  -webkit-text-size-adjust:100%;
+}
+a{color:var(--acc)}
+header.app{
+  background:linear-gradient(135deg,#16263e,#1d3050);
+  border-bottom:1px solid var(--line); padding:14px 16px;
+  position:sticky; top:0; z-index:30; box-shadow:var(--shadow);
+}
+.hwrap{max-width:var(--maxw); margin:0 auto; display:flex; flex-wrap:wrap; gap:10px 16px; align-items:center}
+.brand{font-weight:700; font-size:18px; letter-spacing:.2px}
+.brand small{display:block; font-weight:400; color:var(--mut); font-size:12px; margin-top:2px}
+.spacer{flex:1 1 auto}
+.subjsel{display:flex; align-items:center; gap:8px}
+select,button,input,textarea{font:inherit; color:inherit}
+select.subj{
+  background:var(--panel2); border:1px solid var(--line); color:var(--ink);
+  border-radius:10px; padding:8px 10px; min-width:160px;
+}
+.countdown{
+  background:var(--panel2); border:1px solid var(--line); border-radius:10px;
+  padding:8px 12px; font-size:14px; white-space:nowrap;
+}
+.countdown b{color:var(--warn); font-size:16px}
+main{max-width:var(--maxw); margin:0 auto; padding:14px 16px 60px}
+nav.tabs{
+  display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 18px;
+}
+nav.tabs button{
+  background:var(--panel); border:1px solid var(--line); color:var(--mut);
+  border-radius:999px; padding:8px 14px; cursor:pointer; transition:.15s;
+}
+nav.tabs button:hover{border-color:var(--acc)}
+nav.tabs button.active{background:var(--acc); color:#fff; border-color:var(--acc)}
+.card{
+  background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+  padding:16px 18px; margin:0 0 16px; box-shadow:var(--shadow);
+}
+.card h2{margin:.1em 0 .4em; font-size:20px}
+.card h3{margin:.6em 0 .35em; font-size:16px; color:var(--acc2)}
+.muted{color:var(--mut)}
+.tag{display:inline-block; background:var(--panel2); border:1px solid var(--line);
+  border-radius:999px; padding:2px 10px; font-size:12px; color:var(--mut); margin:0 6px 6px 0}
+.btn{
+  background:var(--acc); color:#fff; border:1px solid var(--acc); border-radius:10px;
+  padding:9px 14px; cursor:pointer; transition:.15s; font-weight:600;
+}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent; color:var(--ink); border-color:var(--line)}
+.btn.good{background:var(--good); border-color:var(--good)}
+.btn.bad{background:var(--bad); border-color:var(--bad)}
+.btn.warn{background:var(--warn); border-color:var(--warn); color:#22130a}
+.btn:disabled{opacity:.5; cursor:not-allowed}
+.row{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+.grid{display:grid; gap:12px}
+@media(min-width:640px){.grid.two{grid-template-columns:1fr 1fr}}
+.exercise{border-left:3px solid var(--acc); padding-left:14px; margin:14px 0}
+.prompt{font-size:16px; margin:.2em 0 .6em}
+.solution{background:var(--panel2); border:1px solid var(--line); border-radius:10px; padding:12px 14px; margin-top:10px}
+.solution ol{margin:.2em 0 .2em 1.1em; padding:0}
+.solution li{margin:.25em 0}
+.answer{margin-top:8px; padding-top:8px; border-top:1px dashed var(--line); font-weight:600; color:var(--good)}
+.bar{height:12px; background:var(--panel2); border:1px solid var(--line); border-radius:999px; overflow:hidden}
+.bar > span{display:block; height:100%; background:linear-gradient(90deg,var(--acc),var(--acc2)); width:0}
+.stat{display:flex; justify-content:space-between; gap:10px; padding:6px 0; border-bottom:1px solid var(--line)}
+.stat:last-child{border-bottom:0}
+textarea.scribble{width:100%; min-height:80px; background:var(--panel2); border:1px solid var(--line);
+  border-radius:10px; padding:10px; resize:vertical}
+input.txt{background:var(--panel2); border:1px solid var(--line); border-radius:10px; padding:8px 10px}
+table.tbl{width:100%; border-collapse:collapse; margin:.4em 0}
+table.tbl th,table.tbl td{border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top}
+table.tbl th{background:var(--panel2)}
+.figure{background:#fff; border-radius:10px; padding:10px; margin:10px 0; overflow:auto}
+.figure svg{max-width:100%; height:auto; display:block; margin:0 auto}
+.timer{font-variant-numeric:tabular-nums; font-size:28px; font-weight:700; color:var(--warn)}
+.errbox{background:#3a1620; border:1px solid var(--bad); color:#ffd7d7; border-radius:12px; padding:16px 18px; margin:16px}
+.errbox h2{margin:.1em 0 .4em; color:#ff9a9a}
+.errbox pre{white-space:pre-wrap; font-size:12px; color:#ffbcbc; background:rgba(0,0,0,.25); padding:10px; border-radius:8px; overflow:auto}
+.hint{font-size:13px; color:var(--mut); margin-top:6px}
+.step{border:1px solid var(--line); border-radius:10px; padding:12px 14px; margin:10px 0; background:var(--panel2)}
+.step .label{font-weight:700; color:var(--acc2)}
+.vok{display:flex; justify-content:space-between; gap:12px; padding:8px 0; border-bottom:1px solid var(--line)}
+.vok .de{color:var(--mut)}
+.vok .reveal{opacity:0; transition:.15s}
+.vok.show .reveal{opacity:1}
+.notice{background:#243a1d; border:1px solid #3c6b2c; color:#d7f3c8; border-radius:10px; padding:10px 12px; font-size:13px; margin:0 0 14px}
+@media print{
+  header.app{position:static; box-shadow:none}
+  nav.tabs, .btn, select.subj, .no-print{display:none !important}
+  body{background:#fff; color:#000}
+  .card{box-shadow:none; border:1px solid #ccc; background:#fff; color:#000; break-inside:avoid}
+  .solution{display:block !important; background:#f5f5f5; color:#000}
+  .figure{border:1px solid #ccc}
+}
+</style>
+</head>
+<body>
+<header class="app">
+  <div class="hwrap">
+    <div class="brand">
+      Gioele · Realschule Mainburg
+      <small>Realschulabschluss (Bayern) · Wahlpflichtfächergruppe IIIa · Abschlussprüfung 2026</small>
+    </div>
+    <div class="spacer"></div>
+    <div class="subjsel">
+      <label for="subjSelect" class="muted">Fach:</label>
+      <select id="subjSelect" class="subj" aria-label="Fach wechseln"></select>
+    </div>
+    <div id="countdown" class="countdown">…</div>
+  </div>
+</header>
+
+<main>
+  <nav class="tabs" id="tabs"></nav>
+  <div id="view"><!-- gerendert vom Motor --></div>
+</main>
+
+<!-- ============================================================
+     DATEN-DATEIEN: werden NACH der Engine geladen (Seitenende),
+     damit APP / APP.register bereits definiert sind.
+     ============================================================ -->
+
+<!-- ============================================================
+     ENGINE  —  globale API: APP
+     ============================================================ -->
+<script>
+(function(){
+"use strict";
+
+/* ---------- 1) storage: localStorage-Wrapper mit Fallback ---------- */
+var storage = (function(){
+  var mem = {}; var ok = false;
+  try{
+    var k="__gioele_test__"; window.localStorage.setItem(k,"1");
+    window.localStorage.removeItem(k); ok = true;
+  }catch(e){ ok = false; }
+  return {
+    available: ok,
+    get: function(key, fallback){
+      try{
+        var raw = ok ? window.localStorage.getItem(key) : (key in mem ? mem[key] : null);
+        if(raw==null) return (fallback===undefined?null:fallback);
+        return JSON.parse(raw);
+      }catch(e){ return (fallback===undefined?null:fallback); }
+    },
+    set: function(key, val){
+      try{
+        var raw = JSON.stringify(val);
+        if(ok) window.localStorage.setItem(key, raw); else mem[key]=raw;
+        return true;
+      }catch(e){ try{ mem[key]=JSON.stringify(val); }catch(e2){} return false; }
+    },
+    remove: function(key){
+      try{ if(ok) window.localStorage.removeItem(key); else delete mem[key]; }catch(e){}
+    }
+  };
+})();
+
+/* ---------- 2) interne Zustände ---------- */
+var SUBJECTS = [];          // registrierte Fächer
+var SUBJECTS_BY_ID = {};
+var STATE = {
+  subjectId: null,
+  tab: "heute"
+};
+var PROGRESS_KEY = "gioele.progress.v1";   // { subjId: { exId: {correct:n, wrong:n, last:ISO} } }
+var ERRORS_KEY   = "gioele.errors.v1";     // { subjId: [exId,...] }
+var LOG_KEY      = "gioele.log.v1";        // [ {date, subj, area, exId, result, ms, note} ]
+var PREF_KEY     = "gioele.pref.v1";       // { subjectId }
+
+function loadJSON(key, def){ var v = storage.get(key, def); return (v==null?def:v); }
+function saveJSON(key, val){ return storage.set(key, val); }
+
+/* ---------- 3) Hilfsfunktionen ---------- */
+function el(tag, attrs, kids){
+  var e = document.createElement(tag);
+  if(attrs){ for(var k in attrs){ if(!attrs.hasOwnProperty(k))continue;
+    if(k==="class") e.className=attrs[k];
+    else if(k==="html") e.innerHTML=attrs[k];
+    else if(k==="text") e.innerHTML=attrs[k];
+    else if(k.indexOf("on")===0 && typeof attrs[k]==="function") e.addEventListener(k.slice(2), attrs[k]);
+    else e.setAttribute(k, attrs[k]);
+  }}
+  if(kids){ if(!Array.isArray(kids)) kids=[kids];
+    for(var i=0;i<kids.length;i++){ var c=kids[i]; if(c==null) continue;
+      e.appendChild(typeof c==="string"?document.createTextNode(c):c); } }
+  return e;
+}
+function clear(node){ while(node && node.firstChild) node.removeChild(node.firstChild); }
+function todayISO(){ var d=new Date(); return isoOf(d); }
+function isoOf(d){ var m=(d.getMonth()+1), day=d.getDate();
+  return d.getFullYear()+"-"+(m<10?"0":"")+m+"-"+(day<10?"0":"")+day; }
+function parseISO(iso){
+  if(typeof iso!=="string") return null;
+  var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(iso); if(!m) return null;
+  var d=new Date(+m[1],(+m[2])-1,+m[3]); return isNaN(d.getTime())?null:d;
+}
+function daysBetween(fromISO, toISO){
+  var a=parseISO(fromISO), b=parseISO(toISO); if(!a||!b) return null;
+  return Math.round((b.getTime()-a.getTime())/86400000);
+}
+function esc(s){ return String(s==null?"":s)
+  .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+/* ---------- 4) öffentliche API ---------- */
+var APP = {
+  version: "1.0.0",
+  storage: storage,
+  /* register: validierend + defensiv. Defekte Fächer werden übersprungen. */
+  register: function(subj){
+    try{
+      if(!subj || typeof subj!=="object") throw new Error("Fach ist kein Objekt");
+      if(!subj.id) throw new Error("Fach ohne id");
+      if(SUBJECTS_BY_ID[subj.id]){ /* doppelt: überschreiben, letzte gewinnt */ }
+      // Defaults setzen, ohne zu crashen
+      subj.name = subj.name || subj.id;
+      subj.areas = Array.isArray(subj.areas) ? subj.areas : [];
+      subj.lernplan = Array.isArray(subj.lernplan) ? subj.lernplan : [];
+      if(!SUBJECTS_BY_ID[subj.id]) SUBJECTS.push(subj);
+      else { // ersetzen an gleicher Stelle
+        for(var i=0;i<SUBJECTS.length;i++){ if(SUBJECTS[i].id===subj.id){ SUBJECTS[i]=subj; break; } }
+      }
+      SUBJECTS_BY_ID[subj.id] = subj;
+      return true;
+    }catch(e){
+      try{ console.error("APP.register fehlgeschlagen:", e); }catch(_){}
+      return false;
+    }
+  },
+  getSubjects: function(){ return SUBJECTS.slice(); },
+  getSubject: function(id){ return SUBJECTS_BY_ID[id]||null; },
+  init: init
+};
+window.APP = APP;
+
+/* ---------- 5) Fortschritt / Fehler / Protokoll ---------- */
+function getProgress(){ return loadJSON(PROGRESS_KEY, {}); }
+function recordResult(subjId, ex, correct){
+  try{
+    var p = getProgress();
+    p[subjId] = p[subjId] || {};
+    var rec = p[subjId][ex.id] || {correct:0, wrong:0, last:null};
+    if(correct) rec.correct++; else rec.wrong++;
+    rec.last = new Date().toISOString();
+    p[subjId][ex.id] = rec; saveJSON(PROGRESS_KEY, p);
+
+    var errs = loadJSON(ERRORS_KEY, {}); errs[subjId]=errs[subjId]||[];
+    if(correct){ errs[subjId] = errs[subjId].filter(function(x){return x!==ex.id;}); }
+    else if(errs[subjId].indexOf(ex.id)<0){ errs[subjId].push(ex.id); }
+    saveJSON(ERRORS_KEY, errs);
+
+    var log = loadJSON(LOG_KEY, []);
+    log.push({date:new Date().toISOString(), subj:subjId, area:ex.area||null,
+              exId:ex.id, result:correct?"richtig":"falsch"});
+    if(log.length>2000) log = log.slice(-2000);
+    saveJSON(LOG_KEY, log);
+  }catch(e){ try{console.error(e);}catch(_){ } }
+}
+function getErrorIds(subjId){ var e=loadJSON(ERRORS_KEY,{}); return (e[subjId]||[]).slice(); }
+
+/* Alle Übungen eines Fachs flach sammeln (aus areas + Sonderstrukturen) */
+function collectExercises(subj){
+  var out=[];
+  try{
+    (subj.areas||[]).forEach(function(area){
+      if(!area || !Array.isArray(area.exercises)) return;
+      area.exercises.forEach(function(ex){
+        if(ex && ex.id){ if(!ex.area) ex.area=area.id; out.push(ex); }
+      });
+    });
+  }catch(e){}
+  return out;
+}
+
+/* ---------- 6) Rendering ---------- */
+function setView(node){ var v=document.getElementById("view"); clear(v); v.appendChild(node); }
+
+function renderCountdown(){
+  var c=document.getElementById("countdown");
+  var s=APP.getSubject(STATE.subjectId);
+  if(!s || !s.examISO){ c.textContent="—"; return; }
+  var d=daysBetween(todayISO(), s.examISO);
+  if(d==null){ c.textContent="Prüfungsdatum unbekannt"; return; }
+  if(d>0) c.innerHTML="Noch <b>"+d+"</b> Tage bis zur Prüfung";
+  else if(d===0) c.innerHTML="<b>Heute</b> ist die Prüfung! Viel Erfolg!";
+  else c.innerHTML="Prüfung war vor <b>"+(-d)+"</b> Tagen";
+}
+
+function renderTabs(){
+  var nav=document.getElementById("tabs"); clear(nav);
+  var s=APP.getSubject(STATE.subjectId); if(!s) return;
+  var tabs=[["heute","Heute"],["lernplan","Lernplan"]];
+  (s.areas||[]).forEach(function(a){ if(a&&a.id) tabs.push(["area:"+a.id, a.title||a.id]); });
+  tabs.push(["simulation","Simulation"]);
+  tabs.push(["fehler","Fehler / Wiederholen"]);
+  tabs.push(["fortschritt","Fortschritt"]);
+  tabs.forEach(function(t){
+    var b=el("button",{text:t[1], "class":(STATE.tab===t[0]?"active":""),
+      onclick:function(){ STATE.tab=t[0]; renderTabs(); renderView(); }});
+    nav.appendChild(b);
+  });
+}
+
+function renderView(){
+  var s=APP.getSubject(STATE.subjectId);
+  if(!s){ setView(el("div",{"class":"card",html:"<h2>Kein Fach ausgewählt</h2>"})); return; }
+  try{
+    var t=STATE.tab;
+    if(t==="heute") return setView(viewHeute(s));
+    if(t==="lernplan") return setView(viewLernplan(s));
+    if(t==="simulation") return setView(viewSimulation(s));
+    if(t==="fehler") return setView(viewFehler(s));
+    if(t==="fortschritt") return setView(viewFortschritt(s));
+    if(t.indexOf("area:")===0){
+      var aid=t.slice(5);
+      var area=null; (s.areas||[]).forEach(function(a){ if(a&&a.id===aid) area=a; });
+      if(!area) return setView(el("div",{"class":"card",html:"<h2>Bereich nicht gefunden</h2>"}));
+      return setView(viewArea(s, area));
+    }
+    setView(viewHeute(s));
+  }catch(e){
+    setView(el("div",{"class":"errbox",html:
+      "<h2>Anzeigefehler</h2><p>Dieser Bereich konnte nicht geladen werden. "+
+      "Die übrigen Bereiche funktionieren weiter.</p><pre>"+esc(e&&e.message)+"</pre>"}));
+  }
+}
+
+/* ---- Heute ---- */
+function viewHeute(s){
+  var wrap=el("div");
+  var c=el("div",{"class":"card"});
+  c.appendChild(el("h2",{text:"Heute — "+(s.name||"")}));
+  c.appendChild(el("p",{"class":"muted",
+    text:"Datum: "+todayISO()+" · Prüfung: "+(s.examISO||"—")}));
+  if(s.note) c.appendChild(el("div",{"class":"notice",html:s.note}));
+
+  var plan = Array.isArray(s.lernplan)?s.lernplan:[];
+  var entry=null;
+  for(var i=0;i<plan.length;i++){ if(plan[i] && plan[i].dateISO===todayISO()){ entry=plan[i]; break; } }
+  if(entry){
+    c.appendChild(el("h3",{text:"Heutiges Lernziel"}));
+    c.appendChild(el("p",{html:entry.focus||""}));
+    if(entry.areaId){
+      c.appendChild(el("button",{"class":"btn",text:"Zum Bereich",
+        onclick:function(){ STATE.tab="area:"+entry.areaId; renderTabs(); renderView(); }}));
+    }
+  }else{
+    c.appendChild(el("p",{html:"Für heute ist kein fester Plan-Eintrag vorhanden. "+
+      "Wähle einen Bereich oder starte eine <b>Simulation</b>."}));
+  }
+  wrap.appendChild(c);
+
+  // Schnellzugriff: nächste fällige Übung aus Fehlerliste
+  var errs=getErrorIds(s.id);
+  if(errs.length){
+    var c2=el("div",{"class":"card"});
+    c2.appendChild(el("h3",{text:"Zu wiederholen: "+errs.length+" Aufgabe(n)"}));
+    c2.appendChild(el("button",{"class":"btn warn",text:"Fehler wiederholen",
+      onclick:function(){ STATE.tab="fehler"; renderTabs(); renderView(); }}));
+    wrap.appendChild(c2);
+  }
+  return wrap;
+}
+
+/* ---- Lernplan ---- */
+function viewLernplan(s){
+  var c=el("div",{"class":"card"});
+  c.appendChild(el("h2",{text:"Lernplan bis zur Prüfung"}));
+  var plan=Array.isArray(s.lernplan)?s.lernplan:[];
+  if(!plan.length){ c.appendChild(el("p",{"class":"muted",
+    text:"Noch kein Lernplan hinterlegt. (Wird in den Daten-Dateien ergänzt.)"})); return c; }
+  var tbl=el("table",{"class":"tbl"});
+  tbl.appendChild(el("tr",{html:"<th>Datum</th><th>Schwerpunkt</th>"}));
+  plan.forEach(function(p){
+    if(!p) return;
+    var tr=el("tr");
+    var isToday = p.dateISO===todayISO();
+    tr.appendChild(el("td",{html:(isToday?"<b>":"")+esc(p.dateISO||"")+(isToday?" ◀ heute</b>":"")}));
+    tr.appendChild(el("td",{html:p.focus||""}));
+    tbl.appendChild(tr);
+  });
+  c.appendChild(tbl);
+  return c;
+}
+
+/* ---- Bereich (Area) inkl. Sonderstrukturen ---- */
+function viewArea(s, area){
+  var wrap=el("div");
+  var head=el("div",{"class":"card"});
+  head.appendChild(el("h2",{text:area.title||area.id}));
+  if(area.intro) head.appendChild(el("div",{html:area.intro}));
+  wrap.appendChild(head);
+
+  // Theorie
+  if(area.theory){
+    var th=el("div",{"class":"card"}); th.appendChild(el("h3",{text:"Theorie"}));
+    th.appendChild(el("div",{html:area.theory})); wrap.appendChild(th);
+  }
+  // Figuren (SVG-Strings)
+  if(Array.isArray(area.figures) && area.figures.length){
+    var fg=el("div",{"class":"card"}); fg.appendChild(el("h3",{text:"Abbildungen"}));
+    area.figures.forEach(function(svg){ if(typeof svg==="string")
+      fg.appendChild(el("div",{"class":"figure",html:svg})); });
+    wrap.appendChild(fg);
+  }
+  // Beispiele (gelöst)
+  if(Array.isArray(area.examples) && area.examples.length){
+    var ex=el("div",{"class":"card"}); ex.appendChild(el("h3",{text:"Gelöste Beispiele"}));
+    area.examples.forEach(function(e){ if(!e) return;
+      if(e.title) ex.appendChild(el("h3",{text:e.title}));
+      if(e.html) ex.appendChild(el("div",{html:e.html}));
+    });
+    wrap.appendChild(ex);
+  }
+
+  // Sonderstrukturen (defensiv, jede in try/catch)
+  trySpecial(wrap, area.tgaTrainer, renderTgaTrainer);
+  trySpecial(wrap, area.vokabeln, renderVokabeln);
+  trySpecial(wrap, area.grammatik, renderGrammatik);
+  trySpecial(wrap, area.leseverstehen, renderLeseverstehen);
+  trySpecial(wrap, area.version, renderVersion);
+  trySpecial(wrap, area.kataloge, renderKataloge);
+
+  // Übungen
+  if(Array.isArray(area.exercises) && area.exercises.length){
+    var box=el("div",{"class":"card"}); box.appendChild(el("h3",{text:"Aufgaben"}));
+    area.exercises.forEach(function(exo){
+      try{ box.appendChild(renderExercise(s, exo)); }
+      catch(e){ box.appendChild(el("p",{"class":"muted",text:"(Aufgabe übersprungen)"})); }
+    });
+    wrap.appendChild(box);
+  }
+  wrap.appendChild(el("div",{"class":"row no-print"},[
+    el("button",{"class":"btn ghost",text:"Drucken / PDF",onclick:function(){ window.print(); }})
+  ]));
+  return wrap;
+}
+function trySpecial(wrap, data, fn){
+  if(!data) return;
+  try{ var node=fn(data); if(node) wrap.appendChild(node); }
+  catch(e){ wrap.appendChild(el("div",{"class":"card muted",
+    text:"(Ein Inhaltsblock konnte nicht geladen werden.)"})); }
+}
+
+/* ---- Aufgaben-Viewer: prompt → Lösung zeigen → Richtig/Falsch ---- */
+function renderExercise(s, ex){
+  if(!ex || !ex.id) throw new Error("Aufgabe ohne id");
+  var box=el("div",{"class":"exercise"});
+  var diff = ex.difficulty?(" · Schwierigkeit "+ex.difficulty):"";
+  box.appendChild(el("div",{"class":"tag",text:ex.id+diff}));
+  box.appendChild(el("div",{"class":"prompt",html:ex.prompt||"(kein Aufgabentext)"}));
+  if(ex.scribble!==false){
+    box.appendChild(el("textarea",{"class":"scribble no-print",
+      placeholder:"Deine Lösung / Notizen …"}));
+  }
+  var sol=el("div",{"class":"solution",style:"display:none"});
+  if(Array.isArray(ex.solutionSteps) && ex.solutionSteps.length){
+    var ol=el("ol");
+    ex.solutionSteps.forEach(function(st){ ol.appendChild(el("li",{html:st})); });
+    sol.appendChild(el("div",{html:"<b>Lösungsweg:</b>"})); sol.appendChild(ol);
+  }
+  if(ex.answer) sol.appendChild(el("div",{"class":"answer",html:"Ergebnis: "+ex.answer}));
+  if(!ex.solutionSteps && !ex.answer) sol.appendChild(el("p",{text:"(keine Lösung hinterlegt)"}));
+
+  var controls=el("div",{"class":"row no-print",style:"margin-top:10px"});
+  var btnShow=el("button",{"class":"btn",text:"Lösung zeigen",onclick:function(){
+    sol.style.display = (sol.style.display==="none"?"block":"none");
+    btnShow.textContent = (sol.style.display==="none"?"Lösung zeigen":"Lösung verbergen");
+  }});
+  var btnOK=el("button",{"class":"btn good",text:"Richtig",onclick:function(){
+    recordResult(s.id, ex, true); flash(controls,"Als richtig gespeichert ✓");
+  }});
+  var btnNO=el("button",{"class":"btn bad",text:"Falsch",onclick:function(){
+    recordResult(s.id, ex, false); flash(controls,"Zum Wiederholen gespeichert");
+  }});
+  controls.appendChild(btnShow); controls.appendChild(btnOK); controls.appendChild(btnNO);
+  box.appendChild(controls); box.appendChild(sol);
+  return box;
+}
+function flash(node, msg){
+  var t=el("span",{"class":"hint",text:" "+msg}); node.appendChild(t);
+  setTimeout(function(){ if(t.parentNode) t.parentNode.removeChild(t); }, 1800);
+}
+
+/* ---- Simulation mit Timer ---- */
+var simTimer=null;
+function viewSimulation(s){
+  var wrap=el("div");
+  var c=el("div",{"class":"card"});
+  c.appendChild(el("h2",{text:"Simulation — "+(s.name||"")}));
+  var mins = s.examMinutes || 60;
+  c.appendChild(el("p",{"class":"muted",text:"Reguläre Dauer: "+mins+" Minuten."}));
+  var disp=el("div",{"class":"timer",text:fmtTime(mins*60)});
+  c.appendChild(disp);
+  var remaining = {sec: mins*60};
+  var row=el("div",{"class":"row no-print",style:"margin-top:10px"});
+  var solBox=el("div");
+  var allEx=collectExercises(s);
+  var btnStart=el("button",{"class":"btn",text:"Start",onclick:function(){
+    if(simTimer) clearInterval(simTimer);
+    simTimer=setInterval(function(){
+      remaining.sec--; disp.textContent=fmtTime(remaining.sec);
+      if(remaining.sec<=0){ clearInterval(simTimer); simTimer=null; revealAll(); }
+    },1000);
+  }});
+  var btnShort=el("button",{"class":"btn ghost",text:"Kurz (5 Min.)",onclick:function(){
+    remaining.sec=5*60; disp.textContent=fmtTime(remaining.sec);
+  }});
+  var btnStop=el("button",{"class":"btn warn",text:"Stop & Lösungen",onclick:function(){
+    if(simTimer){clearInterval(simTimer); simTimer=null;} revealAll();
+  }});
+  function revealAll(){
+    clear(solBox);
+    solBox.appendChild(el("h3",{text:"Lösungen"}));
+    if(!allEx.length){ solBox.appendChild(el("p",{"class":"muted",text:"Keine Aufgaben vorhanden."})); return; }
+    allEx.forEach(function(ex){ try{ solBox.appendChild(renderExercise(s,ex)); }catch(e){} });
+  }
+  row.appendChild(btnStart); row.appendChild(btnShort); row.appendChild(btnStop);
+  c.appendChild(row);
+  // Aufgabenliste (ohne Lösungen) während der Simulation
+  var list=el("div"); list.appendChild(el("h3",{text:"Aufgaben ("+allEx.length+")"}));
+  allEx.forEach(function(ex){
+    var d=el("div",{"class":"exercise"});
+    d.appendChild(el("div",{"class":"tag",text:ex.id}));
+    d.appendChild(el("div",{"class":"prompt",html:ex.prompt||""}));
+    list.appendChild(d);
+  });
+  c.appendChild(list);
+  wrap.appendChild(c);
+  var c3=el("div",{"class":"card"}); c3.appendChild(solBox); wrap.appendChild(c3);
+  return wrap;
+}
+function fmtTime(sec){ if(sec<0)sec=0; var m=Math.floor(sec/60), s=sec%60;
+  return (m<10?"0":"")+m+":"+(s<10?"0":"")+s; }
+
+/* ---- Fehler / Wiederholen ---- */
+function viewFehler(s){
+  var c=el("div",{"class":"card"});
+  c.appendChild(el("h2",{text:"Fehler / Wiederholen"}));
+  var ids=getErrorIds(s.id);
+  if(!ids.length){ c.appendChild(el("p",{"class":"muted",
+    text:"Aktuell keine offenen Fehler. Gut gemacht!"})); return c; }
+  var all=collectExercises(s); var byId={}; all.forEach(function(e){ byId[e.id]=e; });
+  c.appendChild(el("p",{"class":"muted",text:ids.length+" Aufgabe(n) zum Wiederholen:"}));
+  ids.forEach(function(id){
+    var ex=byId[id];
+    if(ex){ c.appendChild(renderExercise(s,ex)); }
+    else c.appendChild(el("p",{"class":"muted",text:"(Aufgabe "+id+" nicht gefunden)"}));
+  });
+  return c;
+}
+
+/* ---- Fortschritt ---- */
+function viewFortschritt(s){
+  var wrap=el("div");
+  var c=el("div",{"class":"card"});
+  c.appendChild(el("h2",{text:"Fortschritt — "+(s.name||"")}));
+  var p=getProgress()[s.id]||{};
+  var all=collectExercises(s);
+  var done=0, correct=0, total=all.length;
+  all.forEach(function(ex){ var r=p[ex.id]; if(r){ done++; if(r.correct>0 && (!r.wrong||r.correct>=r.wrong)) correct++; } });
+  var pct = total? Math.round(done/total*100):0;
+  c.appendChild(el("p",{html:"Bearbeitet: <b>"+done+"</b> von <b>"+total+"</b> Aufgaben ("+pct+"%)"}));
+  var bar=el("div",{"class":"bar"}); var span=el("span"); span.style.width=pct+"%"; bar.appendChild(span);
+  c.appendChild(bar);
+
+  // pro Bereich
+  c.appendChild(el("h3",{text:"Nach Bereich"}));
+  (s.areas||[]).forEach(function(area){
+    if(!area||!Array.isArray(area.exercises)||!area.exercises.length) return;
+    var d=0,t=area.exercises.length;
+    area.exercises.forEach(function(ex){ if(ex&&p[ex.id]) d++; });
+    var st=el("div",{"class":"stat"});
+    st.appendChild(el("span",{text:area.title||area.id}));
+    st.appendChild(el("span",{text:d+" / "+t}));
+    c.appendChild(st);
+  });
+  wrap.appendChild(c);
+
+  // Backup Export / Import
+  var b=el("div",{"class":"card no-print"});
+  b.appendChild(el("h3",{text:"Datensicherung (Backup)"}));
+  b.appendChild(el("p",{"class":"muted",text:"Fortschritt, Fehlerliste und Lernprotokoll als Datei sichern oder einspielen."}));
+  var rowb=el("div",{"class":"row"});
+  rowb.appendChild(el("button",{"class":"btn ghost",text:"Exportieren (JSON)",onclick:exportBackup}));
+  var imp=el("input",{type:"file",accept:"application/json,.json",style:"display:none"});
+  imp.addEventListener("change",function(ev){ importBackup(ev.target.files[0]); });
+  rowb.appendChild(el("button",{"class":"btn ghost",text:"Importieren",onclick:function(){ imp.click(); }}));
+  rowb.appendChild(imp);
+  rowb.appendChild(el("button",{"class":"btn bad",text:"Alles zurücksetzen",onclick:resetAll}));
+  b.appendChild(rowb);
+  wrap.appendChild(b);
+  return wrap;
+}
+function exportBackup(){
+  try{
+    var data={ _app:"gioele-abschluss", _v:1, exportedAt:new Date().toISOString(),
+      progress:loadJSON(PROGRESS_KEY,{}), errors:loadJSON(ERRORS_KEY,{}),
+      log:loadJSON(LOG_KEY,[]), pref:loadJSON(PREF_KEY,{}) };
+    var blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+    var a=document.createElement("a"); a.href=URL.createObjectURL(blob);
+    a.download="gioele-backup-"+todayISO()+".json"; a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); },2000);
+  }catch(e){ alert("Export fehlgeschlagen."); }
+}
+function importBackup(file){
+  if(!file) return;
+  var r=new FileReader();
+  r.onload=function(){
+    try{
+      var d=JSON.parse(r.result);
+      if(d.progress) saveJSON(PROGRESS_KEY,d.progress);
+      if(d.errors) saveJSON(ERRORS_KEY,d.errors);
+      if(d.log) saveJSON(LOG_KEY,d.log);
+      if(d.pref) saveJSON(PREF_KEY,d.pref);
+      alert("Backup eingespielt."); renderView();
+    }catch(e){ alert("Import fehlgeschlagen: ungültige Datei."); }
+  };
+  r.readAsText(file);
+}
+function resetAll(){
+  if(!window.confirm || window.confirm("Wirklich alle gespeicherten Daten löschen?")){
+    storage.remove(PROGRESS_KEY); storage.remove(ERRORS_KEY);
+    storage.remove(LOG_KEY); renderView();
+  }
+}
+
+/* ---- Sonderstruktur-Renderer ---- */
+function renderTgaTrainer(t){
+  var c=el("div",{"class":"card"});
+  c.appendChild(el("h3",{text:t.title||"TGA-Trainer (Schritt für Schritt)"}));
+  if(t.intro) c.appendChild(el("div",{html:t.intro}));
+  (t.steps||[]).forEach(function(st){
+    if(!st) return;
+    var box=el("div",{"class":"step"});
+    box.appendChild(el("div",{"class":"label",text:(st.label||"")+" "+(st.title||"")}));
+    if(st.hint) box.appendChild(el("div",{"class":"hint",html:st.hint}));
+    box.appendChild(el("textarea",{"class":"scribble no-print",placeholder:"Hier deinen Text schreiben …"}));
+    if(st.muster){
+      var sol=el("div",{"class":"solution",style:"display:none",html:"<b>Musterlösung:</b><br>"+st.muster});
+      var bt=el("button",{"class":"btn ghost no-print",text:"Musterlösung zeigen",onclick:function(){
+        sol.style.display=(sol.style.display==="none"?"block":"none");
+      }});
+      box.appendChild(bt); box.appendChild(sol);
+    }
+    c.appendChild(box);
+  });
+  return c;
+}
+function renderVokabeln(v){
+  var c=el("div",{"class":"card"});
+  c.appendChild(el("h3",{text:v.title||"Vokabeltrainer"}));
+  (v.items||[]).forEach(function(it){
+    if(!it) return;
+    var row=el("div",{"class":"vok"});
+    row.appendChild(el("span",{text:it.front||""}));
+    var back=el("span",{"class":"de reveal",text:it.back||""});
+    row.appendChild(back);
+    row.addEventListener("click",function(){ row.classList.toggle("show"); });
+    c.appendChild(row);
+  });
+  c.appendChild(el("div",{"class":"hint",text:"Tipp: auf eine Zeile tippen, um die Übersetzung zu zeigen."}));
+  return c;
+}
+function renderGrammatik(g){
+  var c=el("div",{"class":"card"});
+  c.appendChild(el("h3",{text:g.title||"Grammatik-Trainer"}));
+  if(g.theory) c.appendChild(el("div",{html:g.theory}));
+  (g.items||[]).forEach(function(it){
+    if(!it) return;
+    var box=el("div",{"class":"exercise"});
+    box.appendChild(el("div",{"class":"prompt",html:it.q||""}));
+    box.appendChild(el("input",{"class":"txt no-print",placeholder:"Antwort …"}));
+    var sol=el("div",{"class":"solution",style:"display:none",html:"Lösung: <b>"+esc(it.a||"")+"</b>"});
+    box.appendChild(el("button",{"class":"btn ghost no-print",text:"Lösung",onclick:function(){
+      sol.style.display=(sol.style.display==="none"?"block":"none"); }}));
+    box.appendChild(sol);
+    c.appendChild(box);
+  });
+  return c;
+}
+function renderLeseverstehen(l){
+  var c=el("div",{"class":"card"});
+  c.appendChild(el("h3",{text:l.title||"Leseverstehen"}));
+  if(l.text) c.appendChild(el("div",{"class":"step",html:l.text}));
+  (l.questions||[]).forEach(function(q,i){
+    if(!q) return;
+    var box=el("div",{"class":"exercise"});
+    box.appendChild(el("div",{"class":"prompt",html:(i+1)+". "+(q.q||"")}));
+    var sol=el("div",{"class":"solution",style:"display:none",html:"Lösung: "+(q.a||"")});
+    box.appendChild(el("button",{"class":"btn ghost no-print",text:"Lösung zeigen",onclick:function(){
+      sol.style.display=(sol.style.display==="none"?"block":"none"); }}));
+    box.appendChild(sol);
+    c.appendChild(box);
+  });
+  return c;
+}
+function renderVersion( v){
+  var c=el("div",{"class":"card"});
+  c.appendChild(el("h3",{text:v.title||"Version (Übersetzung)"}));
+  (v.items||[]).forEach(function(it){
+    if(!it) return;
+    var box=el("div",{"class":"exercise"});
+    box.appendChild(el("div",{"class":"prompt",html:it.source||""}));
+    box.appendChild(el("textarea",{"class":"scribble no-print",placeholder:"Deine Übersetzung …"}));
+    var sol=el("div",{"class":"solution",style:"display:none",html:"<b>Musterübersetzung:</b> "+(it.target||"")});
+    box.appendChild(el("button",{"class":"btn ghost no-print",text:"Musterübersetzung",onclick:function(){
+      sol.style.display=(sol.style.display==="none"?"block":"none"); }}));
+    box.appendChild(sol);
+    c.appendChild(box);
+  });
+  return c;
+}
+function renderKataloge(k){
+  var c=el("div",{"class":"card"});
+  c.appendChild(el("h3",{text:k.title||"Katalog"}));
+  (k.entries||[]).forEach(function(e){
+    if(!e) return;
+    var box=el("div",{"class":"step"});
+    box.appendChild(el("div",{"class":"label",text:e.term||""}));
+    if(e.definition) box.appendChild(el("div",{html:e.definition}));
+    if(e.example) box.appendChild(el("div",{"class":"hint",html:"Beispiel: "+e.example}));
+    if(e.effect) box.appendChild(el("div",{"class":"hint",html:"Wirkung: "+e.effect}));
+    c.appendChild(box);
+  });
+  return c;
+}
+
+/* ---------- 7) Initialisierung ---------- */
+function setSubject(id){
+  if(!APP.getSubject(id)) return;
+  STATE.subjectId=id; STATE.tab="heute";
+  saveJSON(PREF_KEY,{subjectId:id});
+  var sel=document.getElementById("subjSelect"); if(sel) sel.value=id;
+  renderCountdown(); renderTabs(); renderView();
+}
+
+function init(){
+  try{
+    if(!SUBJECTS.length){
+      setView(el("div",{"class":"errbox",html:
+        "<h2>Keine Fächer geladen</h2><p>Es konnten keine Fach-Dateien gefunden werden. "+
+        "Bitte prüfe, ob der Ordner <code>data/</code> vorhanden ist.</p>"}));
+      return false;
+    }
+    // Reihenfolge nach Prüfungsdatum (frühestes zuerst)
+    SUBJECTS.sort(function(a,b){ return String(a.examISO).localeCompare(String(b.examISO)); });
+
+    var sel=document.getElementById("subjSelect"); clear(sel);
+    SUBJECTS.forEach(function(s){
+      sel.appendChild(el("option",{value:s.id,text:s.name+" ("+(s.examISO||"?")+")"}));
+    });
+    sel.addEventListener("change",function(){ setSubject(sel.value); });
+
+    var pref=loadJSON(PREF_KEY,{});
+    var startId = (pref&&pref.subjectId&&APP.getSubject(pref.subjectId))?pref.subjectId:SUBJECTS[0].id;
+    setSubject(startId);
+    return true;
+  }catch(e){
+    setView(el("div",{"class":"errbox",html:
+      "<h2>Es ist ein Fehler aufgetreten</h2>"+
+      "<p>Die App konnte nicht vollständig gestartet werden. Lade die Seite neu. "+
+      "Falls das Problem bleibt, melde diesen Hinweis:</p><pre>"+esc(e&&e.stack||e&&e.message||e)+"</pre>"}));
+    return false;
+  }
+}
+
+/* Autostart, sobald DOM bereit */
+if(document.readyState==="loading"){
+  document.addEventListener("DOMContentLoaded", function(){ APP.init(); });
+}else{ APP.init(); }
+
+})();
+</script>
+
+<!-- DATEN-DATEIEN: nach der Engine, damit APP.register() existiert -->
+<script src="data/deutsch.js"></script>
+<script src="data/franzoesisch.js"></script>
+<script src="data/englisch.js"></script>
+<script src="data/mathematik.js"></script>
+</body>
+</html>
