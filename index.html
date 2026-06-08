@@ -105,6 +105,13 @@ table.tbl th{background:var(--panel2)}
 .vok .reveal{opacity:0; transition:.15s}
 .vok.show .reveal{opacity:1}
 .notice{background:#243a1d; border:1px solid #3c6b2c; color:#d7f3c8; border-radius:10px; padding:10px 12px; font-size:13px; margin:0 0 14px}
+.audio-bar{margin:6px 0 10px}
+.audio-bar .btn{padding:6px 10px}
+.audiosp{font-size:13px !important}
+.audiosp.active{background:var(--acc2); border-color:var(--acc2); color:#06231d}
+.audio-hidden{filter:blur(6px); user-select:none; transition:filter .15s}
+.audio-hidden:hover{filter:blur(6px)}
+.audio-hint{background:#3a2c16; border:1px solid #6b552c; color:#f3e4c8; border-radius:10px; padding:8px 12px; font-size:12.5px; margin:8px 0; flex-basis:100%}
 @media print{
   header.app{position:static; box-shadow:none}
   nav.tabs, .btn, select.subj, .no-print{display:none !important}
@@ -208,6 +215,81 @@ function el(tag, attrs, kids){
   return e;
 }
 function clear(node){ while(node && node.firstChild) node.removeChild(node.firstChild); }
+
+/* ---------- Sprachausgabe (TTS) für Hörverstehen ---------- */
+var TTS=(function(){
+  var synth=(typeof window!=="undefined" && window.speechSynthesis)?window.speechSynthesis:null;
+  var loaded=false;
+  function refresh(){ if(synth){ var v=synth.getVoices(); if(v && v.length) loaded=true; } }
+  if(synth){ refresh(); try{ synth.onvoiceschanged=refresh; }catch(e){} }
+  function available(){ return !!synth && typeof SpeechSynthesisUtterance!=="undefined"; }
+  function voicesFor(lang){ if(!synth) return []; var p=(lang||"").slice(0,2).toLowerCase();
+    return (synth.getVoices()||[]).filter(function(v){ return (v.lang||"").slice(0,2).toLowerCase()===p; }); }
+  function hasVoice(lang){ return voicesFor(lang).length>0; }
+  function voicesLoaded(){ refresh(); return loaded; }
+  function stop(){ if(synth){ try{ synth.cancel(); }catch(e){} } }
+  function pause(){ if(!synth) return; try{ if(synth.paused) synth.resume(); else if(synth.speaking) synth.pause(); }catch(e){} }
+  function speak(text, lang, rate){
+    if(!available() || !text) return;
+    stop();
+    var u=new SpeechSynthesisUtterance(text);
+    u.lang=lang||"en-GB"; u.rate=rate||0.85;
+    var vs=voicesFor(lang); if(vs.length) u.voice=vs[0];
+    try{ synth.speak(u); }catch(e){}
+  }
+  return { available:available, hasVoice:hasVoice, voicesLoaded:voicesLoaded, speak:speak, stop:stop, pause:pause };
+})();
+
+/* Text eines Knotens in vorlesbaren Klartext umwandeln (Pausen bei <br> und Absätzen) */
+function speakableText(node){
+  if(!node) return "";
+  var html=(node.innerHTML||"");
+  html=html.replace(/<br\s*\/?>/gi,". ").replace(/<\/(p|div|li|h[1-6])>/gi,". ");
+  var tmp=document.createElement("div"); tmp.innerHTML=html;
+  var t=(tmp.textContent||tmp.innerText||"");
+  return t.replace(/\s+/g," ").replace(/\s+([.,;:!?])/g,"$1").replace(/\.(\s*\.)+/g,".").trim();
+}
+
+/* Audio-Leiste (Anhören/Pause/Stop/Tempo/Text ausblenden) für einen Transkript-Knoten */
+function audioControls(bodyNode, lang){
+  lang=lang||"en-GB";
+  if(!TTS.available()){
+    return el("div",{"class":"muted no-print audio-bar",
+      text:"🔇 Sprachausgabe wird von diesem Browser nicht unterst&uuml;tzt &ndash; du kannst den Text lesen."});
+  }
+  var rate={v:0.85};
+  var bar=el("div",{"class":"row no-print audio-bar"});
+  bar.appendChild(el("button",{"class":"btn",text:"&#9658; Anh&ouml;ren",
+    onclick:function(){ TTS.speak(speakableText(bodyNode), lang, rate.v); }}));
+  bar.appendChild(el("button",{"class":"btn ghost",text:"&#10073;&#10073; Pause / weiter",
+    onclick:function(){ TTS.pause(); }}));
+  bar.appendChild(el("button",{"class":"btn ghost",text:"&#9632; Stop",
+    onclick:function(){ TTS.stop(); }}));
+  var sp=el("span",{"class":"row",style:"gap:4px"});
+  sp.appendChild(el("span",{"class":"muted",text:"Tempo:"}));
+  [["0,7&times;",0.7],["0,85&times;",0.85],["1&times;",1.0]].forEach(function(o){
+    var b=el("button",{"class":"btn ghost audiosp"+(o[1]===rate.v?" active":""),text:o[0],
+      onclick:function(){ rate.v=o[1];
+        Array.prototype.forEach.call(sp.querySelectorAll("button"),function(x){ x.classList.remove("active"); });
+        b.classList.add("active"); }});
+    sp.appendChild(b);
+  });
+  bar.appendChild(sp);
+  var hidden={v:false};
+  var hb=el("button",{"class":"btn ghost",text:"Text ausblenden",onclick:function(){
+    hidden.v=!hidden.v;
+    if(hidden.v){ bodyNode.classList.add("audio-hidden"); hb.innerHTML="Text einblenden"; }
+    else{ bodyNode.classList.remove("audio-hidden"); hb.innerHTML="Text ausblenden"; }
+  }});
+  bar.appendChild(hb);
+  if(TTS.voicesLoaded() && !TTS.hasVoice(lang)){
+    var fr=(lang.slice(0,2).toLowerCase()==="fr");
+    bar.appendChild(el("div",{"class":"audio-hint no-print",html: fr
+      ? "Hinweis: Auf diesem Ger&auml;t ist noch keine franz&ouml;sische Stimme installiert. So f&uuml;gst du sie hinzu: <b>Windows-Einstellungen &rarr; Zeit und Sprache &rarr; Sprache &amp; Region &rarr; &bdquo;Sprache hinzuf&uuml;gen&ldquo; &rarr; Franz&ouml;sisch</b> und dabei die <b>Sprachausgabe</b> mitinstallieren. Danach die Seite neu laden. (Auf dem Handy ist die Stimme meist schon vorhanden.)"
+      : "Hinweis: F&uuml;r diese Sprache ist auf dem Ger&auml;t keine Stimme installiert. Du kannst sie in den System-/Spracheinstellungen erg&auml;nzen."}));
+  }
+  return bar;
+}
 function todayISO(){ var d=new Date(); return isoOf(d); }
 function isoOf(d){ var m=(d.getMonth()+1), day=d.getDate();
   return d.getFullYear()+"-"+(m<10?"0":"")+m+"-"+(day<10?"0":"")+day; }
@@ -323,6 +405,7 @@ function renderTabs(){
 }
 
 function renderView(){
+  try{ TTS.stop(); }catch(e){}
   var s=APP.getSubject(STATE.subjectId);
   if(!s){ setView(el("div",{"class":"card",html:"<h2>Kein Fach ausgewählt</h2>"})); return; }
   try{
@@ -424,12 +507,19 @@ function viewArea(s, area){
       fg.appendChild(el("div",{"class":"figure",html:svg})); });
     wrap.appendChild(fg);
   }
-  // Beispiele (gelöst)
+  // Beispiele (gelöst) — bei Hörverstehen (area.audio) mit Sprachausgabe
   if(Array.isArray(area.examples) && area.examples.length){
-    var ex=el("div",{"class":"card"}); ex.appendChild(el("h3",{text:"Gelöste Beispiele"}));
+    var ex=el("div",{"class":"card"});
+    ex.appendChild(el("h3",{text: area.audio ? "Transkripte (zum Anh&ouml;ren)" : "Gel&ouml;ste Beispiele"}));
+    if(area.audio) ex.appendChild(el("p",{"class":"muted",
+      text:"Tipp: Erst &bdquo;Text ausblenden&ldquo;, dann &bdquo;Anh&ouml;ren&ldquo; &ndash; so &uuml;bst du echtes H&ouml;rverstehen. Danach den Text wieder einblenden und vergleichen."}));
     area.examples.forEach(function(e){ if(!e) return;
       if(e.title) ex.appendChild(el("h3",{text:e.title}));
-      if(e.html) ex.appendChild(el("div",{html:e.html}));
+      if(e.html){
+        var body=el("div",{html:e.html});
+        if(area.audio){ ex.appendChild(audioControls(body, s.lang)); }
+        ex.appendChild(body);
+      }
     });
     wrap.appendChild(ex);
   }
@@ -703,7 +793,15 @@ function renderGrammatik(g){
 function renderLeseverstehen(l){
   var c=el("div",{"class":"card"});
   c.appendChild(el("h3",{text:l.title||"Leseverstehen"}));
-  if(l.text) c.appendChild(el("div",{"class":"step",html:l.text}));
+  if(l.text){
+    var tnode=el("div",{"class":"step",html:l.text});
+    if(l.audio){
+      c.appendChild(el("p",{"class":"muted",
+        text:"Tipp: Erst &bdquo;Text ausblenden&ldquo;, dann &bdquo;Anh&ouml;ren&ldquo; &ndash; so &uuml;bst du echtes H&ouml;rverstehen."}));
+      c.appendChild(audioControls(tnode, l.lang));
+    }
+    c.appendChild(tnode);
+  }
   (l.questions||[]).forEach(function(q,i){
     if(!q) return;
     var box=el("div",{"class":"exercise"});

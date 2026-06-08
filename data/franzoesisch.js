@@ -8,6 +8,7 @@
 APP.register({
   id: "franzoesisch",
   name: "Franz&ouml;sisch",
+  lang: "fr-FR",
   examISO: "2026-06-25",
   examInfo: "Compr&eacute;hension de l&rsquo;oral &amp; des &eacute;crits, Version (F&rarr;D), Production &eacute;crite/orale &middot; Niveau DELF B1 &middot; 25.06.2026",
   examMinutes: 140,
@@ -40,7 +41,7 @@ APP.register({
     {
       id: "oral",
       title: "Compr&eacute;hension de l&rsquo;oral",
-      intro: "<p>In der Pr&uuml;fung h&ouml;rst du einen kurzen Dialog oder eine Durchsage zweimal. Hier liest du den <b>Transkript</b> (das, was du h&ouml;ren w&uuml;rdest) und beantwortest dazu die Fragen. <b>Tipp:</b> Lies zuerst die Fragen, dann wei&szlig;t du, worauf du achten musst.</p>",
+      intro: "<p>In der Pr&uuml;fung h&ouml;rst du einen kurzen Dialog oder eine Durchsage zweimal. Hier kannst du dir den <b>Transkript</b> mit <b>&bdquo;Anh&ouml;ren&ldquo;</b> vorlesen lassen (das, was du h&ouml;ren w&uuml;rdest) und beantwortest dazu die Fragen. <b>Tipp:</b> Lies zuerst die Fragen, dann wei&szlig;t du, worauf du achten musst.</p>",
       theory:
         "<h3>Strategie f&uuml;r das H&ouml;rverstehen</h3>" +
         "<ul>" +
@@ -51,6 +52,8 @@ APP.register({
         "</ul>",
       leseverstehen: {
         title: "Transcript &bdquo;&Agrave; la boulangerie&ldquo; (avec questions)",
+        audio: true,
+        lang: "fr-FR",
         text:
           "<p style='font-style:italic'>" +
           "<b>La vendeuse :</b> Bonjour&nbsp;! Vous d&eacute;sirez&nbsp;?<br>" +

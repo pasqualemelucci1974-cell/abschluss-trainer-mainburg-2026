@@ -8,10 +8,11 @@
 APP.register({
   id: "englisch",
   name: "Englisch",
+  lang: "en-GB",
   examISO: "2026-06-26",
   examInfo: "Listening Comprehension &middot; Reading &amp; Mediation &middot; Use of English &middot; Guided Writing &middot; Speaking Test &middot; ca. 90&ndash;120 Minuten (schriftlich) + Speaking &middot; 26.06.2026",
   examMinutes: 120,
-  note: "<b>So gehst du vor:</b> Beim <b>Listening</b> zuerst die Fragen lesen, dann gezielt h&ouml;ren. Beim <b>Reading</b> Schl&uuml;sselw&ouml;rter unterstreichen. Bei der <b>Mediation</b> antwortest du auf <b>Deutsch</b> &ndash; sinngem&auml;&szlig;, nicht Wort f&uuml;r Wort. Beim <b>Writing</b> erst stichpunktartig planen, dann schreiben, am Ende auf Tenses und Rechtschreibung pr&uuml;fen. &mdash; Die Inhalte orientieren sich am offiziellen Format der Realschule Bayern; es werden keine echten Pr&uuml;fungstexte verwendet. Audio kann sp&auml;ter erg&auml;nzt werden &ndash; die Transkripte stehen vollst&auml;ndig hier.",
+  note: "<b>So gehst du vor:</b> Beim <b>Listening</b> zuerst die Fragen lesen, dann gezielt h&ouml;ren. Beim <b>Reading</b> Schl&uuml;sselw&ouml;rter unterstreichen. Bei der <b>Mediation</b> antwortest du auf <b>Deutsch</b> &ndash; sinngem&auml;&szlig;, nicht Wort f&uuml;r Wort. Beim <b>Writing</b> erst stichpunktartig planen, dann schreiben, am Ende auf Tenses und Rechtschreibung pr&uuml;fen. &mdash; Die Inhalte orientieren sich am offiziellen Format der Realschule Bayern; es werden keine echten Pr&uuml;fungstexte verwendet. Die Transkripte kannst du dir im Bereich <b>Listening</b> mit der Schaltfl&auml;che <b>&bdquo;Anh&ouml;ren&ldquo;</b> vorlesen lassen.",
 
   lernplan: [
     { dateISO: "2026-06-07", areaId: "listening",
@@ -42,6 +43,7 @@ APP.register({
     {
       id: "listening",
       title: "Listening Comprehension",
+      audio: true,
       intro: "<p>In der Pr&uuml;fung h&ouml;rst du die Texte zweimal. Hier stehen die vollst&auml;ndigen <b>Transkripte</b> (du kannst sie lesen oder dir vorlesen lassen). Lies zuerst die Fragen, h&ouml;re/lies dann gezielt und achte auf <b>Zahlen, Zeiten, Orte und Namen</b>.</p>",
       theory:
         "<h3>Strategie f&uuml;r das Listening</h3>" +
