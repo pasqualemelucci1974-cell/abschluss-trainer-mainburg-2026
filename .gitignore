@@ -4,3 +4,7 @@ seeds/
 .playwright-mcp/
 
 GIOELE_TGA_RETTUNG.html
+data/_extra_*.json
+data/_xl_src.json
+tools/_build_*.py
+tools/_*.py
