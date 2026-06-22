@@ -8,3 +8,4 @@ data/_extra_*.json
 data/_xl_src.json
 tools/_build_*.py
 tools/_*.py
+data/_*.json
