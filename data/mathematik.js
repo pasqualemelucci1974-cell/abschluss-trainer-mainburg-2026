@@ -430,6 +430,194 @@ APP.register({
           answer: "P = 8/125 = 0,064 = 6,4&nbsp;%"
         }
       ]
+    },
+{
+  "id": "mathematik_extra",
+  "title": "Mathematik II – Prüfungstraining (Funktionen, Geometrie, Trigonometrie, Raumgeometrie, Daten & Zufall)",
+  "intro": "<p>Gemischte Originalaufgaben auf Prüfungsniveau der Realschule Bayern mit ausführlichem Rechenweg.</p>",
+  "exercises": [
+    {
+      "id": "m-extra-01",
+      "area": "mathematik_extra",
+      "difficulty": 1,
+      "prompt": "Gegeben ist die lineare Funktion <b>f(x) = 2x − 6</b>. Berechne die <b>Nullstelle</b> (Schnittpunkt mit der x-Achse).",
+      "solutionSteps": [
+        "Für die Nullstelle setzt man f(x) = 0: 2x − 6 = 0",
+        "Beide Seiten + 6: 2x = 6",
+        "Beide Seiten : 2: x = 3"
+      ],
+      "answer": "Die Nullstelle liegt bei x = 3, also im Punkt N(3 | 0)."
+    },
+    {
+      "id": "m-extra-02",
+      "area": "mathematik_extra",
+      "difficulty": 1,
+      "prompt": "Bestimme die Steigung <b>m</b> der Geraden, die durch die Punkte <b>A(1 | 2)</b> und <b>B(5 | 10)</b> verläuft.",
+      "solutionSteps": [
+        "Steigungsformel: m = (y₂ − y₁) / (x₂ − x₁)",
+        "Werte einsetzen: m = (10 − 2) / (5 − 1)",
+        "Ausrechnen: m = 8 / 4 = 2"
+      ],
+      "answer": "Die Steigung beträgt m = 2."
+    },
+    {
+      "id": "m-extra-03",
+      "area": "mathematik_extra",
+      "difficulty": 1,
+      "prompt": "In einem rechtwinkligen Dreieck sind die Katheten <b>a = 6 cm</b> und <b>b = 8 cm</b>. Berechne mit dem <b>Satz des Pythagoras</b> die Hypotenuse c.",
+      "solutionSteps": [
+        "Satz des Pythagoras: c² = a² + b²",
+        "Einsetzen: c² = 6² + 8² = 36 + 64 = 100",
+        "Wurzel ziehen: c = √100 = 10"
+      ],
+      "answer": "Die Hypotenuse ist c = 10 cm."
+    },
+    {
+      "id": "m-extra-04",
+      "area": "mathematik_extra",
+      "difficulty": 1,
+      "prompt": "Berechne den <b>Mittelwert (arithmetisches Mittel)</b> der folgenden Messwerte: 12, 15, 9, 14, 10.",
+      "solutionSteps": [
+        "Mittelwert = Summe aller Werte / Anzahl der Werte",
+        "Summe: 12 + 15 + 9 + 14 + 10 = 60",
+        "Anzahl: 5 Werte → 60 / 5 = 12"
+      ],
+      "answer": "Der Mittelwert beträgt 12."
+    },
+    {
+      "id": "m-extra-05",
+      "area": "mathematik_extra",
+      "difficulty": 2,
+      "prompt": "Eine quadratische Funktion lautet <b>f(x) = x² − 4x − 5</b>. Berechne die <b>Nullstellen</b> mit der Mitternachtsformel.",
+      "solutionSteps": [
+        "Allgemeine Form: ax² + bx + c mit a = 1, b = −4, c = −5",
+        "Mitternachtsformel: x = (−b ± √(b² − 4ac)) / (2a)",
+        "Diskriminante: b² − 4ac = (−4)² − 4·1·(−5) = 16 + 20 = 36",
+        "Wurzel: √36 = 6",
+        "x = (4 ± 6) / 2 → x₁ = (4 + 6)/2 = 5 und x₂ = (4 − 6)/2 = −1"
+      ],
+      "answer": "Die Nullstellen sind x₁ = 5 und x₂ = −1."
+    },
+    {
+      "id": "m-extra-06",
+      "area": "mathematik_extra",
+      "difficulty": 2,
+      "prompt": "Bestimme den <b>Scheitelpunkt</b> der Parabel <b>f(x) = x² − 6x + 11</b> durch quadratische Ergänzung.",
+      "solutionSteps": [
+        "Term betrachten: x² − 6x + 11",
+        "Quadratische Ergänzung: (6/2)² = 3² = 9 ergänzen und wieder abziehen",
+        "x² − 6x + 9 − 9 + 11 = (x − 3)² + 2",
+        "Scheitelform f(x) = (x − 3)² + 2 → Scheitel bei x = 3, y = 2"
+      ],
+      "answer": "Der Scheitelpunkt ist S(3 | 2)."
+    },
+    {
+      "id": "m-extra-07",
+      "area": "mathematik_extra",
+      "difficulty": 2,
+      "prompt": "In einem rechtwinkligen Dreieck (rechter Winkel bei C) ist der Winkel <b>α = 35°</b> und die Hypotenuse <b>c = 12 cm</b>. Berechne die Gegenkathete <b>a</b> mit dem Sinus. (Runde auf 2 Dezimalstellen.)",
+      "solutionSteps": [
+        "Definition: sin(α) = Gegenkathete / Hypotenuse = a / c",
+        "Nach a umstellen: a = c · sin(α)",
+        "Einsetzen: a = 12 · sin(35°)",
+        "sin(35°) ≈ 0,5736 → a ≈ 12 · 0,5736 = 6,8832"
+      ],
+      "answer": "Die Gegenkathete beträgt a ≈ 6,88 cm."
+    },
+    {
+      "id": "m-extra-08",
+      "area": "mathematik_extra",
+      "difficulty": 2,
+      "prompt": "Ein <b>Zylinder</b> hat den Radius <b>r = 5 cm</b> und die Höhe <b>h = 10 cm</b>. Berechne das <b>Volumen V</b>. (π ≈ 3,1416; runde auf 1 Dezimalstelle.)",
+      "solutionSteps": [
+        "Volumenformel Zylinder: V = π · r² · h",
+        "Einsetzen: V = π · 5² · 10 = π · 25 · 10 = 250 · π",
+        "Ausrechnen: V ≈ 250 · 3,1416 = 785,4"
+      ],
+      "answer": "Das Volumen beträgt V ≈ 785,4 cm³."
+    },
+    {
+      "id": "m-extra-09",
+      "area": "mathematik_extra",
+      "difficulty": 2,
+      "prompt": "Aus einer Urne mit <b>4 roten</b>, <b>3 blauen</b> und <b>5 grünen</b> Kugeln wird eine Kugel gezogen. Berechne die <b>Wahrscheinlichkeit</b>, eine blaue Kugel zu ziehen (als Bruch und in Prozent).",
+      "solutionSteps": [
+        "Gesamtanzahl der Kugeln: 4 + 3 + 5 = 12",
+        "Günstige Fälle (blau): 3",
+        "P(blau) = günstige / mögliche = 3/12 = 1/4",
+        "In Prozent: 1/4 = 0,25 = 25 %"
+      ],
+      "answer": "P(blau) = 1/4 = 25 %."
+    },
+    {
+      "id": "m-extra-10",
+      "area": "mathematik_extra",
+      "difficulty": 3,
+      "prompt": "Eine <b>quadratische Pyramide</b> hat die Grundkantenlänge <b>a = 6 cm</b> und die Körperhöhe <b>h = 4 cm</b>. Berechne a) das <b>Volumen V</b> und b) die <b>Oberfläche O</b> (Grundfläche + 4 Seitendreiecke).",
+      "solutionSteps": [
+        "a) Volumen: V = (1/3) · G · h mit Grundfläche G = a² = 6² = 36",
+        "V = (1/3) · 36 · 4 = (1/3) · 144 = 48",
+        "b) Für die Oberfläche wird die Höhe der Seitendreiecke (Apothem hₐ) gebraucht.",
+        "hₐ ergibt sich aus Pythagoras: hₐ² = h² + (a/2)² = 4² + 3² = 16 + 9 = 25 → hₐ = 5",
+        "Fläche eines Seitendreiecks: A_Δ = (1/2) · a · hₐ = (1/2) · 6 · 5 = 15",
+        "Mantel M = 4 · 15 = 60; Grundfläche G = 36",
+        "Oberfläche O = G + M = 36 + 60 = 96"
+      ],
+      "answer": "a) V = 48 cm³.   b) O = 96 cm² (Grundfläche 36 cm² + Mantel 60 cm²)."
+    },
+    {
+      "id": "m-extra-11",
+      "area": "mathematik_extra",
+      "difficulty": 3,
+      "prompt": "Ein <b>Kegel</b> hat den Radius <b>r = 3 cm</b> und die Höhe <b>h = 4 cm</b>. Berechne a) die <b>Mantellinie s</b>, b) das <b>Volumen V</b> und c) die <b>Mantelfläche M</b>. (π ≈ 3,1416; runde auf 1 Dezimalstelle.)",
+      "solutionSteps": [
+        "a) Mantellinie mit Pythagoras: s² = r² + h² = 3² + 4² = 9 + 16 = 25 → s = 5",
+        "b) Volumen Kegel: V = (1/3) · π · r² · h = (1/3) · π · 9 · 4 = 12 · π ≈ 37,7",
+        "c) Mantelfläche: M = π · r · s = π · 3 · 5 = 15 · π ≈ 47,1"
+      ],
+      "answer": "a) s = 5 cm.   b) V ≈ 37,7 cm³.   c) M ≈ 47,1 cm²."
+    },
+    {
+      "id": "m-extra-12",
+      "area": "mathematik_extra",
+      "difficulty": 3,
+      "prompt": "In einem rechtwinkligen Dreieck (rechter Winkel bei C) sind die Katheten <b>Gegenkathete a = 7 cm</b> und <b>Ankathete b = 4 cm</b> zum Winkel α gegeben. Berechne den Winkel <b>α</b> mit dem Tangens. (Runde auf eine Dezimalstelle.)",
+      "solutionSteps": [
+        "Definition: tan(α) = Gegenkathete / Ankathete = a / b",
+        "Einsetzen: tan(α) = 7 / 4 = 1,75",
+        "Umkehrfunktion anwenden: α = tan⁻¹(1,75)",
+        "α ≈ 60,255°"
+      ],
+      "answer": "Der Winkel beträgt α ≈ 60,3°."
+    },
+    {
+      "id": "m-extra-13",
+      "area": "mathematik_extra",
+      "difficulty": 3,
+      "prompt": "Zwei Geraden sind gegeben: <b>g: y = 2x − 1</b> und <b>h: y = −x + 5</b>. Berechne den <b>Schnittpunkt S</b> beider Geraden.",
+      "solutionSteps": [
+        "Im Schnittpunkt sind beide y-Werte gleich: 2x − 1 = −x + 5",
+        "+ x auf beiden Seiten: 3x − 1 = 5",
+        "+ 1: 3x = 6 → x = 2",
+        "x in eine Gleichung einsetzen: y = 2·2 − 1 = 3"
+      ],
+      "answer": "Der Schnittpunkt ist S(2 | 3)."
+    },
+    {
+      "id": "m-extra-14",
+      "area": "mathematik_extra",
+      "difficulty": 3,
+      "prompt": "Eine Münze wird <b>zweimal</b> geworfen. Berechne mit einem Baumdiagramm die Wahrscheinlichkeit, <b>genau einmal Kopf</b> zu werfen.",
+      "solutionSteps": [
+        "Jeder Wurf: P(Kopf) = 1/2, P(Zahl) = 1/2",
+        "Günstige Pfade für genau einmal Kopf: (Kopf, Zahl) und (Zahl, Kopf)",
+        "P(Kopf, Zahl) = 1/2 · 1/2 = 1/4",
+        "P(Zahl, Kopf) = 1/2 · 1/2 = 1/4",
+        "Pfade addieren (Summenregel): 1/4 + 1/4 = 2/4 = 1/2"
+      ],
+      "answer": "P(genau einmal Kopf) = 1/2 = 50 %."
     }
+  ]
+}
   ]
 });

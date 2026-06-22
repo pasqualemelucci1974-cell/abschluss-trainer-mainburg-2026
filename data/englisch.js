@@ -482,6 +482,156 @@ APP.register({
           answer: "<b>homework</b> and <b>luggage</b> are uncountable (use &bdquo;some homework&ldquo;, &bdquo;a piece of luggage&ldquo;)." }
       ]
     }
-
+,
+{
+  "id": "englisch_extra",
+  "title": "Englisch – Abschlussprüfung Training (Realschule Bayern, WPF IIIa)",
+  "intro": "<p>Gemischte Aufgaben zu Wortschatz, Grammatik, Leseverstehen, Mediation und Schreiben auf dem Niveau der echten Abschlussprüfung.</p>",
+  "exercises": [
+    {
+      "id": "e-extra-01",
+      "area": "englisch_extra",
+      "difficulty": 1,
+      "prompt": "<b>Vocabulary – Environment.</b> Ordne jedes Wort der passenden Definition zu: <i>recycle, pollution, litter, renewable, waste</i>.<br>1) energy that never runs out (e.g. wind, sun)<br>2) rubbish left in a public place<br>3) to use materials again instead of throwing them away<br>4) dirty air, water or land caused by harmful substances<br>5) things you throw away because you do not need them",
+      "solutionSteps": [
+        "Lies jede Definition genau und achte auf Schlüsselwörter (z. B. 'energy that never runs out' = etwas, das nie ausgeht).",
+        "Verbinde Bedeutung und Wort: 'never runs out' -> renewable; 'rubbish in a public place' -> litter."
+      ],
+      "answer": "1) renewable  2) litter  3) recycle  4) pollution  5) waste"
+    },
+    {
+      "id": "e-extra-02",
+      "area": "englisch_extra",
+      "difficulty": 1,
+      "prompt": "<b>Use of English – Tenses.</b> Setze das Verb in der richtigen Zeit ein.<br>1) Look! It ______ (rain) outside, so take your umbrella.<br>2) Last summer we ______ (visit) my grandparents in Italy.<br>3) She ______ (live) in Munich since 2019.<br>4) Tomorrow I ______ (meet) my friends at the cinema.",
+      "solutionSteps": [
+        "Signalwörter erkennen: 'Look!' / jetzt gerade -> present progressive; 'Last summer' -> simple past; 'since 2019' -> present perfect.",
+        "Bei festen Plänen / Verabredungen ('Tomorrow ... meet my friends') passt 'going to' oder present progressive."
+      ],
+      "answer": "1) is raining  2) visited  3) has lived  4) am going to meet / am meeting"
+    },
+    {
+      "id": "e-extra-03",
+      "area": "englisch_extra",
+      "difficulty": 1,
+      "prompt": "<b>Vocabulary – Word formation.</b> Bilde aus dem Wort in Klammern die richtige Form.<br>1) The film was really ______ (BORE).<br>2) She gave a clear ______ (EXPLAIN) of the problem.<br>3) He works very ______ (CARE) and never makes mistakes.<br>4) Our team won because of good ______ (ORGANISE).",
+      "solutionSteps": [
+        "Frage dich, welche Wortart in die Lücke passt (Adjektiv, Nomen, Adverb).",
+        "Hänge die passende Endung an: -ing/-ed (Adjektive), -ation/-ment (Nomen), -fully/-ly (Adverbien)."
+      ],
+      "answer": "1) boring  2) explanation  3) carefully  4) organisation"
+    },
+    {
+      "id": "e-extra-04",
+      "area": "englisch_extra",
+      "difficulty": 2,
+      "prompt": "<b>Use of English – Passive voice.</b> Forme die Sätze ins Passiv um (Zeitform beibehalten).<br>1) The school organises a charity run every year.<br>2) Someone has stolen my bike.<br>3) They will build a new sports hall next year.<br>4) A famous architect designed this museum.",
+      "solutionSteps": [
+        "Objekt des Aktivsatzes wird Subjekt des Passivsatzes.",
+        "Setze 'be' in der gleichen Zeitform + past participle. 'Someone/They' kann weggelassen werden (kein 'by'-Agens nötig)."
+      ],
+      "answer": "1) A charity run is organised (by the school) every year.  2) My bike has been stolen.  3) A new sports hall will be built next year.  4) This museum was designed by a famous architect."
+    },
+    {
+      "id": "e-extra-05",
+      "area": "englisch_extra",
+      "difficulty": 2,
+      "prompt": "<b>Use of English – Conditionals.</b> Vervollständige die Sätze mit der richtigen Form (if-clauses Typ I und II).<br>1) If it ______ (be) sunny tomorrow, we ______ (go) to the lake.<br>2) If I ______ (have) more money, I ______ (buy) a new bike.<br>3) She would help you if she ______ (have) time.<br>4) If you heat ice, it ______ (melt).",
+      "solutionSteps": [
+        "Typ I (reale Bedingung): if + simple present, will + Infinitiv.",
+        "Typ II (unreale Bedingung): if + simple past, would + Infinitiv. Bei allgemeingültigen Fakten (Typ 0): present + present."
+      ],
+      "answer": "1) is / will go  2) had / would buy  3) had  4) melts"
+    },
+    {
+      "id": "e-extra-06",
+      "area": "englisch_extra",
+      "difficulty": 2,
+      "prompt": "<b>Use of English – Reported speech.</b> Setze in die indirekte Rede.<br>1) Tom said: \"I am tired.\"<br>2) Lisa said: \"I will call you tomorrow.\"<br>3) The teacher said: \"You did very well.\"<br>4) Mum asked: \"Where are my keys?\"",
+      "solutionSteps": [
+        "Verschiebe die Zeit um eine Stufe zurück (am -> was, will -> would, did -> had done).",
+        "Passe Pronomen und Ortsangaben an; bei Fragen die normale Wortstellung (Subjekt vor Verb) verwenden."
+      ],
+      "answer": "1) Tom said (that) he was tired.  2) Lisa said (that) she would call me the next day / the following day.  3) The teacher said (that) I had done very well.  4) Mum asked where her keys were."
+    },
+    {
+      "id": "e-extra-07",
+      "area": "englisch_extra",
+      "difficulty": 2,
+      "prompt": "<b>Vocabulary – Phrasal verbs & collocations.</b> Wähle das passende Verb/Wort.<br>1) I have to ______ (look after / look for) my little sister tonight.<br>2) Please ______ (turn down / turn up) the music, it is too loud.<br>3) We need to ______ (make / do) a decision soon.<br>4) She is good ______ (at / in) playing the guitar.",
+      "solutionSteps": [
+        "Überlege die Bedeutung: 'auf jemanden aufpassen' = look after; 'leiser machen' = turn down.",
+        "Feste Verbindungen lernen: 'make a decision', 'good at + -ing'."
+      ],
+      "answer": "1) look after  2) turn down  3) make  4) at"
+    },
+    {
+      "id": "e-extra-08",
+      "area": "englisch_extra",
+      "difficulty": 2,
+      "prompt": "<b>Reading comprehension.</b> Lies den Text und beantworte die Fragen in ganzen englischen Sätzen.<br><br><i>Maya had always dreamed of a school exchange. When the chance to spend three weeks in Wales finally came, she felt both excited and nervous. The first days were hard: she missed her family and the food tasted strange. But her host sister, Beca, was patient and showed her the cliffs near the coast. By the end of the second week, Maya was laughing at her own mistakes in English and had stopped translating every word in her head. On the last day she realised that the trip had changed her – not because of the places, but because of the people.</i><br><br>1) How did Maya feel before the trip?<br>2) Why were the first days difficult for her?<br>3) What helped her to feel better?<br>4) What did Maya realise on the last day?",
+      "solutionSteps": [
+        "Suche die Textstellen, die zu jeder Frage passen (z. B. 'excited and nervous' für Frage 1).",
+        "Antworte in eigenen, vollständigen Sätzen und schreibe nicht einfach den Text ab."
+      ],
+      "answer": "1) Before the trip she felt both excited and nervous.  2) The first days were difficult because she missed her family and the food tasted strange to her.  3) Her host sister Beca helped her: she was patient and showed her the cliffs near the coast.  4) On the last day Maya realised that the trip had changed her because of the people she had met, not because of the places."
+    },
+    {
+      "id": "e-extra-09",
+      "area": "englisch_extra",
+      "difficulty": 3,
+      "prompt": "<b>Reading comprehension – inference.</b> Lies den kurzen Text und beantworte die Fragen.<br><br><i>The small shop on Baker Street had been in the family for almost a hundred years. Now a bright supermarket stood right across the road, with lower prices and longer opening hours. Mr Allen still opened his door every morning at seven, greeting each customer by name. \"People don't only buy bread here,\" he often said. \"They buy a little bit of time to talk.\" His daughter wanted him to sell the shop, but he just smiled and put on his apron.</i><br><br>1) What problem does Mr Allen's shop face?<br>2) Find ONE detail that shows the shop is important to the community.<br>3) Why does Mr Allen refuse to sell, even though it would be easier?<br>4) Explain the meaning of the sentence: \"They buy a little bit of time to talk.\"",
+      "solutionSteps": [
+        "Unterscheide zwischen Informationen, die direkt im Text stehen, und solchen, die du erschließen musst (Frage 3 und 4).",
+        "Bei der Erklärung (Frage 4) den übertragenen Sinn in eigenen Worten ausdrücken, nicht wörtlich übersetzen."
+      ],
+      "answer": "1) The shop faces strong competition from a new supermarket across the road that has lower prices and longer opening hours.  2) For example, Mr Allen greets each customer by name, which shows that the shop is a personal meeting point in the community.  3) He refuses to sell because for him the shop is not only about business but about human contact and tradition; he values talking to people more than money or convenience.  4) It means that customers do not only come to buy goods, but also to have a short, friendly conversation – the shop gives them a moment of human contact and connection."
+    },
+    {
+      "id": "e-extra-10",
+      "area": "englisch_extra",
+      "difficulty": 3,
+      "prompt": "<b>Mediation (EN → DE).</b> Dein Freund Luca spricht kein Englisch. Gib ihm den Inhalt dieser Schul-E-Mail <u>sinngemäß auf Deutsch</u> wieder (keine Wort-für-Wort-Übersetzung).<br><br><i>\"Dear students, our annual school trip to London will take place from 12 to 16 May. The bus leaves at 6 a.m. from the main entrance, so please be there 15 minutes earlier. Bring a valid passport or ID card, comfortable shoes and some pocket money in pounds. The deadline to sign up and pay the deposit of 50 euros is 30 March. If you have any questions, ask Mrs Brown in room 203.\"</i>",
+      "solutionSteps": [
+        "Erfasse die Kernaussagen: Wann, wo, was mitbringen, Anmeldung/Frist, Ansprechpartner.",
+        "Gib die Infos sinngemäß und flüssig auf Deutsch wieder – nur das Wichtige, ohne jedes Detail wörtlich zu übersetzen."
+      ],
+      "answer": "Sinngemäße Wiedergabe auf Deutsch: Die jährliche Klassenfahrt nach London findet vom 12. bis 16. Mai statt. Der Bus fährt um 6 Uhr morgens am Haupteingang ab, deshalb sollst du schon 15 Minuten früher dort sein. Mitbringen musst du einen gültigen Reisepass oder Personalausweis, bequeme Schuhe und etwas Taschengeld in Pfund. Anmelden und die Anzahlung von 50 Euro bezahlen musst du bis zum 30. März. Bei Fragen kannst du dich an Frau Brown in Raum 203 wenden."
+    },
+    {
+      "id": "e-extra-11",
+      "area": "englisch_extra",
+      "difficulty": 3,
+      "prompt": "<b>Mediation (EN → DE).</b> Erkläre deiner Mutter <u>auf Deutsch sinngemäß</u>, was in dieser kurzen Produktbeschreibung steht.<br><br><i>\"The SmartLamp X2 is an energy-saving LED lamp you can control with your phone. You can change its colour and brightness, and set a timer so it turns off automatically. It uses up to 80% less electricity than an old light bulb and lasts for about 15 years. The lamp comes with a two-year warranty.\"</i>",
+      "solutionSteps": [
+        "Identifiziere die Hauptpunkte: Steuerung per Handy, Farbe/Helligkeit, Timer, Stromersparnis, Lebensdauer, Garantie.",
+        "Formuliere natürliches Deutsch für die Mutter – Zahlen und Fakten korrekt übernehmen, aber nicht starr übersetzen."
+      ],
+      "answer": "Sinngemäße Wiedergabe auf Deutsch: Die SmartLamp X2 ist eine stromsparende LED-Lampe, die man mit dem Handy steuern kann. Man kann die Farbe und die Helligkeit einstellen und einen Timer setzen, damit sie sich von selbst ausschaltet. Sie verbraucht bis zu 80 % weniger Strom als eine alte Glühbirne und hält etwa 15 Jahre. Außerdem gibt es zwei Jahre Garantie."
+    },
+    {
+      "id": "e-extra-12",
+      "area": "englisch_extra",
+      "difficulty": 2,
+      "prompt": "<b>Writing – Mini-task (E-Mail).</b> Schreibe eine kurze E-Mail (ca. 50–70 Wörter) an deinen englischen Freund Jack. Bedanke dich für seine Einladung zur Geburtstagsparty, sage zu, frage nach der Uhrzeit und ob du etwas mitbringen sollst.",
+      "solutionSteps": [
+        "Struktur: Anrede ('Hi Jack,'), Dank, Zusage, zwei Fragen, freundlicher Schluss ('See you', 'Best wishes').",
+        "Achte auf einfache, korrekte Sätze und die richtige Zeitform (Zukunft mit 'will' / 'going to')."
+      ],
+      "answer": "Musterlösung:\n\nHi Jack,\n\nthank you so much for inviting me to your birthday party! I would love to come and I am really looking forward to it. There is just one thing I am not sure about: what time does the party start? And should I bring anything, for example some snacks or drinks?\n\nPlease let me know. See you soon!\n\nBest wishes,\nGioele"
+    },
+    {
+      "id": "e-extra-13",
+      "area": "englisch_extra",
+      "difficulty": 3,
+      "prompt": "<b>Writing – Opinion (Comment).</b> Schreibe einen kurzen Kommentar (ca. 80–100 Wörter) zu der Frage: <i>\"Should students be allowed to use mobile phones at school?\"</i> Nenne deine Meinung, mindestens zwei Argumente und ein Beispiel.",
+      "solutionSteps": [
+        "Beginne mit deiner klaren Meinung ('In my opinion ...').",
+        "Stütze sie mit zwei Argumenten und einem Beispiel; verbinde die Sätze mit Wörtern wie 'firstly', 'moreover', 'however', 'for example'. Schließe mit einem kurzen Fazit ('All in all ...')."
+      ],
+      "answer": "Musterlösung:\n\nIn my opinion, students should be allowed to use mobile phones at school, but only under clear rules. Firstly, phones can be useful for learning, for example to look up words, take photos of the blackboard or use educational apps. Moreover, in an emergency students can quickly contact their parents. However, phones can also be a problem because they distract people from the lesson. For this reason, I think they should be switched off during class and only used in breaks or when the teacher allows it. All in all, a sensible rule is better than a total ban."
+    }
+  ]
+}
   ]
 });

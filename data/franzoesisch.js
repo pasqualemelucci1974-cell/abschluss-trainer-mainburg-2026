@@ -396,6 +396,157 @@ APP.register({
           answer: "&laquo;&nbsp;Il n&rsquo;arrive <b>jamais</b> &agrave; l&rsquo;heure.&nbsp;&raquo; (Er kommt nie p&uuml;nktlich.)" }
       ]
     }
-
+,
+{
+  "id": "franzoesisch_extra",
+  "title": "Französisch – Abschlussprüfung Realschule Bayern (WPF IIIa)",
+  "intro": "<p>Originale Übungen zu Vocabulaire, Grammatik, Version (FR→DE) und Mediation auf Prüfungsniveau.</p>",
+  "exercises": [
+    {
+      "id": "f-extra-01",
+      "area": "franzoesisch_extra",
+      "difficulty": 1,
+      "prompt": "<b>Vocabulaire – La vie quotidienne.</b> Ordne jedem deutschen Wort die richtige französische Übersetzung zu: 1. der Bahnhof, 2. die Wohnung, 3. das Frühstück, 4. die Arbeit, 5. der Nachbar.",
+      "solutionSteps": [
+        "Themenfeld erkennen: Alltag und Stadt.",
+        "Jedes Nomen mit dem passenden Artikel merken (le/la/l').",
+        "Wortpaare zuordnen, auf das Geschlecht achten."
+      ],
+      "answer": "1. der Bahnhof = la gare | 2. die Wohnung = l'appartement (m) | 3. das Frühstück = le petit-déjeuner | 4. die Arbeit = le travail | 5. der Nachbar = le voisin."
+    },
+    {
+      "id": "f-extra-02",
+      "area": "franzoesisch_extra",
+      "difficulty": 1,
+      "prompt": "<b>être ou avoir?</b> Setze die richtige Form von <b>être</b> oder <b>avoir</b> im Présent ein: 1. Je ___ quinze ans. 2. Nous ___ contents. 3. Elle ___ une sœur. 4. Vous ___ en retard. 5. Ils ___ faim.",
+      "solutionSteps": [
+        "'avoir' bei Alter, Besitz und festen Wendungen (avoir faim, avoir … ans).",
+        "'être' bei Eigenschaften, Zuständen und Orten (être content, être en retard).",
+        "Form an das Subjekt anpassen."
+      ],
+      "answer": "1. Je <b>ai</b> quinze ans. 2. Nous <b>sommes</b> contents. 3. Elle <b>a</b> une sœur. 4. Vous <b>êtes</b> en retard. 5. Ils <b>ont</b> faim."
+    },
+    {
+      "id": "f-extra-03",
+      "area": "franzoesisch_extra",
+      "difficulty": 1,
+      "prompt": "<b>Adjektive – Angleichung.</b> Setze das Adjektiv in der richtigen Form ein: 1. une voiture (rouge) ___ . 2. des fleurs (blanc) ___ . 3. une fille (sportif) ___ . 4. un garçon (heureux) ___ . 5. des livres (intéressant) ___ .",
+      "solutionSteps": [
+        "Geschlecht und Zahl des Nomens bestimmen.",
+        "Weiblich meist +e, Plural +s; unregelmäßige Endungen beachten (-f→-ve, -eux→-euse).",
+        "Adjektiv anpassen."
+      ],
+      "answer": "1. une voiture <b>rouge</b> (unverändert). 2. des fleurs <b>blanches</b>. 3. une fille <b>sportive</b>. 4. un garçon <b>heureux</b>. 5. des livres <b>intéressants</b>."
+    },
+    {
+      "id": "f-extra-04",
+      "area": "franzoesisch_extra",
+      "difficulty": 2,
+      "prompt": "<b>Le passé composé.</b> Setze die Verben ins Passé composé: 1. Hier, je (manger) ___ une pizza. 2. Nous (aller) ___ au cinéma. 3. Elle (finir) ___ ses devoirs. 4. Ils (prendre) ___ le bus.",
+      "solutionSteps": [
+        "Hilfsverb wählen: 'être' bei Bewegungs-/Zustandsverben (aller), sonst 'avoir'.",
+        "Partizip Perfekt bilden (mangé, allé, fini, pris).",
+        "Bei 'être' das Partizip an das Subjekt angleichen (elle allée → hier: nous allés)."
+      ],
+      "answer": "1. j'<b>ai mangé</b>. 2. Nous <b>sommes allé(e)s</b>. 3. Elle <b>a fini</b>. 4. Ils <b>ont pris</b>."
+    },
+    {
+      "id": "f-extra-05",
+      "area": "franzoesisch_extra",
+      "difficulty": 2,
+      "prompt": "<b>Le futur simple.</b> Bilde das Futur simple: 1. Demain, je (partir) ___ à huit heures. 2. Tu (être) ___ fatigué. 3. Nous (avoir) ___ le temps. 4. Vous (faire) ___ vos exercices.",
+      "solutionSteps": [
+        "Regelmäßig: Infinitiv + Endungen -ai, -as, -a, -ons, -ez, -ont.",
+        "Unregelmäßige Stämme lernen: être→ser-, avoir→aur-, faire→fer-.",
+        "Endung an das Subjekt anpassen."
+      ],
+      "answer": "1. je <b>partirai</b>. 2. tu <b>seras</b>. 3. nous <b>aurons</b>. 4. vous <b>ferez</b>."
+    },
+    {
+      "id": "f-extra-06",
+      "area": "franzoesisch_extra",
+      "difficulty": 2,
+      "prompt": "<b>L'imparfait.</b> Setze ins Imparfait: 1. Quand j'étais petit, je (jouer) ___ au foot. 2. Il (faire) ___ beau. 3. Nous (habiter) ___ à Paris. 4. Les enfants (être) ___ à l'école.",
+      "solutionSteps": [
+        "Stamm = 1. Person Plural Présent ohne -ons (nous jouons → jou-).",
+        "Endungen anhängen: -ais, -ais, -ait, -ions, -iez, -aient.",
+        "Ausnahme être: Stamm ét-."
+      ],
+      "answer": "1. je <b>jouais</b>. 2. il <b>faisait</b>. 3. nous <b>habitions</b>. 4. les enfants <b>étaient</b>."
+    },
+    {
+      "id": "f-extra-07",
+      "area": "franzoesisch_extra",
+      "difficulty": 2,
+      "prompt": "<b>Vocabulaire thématique – L'environnement.</b> Übersetze ins Französische: 1. der Müll, 2. die Umwelt schützen, 3. erneuerbare Energie, 4. das Fahrrad benutzen, 5. die Verschmutzung.",
+      "solutionSteps": [
+        "Themenwortschatz Umwelt aktivieren.",
+        "Bei Verben den Infinitiv mit korrekter Präposition angeben.",
+        "Auf das Geschlecht der Nomen achten."
+      ],
+      "answer": "1. les déchets (m. pl.) | 2. protéger l'environnement | 3. l'énergie renouvelable | 4. utiliser le vélo | 5. la pollution."
+    },
+    {
+      "id": "f-extra-08",
+      "area": "franzoesisch_extra",
+      "difficulty": 2,
+      "prompt": "<b>Version (FR→DE).</b> Übertrage sinngemäß ins Deutsche: « Le week-end dernier, Léa et sa famille ont visité un petit village en Bretagne. Il faisait froid, mais ils se sont bien amusés. »",
+      "solutionSteps": [
+        "Zeitformen erkennen: ont visité / se sont amusés = Passé composé, faisait = Imparfait.",
+        "Sinngemäß, nicht wörtlich übersetzen; 'se sont bien amusés' = 'hatten viel Spaß'.",
+        "Natürlichen deutschen Satzbau wählen."
+      ],
+      "answer": "Letztes Wochenende haben Léa und ihre Familie ein kleines Dorf in der Bretagne besucht. Es war kalt, aber sie hatten viel Spaß."
+    },
+    {
+      "id": "f-extra-09",
+      "area": "franzoesisch_extra",
+      "difficulty": 3,
+      "prompt": "<b>Version (FR→DE) – Texte plus long.</b> Übertrage sinngemäß: « Depuis qu'il habite à Lyon, Thomas prend le tram tous les matins. Avant, il devait conduire une heure pour aller au travail. Maintenant, il a plus de temps libre et il se sent moins stressé. »",
+      "solutionSteps": [
+        "'Depuis que' + Présent = 'Seitdem' mit Präsens.",
+        "'devait' (Imparfait) drückt eine frühere Gewohnheit aus → 'musste'.",
+        "Inhaltliche Verbindung Vorher/Nachher beim Übersetzen erhalten."
+      ],
+      "answer": "Seitdem er in Lyon wohnt, nimmt Thomas jeden Morgen die Straßenbahn. Früher musste er eine Stunde fahren, um zur Arbeit zu kommen. Jetzt hat er mehr Freizeit und fühlt sich weniger gestresst."
+    },
+    {
+      "id": "f-extra-10",
+      "area": "franzoesisch_extra",
+      "difficulty": 3,
+      "prompt": "<b>Grammatik – Pronomen (COD/COI).</b> Ersetze die unterstrichenen Satzteile durch das passende Pronomen: 1. Je vois <u>Marie</u>. 2. Il parle <u>à ses amis</u>. 3. Nous achetons <u>les billets</u>. 4. Tu donnes le cadeau <u>à ton frère</u>.",
+      "solutionSteps": [
+        "Direktes Objekt (COD) ohne Präposition → le/la/les.",
+        "Indirektes Objekt (COI) mit 'à' (Person) → lui/leur.",
+        "Pronomen vor das konjugierte Verb stellen."
+      ],
+      "answer": "1. Je <b>la</b> vois. 2. Il <b>leur</b> parle. 3. Nous <b>les</b> achetons. 4. Tu <b>lui</b> donnes le cadeau."
+    },
+    {
+      "id": "f-extra-11",
+      "area": "franzoesisch_extra",
+      "difficulty": 3,
+      "prompt": "<b>Mediation / Leseverstehen.</b> Lies den Text und antworte auf Deutsch in ganzen Sätzen: « Au collège Jules-Verne, les élèves ont lancé un projet 'zéro plastique'. Chaque classe a une gourde réutilisable et un bac de recyclage. Le directeur dit que la quantité de déchets a baissé de moitié en un an. » Fragen: a) Worum geht es bei dem Projekt? b) Was hat jede Klasse bekommen? c) Welches Ergebnis nennt der Direktor?",
+      "solutionSteps": [
+        "Schlüsselwörter suchen: 'zéro plastique', 'gourde réutilisable', 'bac de recyclage', 'baissé de moitié'.",
+        "Inhalt sinngemäß auf Deutsch wiedergeben, nicht Wort für Wort übersetzen.",
+        "In ganzen Sätzen antworten."
+      ],
+      "answer": "a) Bei dem Projekt geht es darum, am Collège Jules-Verne Plastik zu vermeiden ('null Plastik'). b) Jede Klasse hat eine wiederverwendbare Trinkflasche und einen Recyclingbehälter bekommen. c) Der Direktor sagt, dass sich die Müllmenge in einem Jahr halbiert hat."
+    },
+    {
+      "id": "f-extra-12",
+      "area": "franzoesisch_extra",
+      "difficulty": 3,
+      "prompt": "<b>Mediation (DE→FR mündlich).</b> Ein französischer Freund versteht kein Deutsch. Gib den Inhalt dieser deutschen Nachricht sinngemäß auf Französisch wieder: „Das Schwimmbad ist am Montag geschlossen. Am Dienstag öffnet es um 10 Uhr. Der Eintritt für Schüler kostet 3 Euro.“",
+      "solutionSteps": [
+        "Kerninformationen erfassen: Schließtag, Öffnungszeit, Preis.",
+        "Sinngemäß übertragen, kein Wort-für-Wort.",
+        "Einfache, korrekte Sätze im Présent bilden."
+      ],
+      "answer": "« La piscine est fermée le lundi. Mardi, elle ouvre à 10 heures. L'entrée coûte 3 euros pour les élèves. »"
+    }
+  ]
+}
   ]
 });
