@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ripasso Englisch &mdash; Realschulabschluss Bayern (26.06.2026)</title>
+<style>
+  :root{
+    --bg:#eef4fb;
+    --card:#ffffff;
+    --ink:#1a1a1a;
+    --muted:#3d4a5c;
+    --accent:#1565c0;
+    --accent-dark:#0d3f7a;
+    --accent-soft:#e3f0ff;
+    --green:#1b7a3d;
+    --green-soft:#e4f6ea;
+    --border:#c8d6e8;
+    --warn:#b35900;
+    --warn-soft:#fff3e0;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    font-size:20px;
+    line-height:1.65;
+    padding:0 0 90px 0;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:820px;margin:0 auto;padding:18px 18px 0 18px;}
+  header.top{
+    background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+    color:#fff;border-radius:18px;padding:24px 22px;margin-bottom:18px;
+    box-shadow:0 6px 18px rgba(13,63,122,.25);
+  }
+  header.top h1{font-size:30px;line-height:1.25;margin:0 0 8px 0;}
+  header.top p{margin:4px 0;font-size:18px;color:#eaf2ff;}
+  header.top .tag{
+    display:inline-block;background:rgba(255,255,255,.2);
+    border-radius:999px;padding:4px 14px;font-size:16px;margin-top:8px;
+  }
+  nav.index{
+    background:var(--card);border:1px solid var(--border);border-radius:16px;
+    padding:16px 18px;margin-bottom:22px;
+  }
+  nav.index h2{font-size:20px;margin:0 0 10px 0;color:var(--accent-dark);}
+  nav.index a{
+    display:block;color:var(--accent);text-decoration:none;
+    padding:11px 12px;border-radius:10px;font-size:19px;
+    min-height:44px;border:1px solid transparent;
+  }
+  nav.index a:active{background:var(--accent-soft);}
+  details.card{
+    background:var(--card);border:1px solid var(--border);border-radius:16px;
+    margin-bottom:18px;padding:0 18px;overflow:hidden;
+    box-shadow:0 2px 8px rgba(13,63,122,.06);
+  }
+  details.card > summary{
+    list-style:none;cursor:pointer;font-size:24px;font-weight:700;
+    color:var(--accent-dark);padding:18px 0;min-height:44px;
+    display:flex;align-items:center;gap:10px;
+  }
+  details.card > summary::-webkit-details-marker{display:none;}
+  details.card > summary::before{
+    content:"\25B8";color:var(--accent);font-size:20px;transition:transform .15s;
+  }
+  details.card[open] > summary::before{transform:rotate(90deg);}
+  .body{padding:0 0 18px 0;}
+  h3{font-size:21px;color:var(--accent-dark);margin:22px 0 8px 0;}
+  h4{font-size:19px;color:var(--ink);margin:18px 0 6px 0;}
+  p,li{font-size:20px;}
+  .muted{color:var(--muted);font-size:18px;}
+  .note{
+    background:var(--accent-soft);border-left:5px solid var(--accent);
+    border-radius:10px;padding:12px 14px;margin:14px 0;font-size:18px;
+  }
+  .warn{
+    background:var(--warn-soft);border-left:5px solid var(--warn);
+    border-radius:10px;padding:12px 14px;margin:14px 0;font-size:18px;
+  }
+  .pair{
+    background:#f6faff;border:1px solid var(--border);border-radius:12px;
+    padding:12px 14px;margin:10px 0;
+  }
+  .pair .de{color:var(--muted);font-size:17px;}
+  .pair .en{font-size:20px;font-weight:600;margin-top:2px;}
+  .voc{
+    display:flex;flex-direction:column;gap:8px;margin:10px 0;
+  }
+  .voc .row{
+    background:#f6faff;border:1px solid var(--border);border-radius:12px;
+    padding:11px 14px;
+  }
+  .voc .row .d{color:var(--muted);font-size:17px;}
+  .voc .row .e{font-size:20px;font-weight:600;}
+  details.sol{
+    background:var(--green-soft);border:1px solid #b9e3c7;border-radius:12px;
+    margin:12px 0;padding:0 14px;
+  }
+  details.sol > summary{
+    list-style:none;cursor:pointer;font-size:18px;font-weight:700;color:var(--green);
+    padding:13px 0;min-height:44px;display:flex;align-items:center;gap:8px;
+  }
+  details.sol > summary::-webkit-details-marker{display:none;}
+  details.sol > summary::before{content:"\1F4A1";font-size:18px;}
+  details.sol .inner{padding:0 0 14px 0;font-size:19px;}
+  .ex{
+    background:#f6faff;border:1px solid var(--border);border-radius:12px;
+    padding:12px 14px;margin:10px 0;
+  }
+  .audio{
+    display:inline-flex;align-items:center;gap:6px;
+    background:var(--accent);color:#fff;border:none;border-radius:999px;
+    font-size:17px;font-family:inherit;padding:0 16px;min-height:44px;
+    margin:6px 8px 6px 0;cursor:pointer;
+  }
+  .audio.slow{background:#4a6b8a;}
+  .audio:active{opacity:.8;}
+  ol,ul{padding-left:24px;}
+  ol li,ul li{margin:7px 0;}
+  .q{margin:6px 0;}
+  .reading{
+    background:#f6faff;border:1px solid var(--border);border-radius:12px;
+    padding:14px 16px;margin:12px 0;font-size:20px;
+  }
+  .reading p{margin:0 0 10px 0;}
+  .model{
+    background:#fbfdff;border:1px dashed var(--accent);border-radius:12px;
+    padding:14px 16px;margin:10px 0;font-size:19px;white-space:pre-wrap;
+  }
+  hr.sep{border:none;border-top:1px solid var(--border);margin:18px 0;}
+  .up{
+    position:fixed;right:16px;bottom:16px;z-index:50;
+    background:var(--accent-dark);color:#fff;text-decoration:none;
+    border-radius:999px;padding:0 20px;min-height:48px;
+    display:inline-flex;align-items:center;font-size:18px;font-weight:600;
+    box-shadow:0 4px 14px rgba(0,0,0,.25);
+  }
+  footer{color:var(--muted);font-size:16px;text-align:center;padding:24px 0;}
+  .chk li{list-style:none;margin:9px 0;padding-left:30px;position:relative;}
+  .chk li::before{content:"\2610";position:absolute;left:0;font-size:22px;}
+  .dict{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 18px;margin-bottom:22px;}
+  .dict strong{color:var(--accent-dark);font-size:19px;}
+  .dict input{width:100%;font-size:19px;font-family:inherit;padding:12px 14px;margin:10px 0;border:1px solid var(--border);border-radius:12px;min-height:44px;}
+  .dictbtn{display:inline-flex;align-items:center;justify-content:center;background:var(--accent);color:#fff;border:none;border-radius:999px;font-size:17px;font-family:inherit;padding:0 16px;min-height:44px;margin:4px 8px 4px 0;cursor:pointer;}
+  .dictbtn:active{opacity:.8;}
+</style>
+</head>
+<body>
+<a class="up" href="#top">&uarr; nach oben</a>
+<div class="wrap" id="top">
+
+<header class="top">
+  <h1>Ripasso Englisch &mdash; Realschulabschluss Bayern</h1>
+  <p><strong>Pr&uuml;fung: 26.06.2026</strong> &middot; Mittlere Reife (~B1 GER) &middot; Mainburg</p>
+  <p>Erkl&auml;rungen auf <strong>Deutsch</strong>, Inhalte auf <strong>Englisch + Deutsch</strong>.</p>
+  <span class="tag">Aufbau basierend auf der Struktur der bayerischen Abschlusspr&uuml;fungen der letzten Jahre</span>
+</header>
+
+<div class="note">
+  <strong>Aufbau der schriftlichen Pr&uuml;fung (typische Gewichtung):</strong><br>
+  Listening 25% &middot; Reading 17% (mit Mediation EN&rarr;DE) &middot; Use of English: Vocabulary 13% &middot;
+  Grammar 12,5% &middot; Translation DE&rarr;EN 12,5% &middot; Guided Writing 20% (~200 W&ouml;rter, Auswahl aus 2 Aufgaben).<br>
+  <span class="muted">H&auml;ufige Themen: environment / Fridays for Future, digital &amp; social media, jobs &amp; future, travel, school &amp; daily life.
+  Writing-Textsorten: personal email, article/blog, online review, complaint, application.</span>
+</div>
+
+<nav class="index">
+  <h2>Inhalt &mdash; tippe zum Springen</h2>
+  <a href="#m1">1 &middot; Wortschatz (5 Themen)</a>
+  <a href="#m2">2 &middot; Grammatik</a>
+  <a href="#m3">3 &middot; Listening (H&ouml;rverstehen)</a>
+  <a href="#m4">4 &middot; Reading</a>
+  <a href="#m5">5 &middot; Mediation EN&rarr;DE</a>
+  <a href="#m6">6 &middot; Translation DE&rarr;EN</a>
+  <a href="#m7">7 &middot; Writing</a>
+  <a href="#m8">8 &middot; Useful phrases &amp; Pr&uuml;fungstipps</a>
+</nav>
+
+<div class="dict">
+  <strong>&#128214; W&ouml;rterbuch &mdash; ein Wort schnell nachschlagen</strong>
+  <input id="dictWord" type="text" placeholder="z.B. sustainable" autocomplete="off" autocapitalize="off" spellcheck="false">
+  <div>
+    <button class="dictbtn" data-dict="leo">LEO</button>
+    <button class="dictbtn" data-dict="dictcc">dict.cc</button>
+    <button class="dictbtn" data-dict="google">Google &Uuml;bersetzer</button>
+  </div>
+  <span class="muted">Tippe ein Wort und w&auml;hle ein W&ouml;rterbuch &mdash; &ouml;ffnet sich in einem neuen Tab (Internet n&ouml;tig).</span>
+</div>
+
+<!-- ============ MODUL 1 ============ -->
+<details class="card" id="m1" open>
+  <summary>1 &middot; Wortschatz (5 Themen)</summary>
+  <div class="body">
+    <p class="muted">Lerne die W&ouml;rter laut. Tippe <strong>&#128266; anh&ouml;ren</strong>, um die englische Aussprache zu h&ouml;ren.</p>
+
+    <h3>Environment / Umwelt</h3>
+    <div class="voc">
+      <div class="row"><span class="d">die Umwelt</span> &middot; <span class="e">the environment</span> <button class="audio" data-say="the environment">&#128266; anh&ouml;ren</button></div>
+      <div class="row"><span class="d">nachhaltig</span> &middot; <span class="e">sustainable</span> <button class="audio" data-say="sustainable">&#128266;</button></div>
+      <div class="row"><span class="d">der Klimawandel</span> &middot; <span class="e">climate change</span> <button class="audio" data-say="climate change">&#128266;</button></div>
+      <div class="row"><span class="d">Müll / Abfall</span> &middot; <span class="e">rubbish / waste</span> <button class="audio" data-say="rubbish, waste">&#128266;</button></div>
+      <div class="row"><span class="d">recyceln</span> &middot; <span class="e">to recycle</span> <button class="audio" data-say="to recycle">&#128266;</button></div>
+      <div class="row"><span class="d">Umwelt schützen</span> &middot; <span class="e">to protect the environment</span> <button class="audio" data-say="to protect the environment">&#128266;</button></div>
+    </div>
+
+    <h3>Media / Technology</h3>
+    <div class="voc">
+      <div class="row"><span class="d">soziale Medien</span> &middot; <span class="e">social media</span> <button class="audio" data-say="social media">&#128266; anh&ouml;ren</button></div>
+      <div class="row"><span class="d">der Bildschirm</span> &middot; <span class="e">the screen</span> <button class="audio" data-say="the screen">&#128266;</button></div>
+      <div class="row"><span class="d">die App / Anwendung</span> &middot; <span class="e">the app / application</span> <button class="audio" data-say="the app, the application">&#128266;</button></div>
+      <div class="row"><span class="d">Ablenkung</span> &middot; <span class="e">distraction</span> <button class="audio" data-say="distraction">&#128266;</button></div>
+      <div class="row"><span class="d">Nachricht (Chat)</span> &middot; <span class="e">message</span> <button class="audio" data-say="message">&#128266;</button></div>
+      <div class="row"><span class="d">online / im Internet</span> &middot; <span class="e">online</span> <button class="audio" data-say="online">&#128266;</button></div>
+    </div>
+
+    <h3>Jobs / Future</h3>
+    <div class="voc">
+      <div class="row"><span class="d">sich bewerben (um)</span> &middot; <span class="e">to apply (for)</span> <button class="audio" data-say="to apply for">&#128266; anh&ouml;ren</button></div>
+      <div class="row"><span class="d">die Erfahrung</span> &middot; <span class="e">experience</span> <button class="audio" data-say="experience">&#128266;</button></div>
+      <div class="row"><span class="d">die Ausbildung</span> &middot; <span class="e">apprenticeship / training</span> <button class="audio" data-say="apprenticeship, training">&#128266;</button></div>
+      <div class="row"><span class="d">der Beruf</span> &middot; <span class="e">job / profession</span> <button class="audio" data-say="job, profession">&#128266;</button></div>
+      <div class="row"><span class="d">der Vorteil / Nachteil</span> &middot; <span class="e">advantage / disadvantage</span> <button class="audio" data-say="advantage, disadvantage">&#128266;</button></div>
+      <div class="row"><span class="d">verbessern</span> &middot; <span class="e">to improve</span> <button class="audio" data-say="to improve">&#128266;</button></div>
+    </div>
+
+    <h3>Travel</h3>
+    <div class="voc">
+      <div class="row"><span class="d">die Reise / reisen</span> &middot; <span class="e">the journey / to travel</span> <button class="audio" data-say="the journey, to travel">&#128266; anh&ouml;ren</button></div>
+      <div class="row"><span class="d">die Unterkunft</span> &middot; <span class="e">accommodation</span> <button class="audio" data-say="accommodation">&#128266;</button></div>
+      <div class="row"><span class="d">empfehlen</span> &middot; <span class="e">to recommend</span> <button class="audio" data-say="to recommend">&#128266;</button></div>
+      <div class="row"><span class="d">überfüllt / voll</span> &middot; <span class="e">crowded</span> <button class="audio" data-say="crowded">&#128266;</button></div>
+      <div class="row"><span class="d">die Sehenswürdigkeit</span> &middot; <span class="e">sight / attraction</span> <button class="audio" data-say="sight, attraction">&#128266;</button></div>
+      <div class="row"><span class="d">der Ausflug</span> &middot; <span class="e">trip / excursion</span> <button class="audio" data-say="trip, excursion">&#128266;</button></div>
+    </div>
+
+    <h3>Daily life / School</h3>
+    <div class="voc">
+      <div class="row"><span class="d">die Nachbarschaft / das Viertel</span> &middot; <span class="e">neighbourhood</span> <button class="audio" data-say="neighbourhood">&#128266; anh&ouml;ren</button></div>
+      <div class="row"><span class="d">die Gesundheit</span> &middot; <span class="e">health</span> <button class="audio" data-say="health">&#128266;</button></div>
+      <div class="row"><span class="d">die Hausaufgaben</span> &middot; <span class="e">homework</span> <button class="audio" data-say="homework">&#128266;</button></div>
+      <div class="row"><span class="d">der Stundenplan</span> &middot; <span class="e">timetable</span> <button class="audio" data-say="timetable">&#128266;</button></div>
+      <div class="row"><span class="d">sich treffen</span> &middot; <span class="e">to meet (up)</span> <button class="audio" data-say="to meet up">&#128266;</button></div>
+      <div class="row"><span class="d">verantwortlich</span> &middot; <span class="e">responsible</span> <button class="audio" data-say="responsible">&#128266;</button></div>
+    </div>
+  </div>
+</details>
+
+<!-- ============ MODUL 2 ============ -->
+<details class="card" id="m2" open>
+  <summary>2 &middot; Grammatik</summary>
+  <div class="body">
+    <p class="muted">Pro Thema: kurze Regel, Beispiel zum Anh&ouml;ren und ein Mini-Test. L&ouml;sung erst nach dem Versuch &ouml;ffnen.</p>
+
+    <h3>Present Simple vs. Present Continuous</h3>
+    <p><strong>Simple</strong> = Gewohnheit / immer (Signal: <em>every day, usually, always</em>). <strong>Continuous</strong> = jetzt gerade (Signal: <em>now, look!, at the moment</em>).</p>
+    <div class="ex">Every morning my dad <strong>makes</strong> coffee. &mdash; Look! It <strong>is raining</strong>.
+      <br><button class="audio" data-say="Every morning my dad makes coffee. Look! It is raining.">&#128266; anh&ouml;ren</button>
+      <button class="audio slow" data-say="Every morning my dad makes coffee. Look! It is raining." data-rate="0.7">&#128034; langsam</button>
+    </div>
+    <div class="ex">Mini-Test: <em>I can't come now &mdash; I ____ (to do) my homework at the moment.</em></div>
+    <details class="sol"><summary>L&ouml;sung zeigen</summary><div class="inner">I <strong>am doing</strong> my homework at the moment. (Continuous, Signal: <em>at the moment</em>)</div></details>
+
+    <h3>Past Simple vs. Past Continuous</h3>
+    <p><strong>Past Simple</strong> = abgeschlossene Handlung (Signal: <em>yesterday, last night, in 2010</em>). <strong>Past Continuous</strong> = war gerade am Laufen (<em>while, as</em>).</p>
+    <div class="ex">We <strong>watched</strong> a great film last night.
+      <button class="audio" data-say="We watched a great film last night.">&#128266; anh&ouml;ren</button>
+    </div>
+    <div class="ex">Mini-Test: <em>While I ____ (to read), the phone ____ (to ring).</em></div>
+    <details class="sol"><summary>L&ouml;sung zeigen</summary><div class="inner">While I <strong>was reading</strong>, the phone <strong>rang</strong>. (l&auml;ngere Handlung = Continuous, kurze = Simple)</div></details>
+
+    <h3>Present Perfect</h3>
+    <p>Verbindung Vergangenheit &rarr; jetzt. Form: <strong>have/has + 3. Verbform</strong>. Signal: <em>since, for, already, yet, ever, never, just</em>. <strong>since</strong> = Zeitpunkt, <strong>for</strong> = Zeitraum.</p>
+    <div class="ex">She <strong>has lived</strong> in Berlin <strong>since</strong> 2020.
+      <button class="audio" data-say="She has lived in Berlin since 2020.">&#128266; anh&ouml;ren</button>
+    </div>
+    <div class="ex">Mini-Test: <em>They ____ (already / to finish) the project.</em></div>
+    <details class="sol"><summary>L&ouml;sung zeigen</summary><div class="inner">They <strong>have already finished</strong> the project.</div></details>
+
+    <h3>will / going to (Zukunft)</h3>
+    <p><strong>will</strong> = spontane Entscheidung / Vorhersage. <strong>going to</strong> = Plan / Absicht oder sichtbares Anzeichen.</p>
+    <div class="ex">Look at those clouds &mdash; it <strong>is going to</strong> rain. / I think it <strong>will</strong> be sunny.
+      <button class="audio" data-say="Look at those clouds, it is going to rain. I think it will be sunny.">&#128266; anh&ouml;ren</button>
+    </div>
+    <div class="ex">Mini-Test: <em>"The phone is ringing!" &mdash; "OK, I ____ answer it."</em></div>
+    <details class="sol"><summary>L&ouml;sung zeigen</summary><div class="inner">I <strong>will</strong> answer it. (spontane Entscheidung)</div></details>
+
+    <h3>Passive (Passiv)</h3>
+    <p>Form: <strong>be + 3. Verbform</strong>. Das Objekt wird zum Subjekt. Wer es tut = <em>by ...</em> (oft weggelassen).</p>
+    <div class="ex">The children plant the trees. &rarr; The trees <strong>are planted</strong> (by the children).
+      <button class="audio" data-say="The trees are planted by the children.">&#128266; anh&ouml;ren</button>
+    </div>
+    <div class="ex">Mini-Test: <em>This bridge ____ (to build) in 1890.</em> &middot; <em>Somebody stole my bag yesterday. &rarr; ?</em></div>
+    <details class="sol"><summary>L&ouml;sung zeigen</summary><div class="inner">This bridge <strong>was built</strong> in 1890. &middot; My bag <strong>was stolen</strong> yesterday.</div></details>
+
+    <h3>Conditionals (if-S&auml;tze)</h3>
+    <p><strong>Typ I</strong> (real): <em>if + present, will + Infinitiv</em>. <strong>Typ II</strong> (unwahrscheinlich): <em>if + past, would + Infinitiv</em>. <strong>Typ III</strong> (vergangen, irreal): <em>if + had + 3. Form, would have + 3. Form</em>.</p>
+    <div class="ex">If it <strong>is</strong> sunny, we <strong>will go</strong> to the beach. (I) &mdash; If I <strong>had</strong> money, I <strong>would buy</strong> a bike. (II) &mdash; If she <strong>had studied</strong>, she <strong>would have passed</strong>. (III)
+      <button class="audio" data-say="If it is sunny, we will go to the beach. If I had more money, I would buy a bike. If she had studied harder, she would have passed the exam.">&#128266; anh&ouml;ren</button>
+    </div>
+    <div class="ex">Mini-Test: <em>If I ____ (to have) more time, I ____ (to learn) Spanish.</em></div>
+    <details class="sol"><summary>L&ouml;sung zeigen</summary><div class="inner">If I <strong>had</strong> more time, I <strong>would learn</strong> Spanish. (Typ II)</div></details>
+
+    <h3>Reported Speech (indirekte Rede)</h3>
+    <p>Zeit <strong>eine Stufe zur&uuml;ck</strong> (backshift), Pronomen anpassen. Frage &rarr; <strong>Aussage-Wortstellung</strong> (kein <em>did</em>!), mit <em>if / whether</em>.</p>
+    <div class="ex">"I am tired," she said. &rarr; She said that she <strong>was</strong> tired.
+      <br>"Did you see the film?" &rarr; He asked whether I <strong>had seen</strong> the film.
+      <button class="audio" data-say="She said that she was tired. He asked whether I had seen the film.">&#128266; anh&ouml;ren</button>
+    </div>
+    <div class="ex">Mini-Test: <em>"We will help you," they said. &rarr; They said that ...</em></div>
+    <details class="sol"><summary>L&ouml;sung zeigen</summary><div class="inner">They said that they <strong>would help me</strong>.</div></details>
+
+    <h3>Relative Clauses</h3>
+    <p><strong>who</strong> = Person, <strong>which</strong> = Sache, <strong>that</strong> = beides, <strong>whose</strong> = Besitz.</p>
+    <div class="ex">That's the woman <strong>who</strong> won the prize. &middot; the book <strong>which</strong> I borrowed &middot; the boy <strong>whose</strong> father is a doctor.
+      <button class="audio" data-say="That's the woman who won the prize. Here is the book which I borrowed. He is the boy whose father is a doctor.">&#128266; anh&ouml;ren</button>
+    </div>
+    <div class="ex">Mini-Test: <em>This is the house ____ we lived in.</em></div>
+    <details class="sol"><summary>L&ouml;sung zeigen</summary><div class="inner">This is the house <strong>which/that</strong> we lived in.</div></details>
+
+    <h3>Gerund / Infinitive</h3>
+    <p>Nach <em>enjoy, like, be good at, after, before, prepositions</em> &rarr; <strong>-ing</strong>. Nach <em>want, would like, decide, hope</em> &rarr; <strong>to + Infinitiv</strong>.</p>
+    <div class="ex">I enjoy <strong>cooking</strong>. &middot; She wants <strong>to become</strong> a vet. &middot; They are good at <strong>playing</strong> chess.
+      <button class="audio" data-say="I really enjoy cooking for my friends. She wants to become a vet. They are good at playing chess.">&#128266; anh&ouml;ren</button>
+    </div>
+    <div class="ex">Mini-Test: <em>I'm looking forward to ____ (to see) you.</em></div>
+    <details class="sol"><summary>L&ouml;sung zeigen</summary><div class="inner">I'm looking forward to <strong>seeing</strong> you. (<em>to</em> ist hier Pr&auml;position &rarr; -ing!)</div></details>
+
+    <h3>Comparison (Steigerung)</h3>
+    <p>Kurz: <em>-er / -est</em> (cheap&rarr;cheaper&rarr;cheapest). Lang: <em>more / most</em> (interesting). Unregelm&auml;&szlig;ig: good&rarr;better&rarr;best, bad&rarr;worse&rarr;worst.</p>
+    <div class="ex">London is <strong>more expensive than</strong> Mainburg. &mdash; This is the <strong>best</strong> film I have ever seen.
+      <button class="audio" data-say="London is more expensive than Mainburg. This is the best film I have ever seen.">&#128266; anh&ouml;ren</button>
+    </div>
+    <div class="ex">Mini-Test: <em>My phone is ____ (good) than yours.</em></div>
+    <details class="sol"><summary>L&ouml;sung zeigen</summary><div class="inner">My phone is <strong>better than</strong> yours.</div></details>
+  </div>
+</details>
+
+<!-- ============ MODUL 3 ============ -->
+<details class="card" id="m3" open>
+  <summary>3 &middot; Listening (H&ouml;rverstehen)</summary>
+  <div class="body">
+    <p class="muted">Tippe <strong>&#128266; vorlesen</strong> und h&ouml;re zu (englische Stimme). Schreibe deine Antworten auf, bevor du die L&ouml;sung &ouml;ffnest. Bei Bedarf <strong>&#128034; langsam</strong>.</p>
+
+    <h3>Hörtext 1 &mdash; School announcement</h3>
+    <div class="ex">
+      <button class="audio" data-say="Good morning, everyone. This is an important announcement about Friday's school trip to the science museum. The bus will leave at eight o'clock sharp, so please be at the main entrance by quarter to eight. Don't forget to bring a packed lunch and a bottle of water. The weather will be cold, so wear a warm jacket. We will be back at school at around four o'clock. Have a great trip!">&#128266; vorlesen</button>
+      <button class="audio slow" data-say="Good morning, everyone. This is an important announcement about Friday's school trip to the science museum. The bus will leave at eight o'clock sharp, so please be at the main entrance by quarter to eight. Don't forget to bring a packed lunch and a bottle of water. The weather will be cold, so wear a warm jacket. We will be back at school at around four o'clock." data-rate="0.7">&#128034; langsam</button>
+    </div>
+    <ol>
+      <li class="q">Where is the school trip going?</li>
+      <li class="q">What time should students be at the main entrance?</li>
+      <li class="q">Name two things students must bring.</li>
+      <li class="q">When will they be back at school?</li>
+    </ol>
+    <details class="sol"><summary>L&ouml;sung zeigen</summary><div class="inner">
+      1. To the <strong>science museum</strong>. &middot; 2. By <strong>quarter to eight (7:45)</strong>. &middot;
+      3. A <strong>packed lunch</strong> and a <strong>bottle of water</strong> (+ a warm jacket). &middot;
+      4. At <strong>around four o'clock</strong>.
+    </div></details>
+
+    <h3>Hörtext 2 &mdash; Voicemail from a friend</h3>
+    <div class="ex">
+      <button class="audio" data-say="Hi, it's Emma. Listen, about Saturday, I'm afraid I can't come to the cinema after all, because my grandparents are visiting. But would you like to meet on Sunday instead? We could go to the new café in the town centre, the one near the library. They say the cakes are amazing. Call me back when you get this. Bye!">&#128266; vorlesen</button>
+      <button class="audio slow" data-say="Hi, it's Emma. Listen, about Saturday, I'm afraid I can't come to the cinema after all, because my grandparents are visiting. But would you like to meet on Sunday instead? We could go to the new café in the town centre, the one near the library. They say the cakes are amazing. Call me back when you get this. Bye!" data-rate="0.7">&#128034; langsam</button>
+    </div>
+    <ol start="5">
+      <li class="q">Why can't Emma come on Saturday?</li>
+      <li class="q">What does she suggest doing instead, and when?</li>
+      <li class="q">Where is the café?</li>
+      <li class="q">What does Emma ask her friend to do?</li>
+    </ol>
+    <details class="sol"><summary>L&ouml;sung zeigen</summary><div class="inner">
+      5. Because her <strong>grandparents are visiting</strong>. &middot;
+      6. To meet on <strong>Sunday</strong> and go to the <strong>new café</strong>. &middot;
+      7. In the <strong>town centre, near the library</strong>. &middot;
+      8. To <strong>call her back</strong>.
+    </div></details>
+  </div>
+</details>
+
+<!-- ============ MODUL 4 ============ -->
+<details class="card" id="m4" open>
+  <summary>4 &middot; Reading</summary>
+  <div class="body">
+    <p class="muted">Lies genau, markiere Schl&uuml;sselw&ouml;rter, antworte <strong>auf Englisch</strong> in ganzen S&auml;tzen. Mit <strong>&#128266;</strong> kannst du den Text auch h&ouml;ren.</p>
+
+    <h3>Text 1 &mdash; A Weekend Without a Phone</h3>
+    <button class="audio" data-say="Last month our class did an unusual experiment. For one whole weekend, none of us was allowed to use a mobile phone. At first, almost everyone thought it would be impossible. On Friday evening it felt really strange. I kept reaching for my pocket, but there was nothing there. On Saturday, something changed. My family and I went for a long walk in the forest. We talked much more than usual, and my little brother taught me a card game. In the afternoon I started reading a book made of paper, and I finished it by Sunday night. When we got our phones back on Monday, I had over fifty messages. But honestly, none of them was important. I have decided to keep one phone-free afternoon every week. It makes me feel calmer and gives me more time for the people around me.">&#128266; Text anh&ouml;ren</button>
+    <div class="reading">
+      <p><em>Last month our class did an unusual experiment. For one whole weekend, none of us was allowed to use a mobile phone. At first, almost everyone thought it would be impossible. On Friday evening it felt really strange. I kept reaching for my pocket, but there was nothing there.</em></p>
+      <p><em>On Saturday, something changed. My family and I went for a long walk in the forest. We talked much more than usual, and my little brother taught me a card game. In the afternoon I started reading a book &mdash; a real one, made of paper &mdash; and I finished it by Sunday night.</em></p>
+      <p><em>When we got our phones back on Monday, I had over fifty messages. But honestly, none of them was important. I have decided to keep one "phone-free" afternoon every week. It makes me feel calmer and gives me more time for the people around me.</em></p>
+    </div>
+    <ol>
+      <li class="q">Why did the class do the experiment, and how long did it last?</li>
+      <li class="q">How did the writer feel on Friday evening? Give one detail.</li>
+      <li class="q">Name two things the writer did on Saturday instead of using a phone.</li>
+      <li class="q"><em>True or false?</em> "The writer thinks all the messages were important." Give a reason.</li>
+      <li class="q">What decision did the writer make after the experiment, and why?</li>
+    </ol>
+    <details class="sol"><summary>L&ouml;sung zeigen</summary><div class="inner">
+      1. To spend <strong>one whole weekend without a mobile phone</strong>; it lasted <strong>a whole weekend</strong> (Friday&ndash;Monday). &middot;
+      2. He felt <strong>strange</strong> &mdash; he <strong>kept reaching for his pocket</strong>. &middot;
+      3. A <strong>long walk in the forest</strong>; a <strong>card game</strong> with his brother; <strong>read a book</strong> (two of these). &middot;
+      4. <strong>False</strong> &mdash; he says "<em>none of them was important</em>." &middot;
+      5. To keep <strong>one phone-free afternoon every week</strong>, because it makes him feel <strong>calmer</strong> and gives him <strong>more time for people</strong>.
+    </div></details>
+
+    <h3>Text 2 &mdash; A New Job at the Animal Shelter</h3>
+    <button class="audio" data-say="Tom had always loved animals, so when he saw an advertisement for weekend helpers at the local animal shelter, he applied at once. He was nervous before his first day, because he had never worked with so many dogs before. The manager, Mrs Patel, welcomed him with a warm smile. Tom's main job was to walk the dogs, clean the cages and prepare the food. The work was harder than he had expected. But there was one dog, an old grey terrier called Buster, who followed him everywhere. Buster had been at the shelter for almost a year because nobody wanted to adopt an older dog. After three weekends, Tom asked his parents if the family could give the dog a home. To his surprise, they agreed. Volunteering was supposed to be just a hobby, but it completely changed his life.">&#128266; Text anh&ouml;ren</button>
+    <div class="reading">
+      <p><em>Tom had always loved animals, so when he saw an advertisement for weekend helpers at the local animal shelter, he applied at once. He was nervous before his first day, because he had never worked with so many dogs before. The manager, Mrs Patel, welcomed him with a warm smile.</em></p>
+      <p><em>Tom's main job was to walk the dogs, clean the cages and prepare the food. The work was harder than he had expected. But there was one dog, an old grey terrier called Buster, who followed him everywhere. Buster had been at the shelter for almost a year because nobody wanted to adopt an older dog.</em></p>
+      <p><em>After three weekends, Tom asked his parents if the family could give the dog a home. To his surprise, they agreed. "Volunteering was supposed to be just a hobby," Tom says, "but it completely changed my life."</em></p>
+    </div>
+    <ol start="6">
+      <li class="q">Why was Tom nervous on his first day?</li>
+      <li class="q">What were Tom's three main tasks at the shelter?</li>
+      <li class="q">Why had nobody adopted Buster before?</li>
+      <li class="q"><em>True or false?</em> "Tom's parents refused to take the dog." Give a reason.</li>
+      <li class="q">Explain in your own words what Tom means by "it completely changed my life."</li>
+    </ol>
+    <details class="sol"><summary>L&ouml;sung zeigen</summary><div class="inner">
+      6. Because he had <strong>never worked with so many dogs before</strong>. &middot;
+      7. To <strong>walk the dogs</strong>, <strong>clean the cages</strong> and <strong>prepare the food</strong>. &middot;
+      8. Because he was an <strong>old dog</strong> and nobody wanted an older dog. &middot;
+      9. <strong>False</strong> &mdash; "<em>To his surprise, they agreed</em>." &middot;
+      10. Volunteering started as a hobby, but it led him to <strong>adopt Buster</strong> and gave his life a <strong>new, happier meaning</strong>.
+    </div></details>
+  </div>
+</details>
+
+<!-- ============ MODUL 5 ============ -->
+<details class="card" id="m5" open>
+  <summary>5 &middot; Mediation EN&rarr;DE</summary>
+  <div class="body">
+    <p class="muted">Lies den <strong>englischen</strong> Text. Antworte <strong>auf Deutsch</strong> und <strong>sinngem&auml;&szlig;</strong> (nicht Wort f&uuml;r Wort!). Gib nur das Gefragte wieder.</p>
+
+    <h3>English source &mdash; "City Bike Rental"</h3>
+    <button class="audio" data-say="Welcome to GreenWheels, the city bike rental for everyone! Our bikes are available 24 hours a day at more than 40 stations. To rent a bike, download our free app, register with your email address and add a payment method. The first 30 minutes of every ride are free; after that, the price is one pound for each additional 30 minutes. There is a daily maximum of eight pounds. Children under 16 must be accompanied by an adult. If you leave a bike outside a station, you will be charged an extra fee of 15 pounds. If a bike is damaged, report it in the app so that nobody else rents it.">&#128266; Text anh&ouml;ren</button>
+    <div class="reading">
+      <p><em>Welcome to GreenWheels, the city bike rental for everyone! Our bikes are available 24 hours a day at more than 40 stations across the city. To rent a bike, simply download our free app, register with your email address and add a payment method. The first 30 minutes of every ride are free; after that, the price is &pound;1 for each additional 30 minutes. There is a daily maximum of &pound;8.</em></p>
+      <p><em>Children under 16 must be accompanied by an adult. Please return the bike to any official station and lock it properly &mdash; if you leave a bike outside a station, you will be charged an extra fee of &pound;15. If a bike is damaged or does not work, report it in the app so that nobody else rents it.</em></p>
+    </div>
+    <ol start="11">
+      <li class="q">Deine Mutter spricht kein Englisch und m&ouml;chte ein Fahrrad mieten. Erkl&auml;re ihr, <strong>wie</strong> man ein Rad ausleiht.</li>
+      <li class="q">Was kostet das Mieten? Erkl&auml;re die Preise (auch die Tagesobergrenze).</li>
+      <li class="q">Welche Regel gilt f&uuml;r Kinder unter 16 Jahren?</li>
+      <li class="q">Was passiert, wenn man das Fahrrad <strong>nicht</strong> an einer offiziellen Station abstellt?</li>
+      <li class="q">Was soll man tun, wenn ein Fahrrad kaputt ist, und warum?</li>
+    </ol>
+    <details class="sol"><summary>L&ouml;sung zeigen (Musterantworten)</summary><div class="inner">
+      11. Man l&auml;dt die <strong>kostenlose App</strong> herunter, <strong>registriert sich mit der E-Mail-Adresse</strong> und f&uuml;gt eine <strong>Zahlungsmethode</strong> hinzu. Dann kann man an einer der &uuml;ber 40 Stationen ein Rad ausleihen.<br>
+      12. Die <strong>ersten 30 Minuten</strong> sind <strong>kostenlos</strong>. Danach kostet jede weitere halbe Stunde <strong>1 Pfund</strong>. Pro Tag zahlt man <strong>h&ouml;chstens 8 Pfund</strong>.<br>
+      13. Kinder <strong>unter 16</strong> d&uuml;rfen nur <strong>in Begleitung eines Erwachsenen</strong> fahren.<br>
+      14. Man zahlt eine <strong>Extrageb&uuml;hr von 15 Pfund</strong>.<br>
+      15. Man soll es <strong>in der App melden</strong>, damit <strong>niemand sonst</strong> dieses kaputte Rad ausleiht.
+    </div></details>
+  </div>
+</details>
+
+<!-- ============ MODUL 6 ============ -->
+<details class="card" id="m6" open>
+  <summary>6 &middot; Translation DE&rarr;EN</summary>
+  <div class="body">
+    <p class="muted">&Uuml;bersetze die deutschen S&auml;tze ins Englische. Achte auf Zeitform und Wortstellung. L&ouml;sung erst nach dem Versuch.</p>
+    <ol start="16">
+      <li class="q">Ich wohne seit drei Jahren in Mainburg.</li>
+      <li class="q">Gestern haben wir einen tollen Film gesehen.</li>
+      <li class="q">Wenn es morgen regnet, bleiben wir zu Hause.</li>
+      <li class="q">Diese Br&uuml;cke wurde 1890 gebaut.</li>
+      <li class="q">Sie sagte, dass sie m&uuml;de sei.</li>
+      <li class="q">Ich freue mich darauf, dich zu sehen.</li>
+      <li class="q">Mein Bruder ist gr&ouml;&szlig;er als ich.</li>
+      <li class="q">Du solltest mehr Wasser trinken.</li>
+    </ol>
+    <details class="sol"><summary>L&ouml;sung zeigen</summary><div class="inner">
+      16. I <strong>have lived</strong> in Mainburg <strong>for</strong> three years.<br>
+      17. Yesterday we <strong>watched</strong> a great film.<br>
+      18. If it <strong>rains</strong> tomorrow, we <strong>will stay</strong> at home.<br>
+      19. This bridge <strong>was built</strong> in 1890.<br>
+      20. She said that she <strong>was tired</strong>.<br>
+      21. I'm <strong>looking forward to seeing</strong> you.<br>
+      22. My brother is <strong>taller than</strong> me.<br>
+      23. You <strong>should drink</strong> more water.
+    </div></details>
+  </div>
+</details>
+
+<!-- ============ MODUL 7 ============ -->
+<details class="card" id="m7" open>
+  <summary>7 &middot; Writing</summary>
+  <div class="body">
+    <p class="muted">Plane kurz (Stichpunkte), schreibe in Abs&auml;tzen, nutze Konnektoren (<em>first, then, however, because, finally</em>) und pr&uuml;fe am Ende Zeiten + Rechtschreibung. ~200 W&ouml;rter.</p>
+
+    <h3>A) Personal Email</h3>
+    <p><strong>Aufbau:</strong> Anrede (<em>Hi Alex / Dear Alex</em>) &rarr; Dank/Einstieg &rarr; Hauptteil (alle Stichpunkte!) &rarr; Frage &rarr; Schluss (<em>Best wishes / Write back soon</em>) &rarr; Name.</p>
+    <p class="muted"><strong>Linking words:</strong> first &middot; then &middot; also &middot; by the way &middot; that's why &middot; looking forward to.</p>
+    <details class="sol"><summary>Mustertext zeigen (Email)</summary><div class="inner">
+      <div class="model">Hi Alex,
+
+Thanks for your email &mdash; I'm so excited that you're coming to stay with us this summer! I really can't wait to see you again.
+
+There are lots of things we could do together. First, we could go swimming in the lake near my house, which is great when the weather is hot. Then, if you like, we could visit the city centre and try some typical Bavarian food.
+
+Please bring some warm clothes for the evenings and good walking shoes, because we might go hiking one day. Don't forget your swimming things, too!
+
+By the way, how long are you planning to stay? Let me know so that I can organise everything.
+
+Looking forward to seeing you soon!
+
+Best wishes,
+Gioele</div>
+      <button class="audio" data-say="Hi Alex, thanks for your email. I'm so excited that you're coming to stay with us this summer. There are lots of things we could do together. First, we could go swimming in the lake. Then we could visit the city centre. Please bring some warm clothes and good walking shoes. By the way, how long are you planning to stay? Looking forward to seeing you soon. Best wishes, Gioele.">&#128266; anh&ouml;ren</button>
+    </div></details>
+
+    <h3>B) Article / Comment (Opinion)</h3>
+    <p><strong>Aufbau:</strong> Einleitung (Thema) &rarr; <em>On the one hand, ...</em> (pro) &rarr; <em>On the other hand, ...</em> (contra) &rarr; <em>All in all / Personally, ...</em> (eigene Meinung).</p>
+    <details class="sol"><summary>Mustertext zeigen (Comment: "Phones at school?")</summary><div class="inner">
+      <div class="model">Mobile phones at school are a topic that many students and teachers argue about.
+
+On the one hand, phones can be very useful. For example, students can quickly look up information, use learning apps or contact their parents in an emergency. Moreover, many lessons today use digital material.
+
+On the other hand, phones are often a big distraction. Instead of listening, some students chat or play games. In addition, phones can be used for cheating, which is a serious problem.
+
+All in all, I can see both sides. Personally, I think phones should be allowed during breaks but switched off during lessons. In my opinion, this would be a fair compromise for everyone.</div>
+      <button class="audio" data-say="Mobile phones at school are a topic that many people argue about. On the one hand, phones can be useful. On the other hand, phones are often a distraction. All in all, I think phones should be allowed during breaks but switched off during lessons.">&#128266; anh&ouml;ren</button>
+    </div></details>
+
+    <h3>C) Short story / Online review</h3>
+    <p><strong>Story:</strong> Setze ein klares Setting, eine Hauptfigur und ein Problem; nutze <em>Past Simple</em> + <em>Past Continuous</em>. <strong>Review:</strong> sage wo/was, gib eine Bewertung (<em>I would recommend ... / The best thing was ...</em>) und eine Empfehlung am Ende.</p>
+    <details class="sol"><summary>Mustertext zeigen (Review)</summary><div class="inner">
+      <div class="model">Last weekend I visited the new café in the town centre, and I really enjoyed it.
+
+The café was bright and friendly, and the staff were very helpful. I ordered a hot chocolate and a piece of apple cake. The cake was delicious and not too expensive. The only disadvantage was that it got quite crowded in the afternoon, so we had to wait for a table.
+
+All in all, I would definitely recommend this café, especially if you go in the morning. I'm already looking forward to my next visit!</div>
+      <button class="audio" data-say="Last weekend I visited the new café in the town centre, and I really enjoyed it. The café was bright and friendly, and the staff were very helpful. The cake was delicious. The only disadvantage was that it got quite crowded. All in all, I would recommend this café.">&#128266; anh&ouml;ren</button>
+    </div></details>
+  </div>
+</details>
+
+<!-- ============ MODUL 8 ============ -->
+<details class="card" id="m8" open>
+  <summary>8 &middot; Useful phrases &amp; Pr&uuml;fungstipps</summary>
+  <div class="body">
+
+    <h3>10 Mustersätze (auswendig lernen)</h3>
+    <div class="voc">
+      <div class="row"><span class="e">Thanks for your email &mdash; I was really happy to hear from you.</span> <button class="audio" data-say="Thanks for your email, I was really happy to hear from you.">&#128266;</button></div>
+      <div class="row"><span class="e">In my opinion / Personally, I think that &hellip;</span> <button class="audio" data-say="In my opinion, personally, I think that">&#128266;</button></div>
+      <div class="row"><span class="e">On the one hand, &hellip; ; on the other hand, &hellip;</span> <button class="audio" data-say="On the one hand; on the other hand">&#128266;</button></div>
+      <div class="row"><span class="e">One advantage / disadvantage of this is that &hellip;</span> <button class="audio" data-say="One advantage of this is that">&#128266;</button></div>
+      <div class="row"><span class="e">For example / For instance, &hellip;</span> <button class="audio" data-say="For example, for instance">&#128266;</button></div>
+      <div class="row"><span class="e">However, we should not forget that &hellip;</span> <button class="audio" data-say="However, we should not forget that">&#128266;</button></div>
+      <div class="row"><span class="e">If I were you, I would &hellip;</span> <button class="audio" data-say="If I were you, I would">&#128266;</button></div>
+      <div class="row"><span class="e">I'm looking forward to seeing / hearing from you.</span> <button class="audio" data-say="I'm looking forward to hearing from you.">&#128266;</button></div>
+      <div class="row"><span class="e">All in all / To sum up, I believe that &hellip;</span> <button class="audio" data-say="All in all, to sum up, I believe that">&#128266;</button></div>
+      <div class="row"><span class="e">In the picture I can see &hellip; ; in the foreground / background there is &hellip;</span> <button class="audio" data-say="In the picture I can see; in the foreground there is; in the background there is">&#128266;</button></div>
+    </div>
+
+    <h3>Checklist last-minute</h3>
+    <h4>Vor der Prüfung</h4>
+    <ul class="chk">
+      <li>Conditionals (I / II / III) kurz angeschaut?</li>
+      <li>Passiv = <em>be</em> + 3. Verbform &mdash; sitzt das?</li>
+      <li>Reported speech: Zeit eine Stufe zur&uuml;ck, Pronomen anpassen?</li>
+      <li>10 Mustersätze auswendig?</li>
+      <li>Anrede + Grußformel (informell <strong>und</strong> formell) gewusst?</li>
+    </ul>
+    <h4>Während der Prüfung</h4>
+    <ul class="chk">
+      <li>Reading: zuerst Fragen lesen, dann Schl&uuml;sselw&ouml;rter markieren.</li>
+      <li>Mediation: auf <strong>Deutsch</strong>, <strong>sinngem&auml;&szlig;</strong>, nur das Gefragte.</li>
+      <li>Writing: <strong>alle Stichpunkte</strong> abhaken, kurz planen, Abs&auml;tze machen.</li>
+      <li>Zeit einteilen &mdash; Schwieriges markieren und sp&auml;ter zur&uuml;ck.</li>
+      <li>Am Ende 5 Min. Kontrolle: Tenses, <em>he/she + s</em>, Rechtschreibung, Gro&szlig;buchstaben.</li>
+    </ul>
+    <div class="warn">
+      <strong>H&auml;ufige Fehler:</strong> <em>he/she/it</em> &rarr; das <strong>-s</strong> nicht vergessen (<em>she plays</em>) &middot;
+      <em>since</em> (Zeitpunkt) vs. <em>for</em> (Zeitraum) &middot;
+      Reported question = <strong>Aussage-Wortstellung</strong> (kein <em>did</em>!) &middot;
+      Mediation <strong>nicht</strong> auf Englisch und <strong>nicht</strong> Wort f&uuml;r Wort.
+    </div>
+    <p class="note"><strong>Du schaffst das, Gioele &mdash; viel Erfolg! &#128170;</strong></p>
+  </div>
+</details>
+
+<footer>
+  &Uuml;bungsmaterial zum Selbstlernen &mdash; keine echten Pr&uuml;fungstexte. Aufbau basierend auf der Struktur der bayerischen Abschlusspr&uuml;fungen der letzten Jahre. &middot; 26.06.2026
+</footer>
+
+</div>
+
+<script>
+(function(){
+  function stop(){ try{ window.speechSynthesis.cancel(); }catch(e){} }
+  function speak(text, rate){
+    if(!('speechSynthesis' in window)){ alert('Audio wird auf diesem Gerät leider nicht unterstützt.'); return; }
+    stop();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-GB';
+    u.rate = rate || 1;
+    var voices = window.speechSynthesis.getVoices();
+    for(var i=0;i<voices.length;i++){
+      if(voices[i].lang && voices[i].lang.toLowerCase().indexOf('en-gb')===0){ u.voice = voices[i]; break; }
+    }
+    if(!u.voice){
+      for(var j=0;j<voices.length;j++){
+        if(voices[j].lang && voices[j].lang.toLowerCase().indexOf('en')===0){ u.voice = voices[j]; break; }
+      }
+    }
+    window.speechSynthesis.speak(u);
+  }
+  // Manche iPads laden voices verzögert
+  if('speechSynthesis' in window){ window.speechSynthesis.getVoices(); window.speechSynthesis.onvoiceschanged = function(){ window.speechSynthesis.getVoices(); }; }
+
+  document.addEventListener('click', function(ev){
+    var d = ev.target.closest ? ev.target.closest('.dictbtn') : null;
+    if(d){
+      ev.preventDefault();
+      var w = (document.getElementById('dictWord').value || '').trim();
+      if(!w){ var inp=document.getElementById('dictWord'); if(inp) inp.focus(); return; }
+      var enc = encodeURIComponent(w), t = d.getAttribute('data-dict'), url;
+      if(t==='leo') url='https://dict.leo.org/englisch-deutsch/'+enc;
+      else if(t==='dictcc') url='https://www.dict.cc/?s='+enc;
+      else url='https://translate.google.com/?sl=en&tl=de&op=translate&text='+enc;
+      window.open(url,'_blank');
+      return;
+    }
+    var b = ev.target.closest ? ev.target.closest('.audio') : null;
+    if(!b) return;
+    ev.preventDefault();
+    var text = b.getAttribute('data-say') || '';
+    var rate = parseFloat(b.getAttribute('data-rate') || '1');
+    speak(text, rate);
+  });
+})();
+</script>
+</body>
+</html>
