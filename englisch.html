@@ -148,6 +148,10 @@
   .dict input{width:100%;font-size:19px;font-family:inherit;padding:12px 14px;margin:10px 0;border:1px solid var(--border);border-radius:12px;min-height:44px;}
   .dictbtn{display:inline-flex;align-items:center;justify-content:center;background:var(--accent);color:#fff;border:none;border-radius:999px;font-size:17px;font-family:inherit;padding:0 16px;min-height:44px;margin:4px 8px 4px 0;cursor:pointer;}
   .dictbtn:active{opacity:.8;}
+  .audiotest{background:#fff8e1;border:1px solid #ffe0a3;border-radius:16px;padding:14px 18px;margin-bottom:22px;}
+  .audiotest strong{color:var(--warn);font-size:19px;}
+  #audioStatus{margin:8px 0;font-size:18px;}
+  .audio.playing{outline:3px solid #ffd54f;outline-offset:1px;}
 </style>
 </head>
 <body>
@@ -160,6 +164,13 @@
   <p>Erkl&auml;rungen auf <strong>Deutsch</strong>, Inhalte auf <strong>Englisch + Deutsch</strong>.</p>
   <span class="tag">Aufbau basierend auf der Struktur der bayerischen Abschlusspr&uuml;fungen der letzten Jahre</span>
 </header>
+
+<div class="audiotest">
+  <strong>&#128264; Audio-Test &mdash; zuerst hier pr&uuml;fen</strong>
+  <div id="audioStatus" class="muted">pr&uuml;fe Audio &hellip;</div>
+  <button class="audio" data-say="Hello! This is your English exam trainer. You can do this. Good luck!">&#9654;&#65039; Test-Stimme abspielen</button>
+  <div class="muted" style="font-size:16px;margin-top:8px;">Kein Ton? Auf iPhone/iPad den <strong>Lautlos-Schalter</strong> (an der Seite) ausschalten und die Lautst&auml;rke aufdrehen.</div>
+</div>
 
 <div class="note">
   <strong>Aufbau der schriftlichen Pr&uuml;fung (typische Gewichtung):</strong><br>
@@ -599,26 +610,45 @@ All in all, I would definitely recommend this café, especially if you go in the
 
 <script>
 (function(){
-  function stop(){ try{ window.speechSynthesis.cancel(); }catch(e){} }
-  function speak(text, rate){
-    if(!('speechSynthesis' in window)){ alert('Audio wird auf diesem Gerät leider nicht unterstützt.'); return; }
-    stop();
-    var u = new SpeechSynthesisUtterance(text);
-    u.lang = 'en-GB';
-    u.rate = rate || 1;
-    var voices = window.speechSynthesis.getVoices();
-    for(var i=0;i<voices.length;i++){
-      if(voices[i].lang && voices[i].lang.toLowerCase().indexOf('en-gb')===0){ u.voice = voices[i]; break; }
-    }
-    if(!u.voice){
-      for(var j=0;j<voices.length;j++){
-        if(voices[j].lang && voices[j].lang.toLowerCase().indexOf('en')===0){ u.voice = voices[j]; break; }
-      }
-    }
-    window.speechSynthesis.speak(u);
+  var synth = ('speechSynthesis' in window) ? window.speechSynthesis : null;
+
+  function voices(){ try{ return synth.getVoices() || []; }catch(e){ return []; } }
+  function pick(){
+    var v=voices(), i;
+    for(i=0;i<v.length;i++){ if(v[i].lang && v[i].lang.toLowerCase().indexOf('en-gb')===0) return v[i]; }
+    for(i=0;i<v.length;i++){ if(v[i].lang && v[i].lang.toLowerCase().indexOf('en')===0) return v[i]; }
+    return null;
   }
-  // Manche iPads laden voices verzögert
-  if('speechSynthesis' in window){ window.speechSynthesis.getVoices(); window.speechSynthesis.onvoiceschanged = function(){ window.speechSynthesis.getVoices(); }; }
+  // Fix consensus 25/06: NIENTE unlock+cancel (rompeva iOS). Il primo speak reale sblocca da se'.
+  function speak(text, rate, btn){
+    if(!synth){ if(btn) btn.textContent='❌ kein Audio'; return; }
+    if(!text || !text.trim()) return;                       // MINOR: bail su testo vuoto
+    if(synth.speaking || synth.pending){ try{ synth.cancel(); }catch(e){} }  // BLOCKER: cancel SOLO se occupato
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang='en-GB'; u.rate=rate||1;
+    var vo=pick(); if(vo) u.voice=vo;
+    var timer=null;
+    function clr(){ if(btn) btn.classList.remove('playing'); if(timer){ clearInterval(timer); timer=null; } }
+    u.onstart=function(){ if(btn) btn.classList.add('playing'); };
+    u.onend=clr; u.onerror=clr;
+    try{
+      synth.speak(u);
+      timer=setInterval(function(){ if(synth.speaking){ try{ synth.resume(); }catch(e){} } else { clr(); } }, 5000); // MAJOR: resume periodico (Chrome 15s)
+    }catch(e){ clr(); }
+  }
+  function status(){
+    var el=document.getElementById('audioStatus'); if(!el) return;
+    if(!synth){ el.innerHTML='❌ Dein Browser unterstützt keine Sprachausgabe.'; return; }
+    var v=voices(), en=0, i;
+    for(i=0;i<v.length;i++){ if(v[i].lang && v[i].lang.toLowerCase().indexOf('en')===0) en++; }
+    el.innerHTML = '✅ Sprachausgabe aktiv · <strong>'+en+'</strong> englische Stimme(n)'
+      + (en===0 ? ' — tippe trotzdem auf Test (die Stimme lädt oft beim ersten Tippen).' : '.');
+  }
+
+  if(synth){
+    voices(); status();
+    synth.onvoiceschanged = function(){ voices(); status(); };
+  } else { status(); }
 
   document.addEventListener('click', function(ev){
     var d = ev.target.closest ? ev.target.closest('.dictbtn') : null;
@@ -636,9 +666,7 @@ All in all, I would definitely recommend this café, especially if you go in the
     var b = ev.target.closest ? ev.target.closest('.audio') : null;
     if(!b) return;
     ev.preventDefault();
-    var text = b.getAttribute('data-say') || '';
-    var rate = parseFloat(b.getAttribute('data-rate') || '1');
-    speak(text, rate);
+    speak(b.getAttribute('data-say') || '', parseFloat(b.getAttribute('data-rate') || '1'), b);
   });
 })();
 </script>
