@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mathe-Vorbereitung — Gioele · 29.06.2026</title>
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+<style>
+  :root{ --blau:#1d4e89; --hell:#eaf2fb; --gruen:#e7f6ec; --grueng:#2e7d4f; --gelb:#fff7e0; --gelbr:#c98a00; --grau:#5b6470; --linie:#d6dde6; }
+  *{ box-sizing:border-box; }
+  body{ font-family:"Segoe UI",system-ui,Arial,sans-serif; color:#1c2330; line-height:1.55; margin:0; background:#f4f6f9; }
+  .wrap{ max-width:940px; margin:0 auto; padding:24px 28px 80px; background:#fff; }
+  header.kopf{ background:linear-gradient(135deg,var(--blau),#2e6fb0); color:#fff; border-radius:14px; padding:22px 26px; margin-bottom:22px; }
+  header.kopf h1{ margin:0 0 6px; font-size:1.7rem; }
+  header.kopf .meta{ font-size:1.02rem; opacity:.96; }
+  header.kopf .meta b{ background:rgba(255,255,255,.18); padding:1px 8px; border-radius:6px; }
+  h2{ color:var(--blau); border-bottom:3px solid var(--hell); padding-bottom:6px; margin-top:6px; font-size:1.4rem; }
+  h3{ color:#13355f; margin:18px 0 6px; font-size:1.12rem; }
+  h4{ margin:14px 0 4px; color:#244; }
+  section.bereich{ border:1px solid var(--linie); border-radius:12px; padding:18px 20px; margin:20px 0; background:#fff; }
+  .toc{ background:var(--hell); border-radius:12px; padding:16px 22px; }
+  .toc a{ color:var(--blau); text-decoration:none; font-weight:600; }
+  .toc a:hover{ text-decoration:underline; }
+  .toc ol{ margin:6px 0; }
+  .tipp-it{ background:var(--gelb); border-left:5px solid var(--gelbr); border-radius:8px; padding:8px 14px; margin:10px 0; font-size:.97rem; }
+  .tipp-it b{ color:var(--gelbr); }
+  .muster{ background:#f3f7ff; border:1px dashed #9fbce0; border-radius:8px; padding:10px 16px; margin:12px 0; }
+  .muster .titel{ font-weight:700; color:var(--blau); }
+  .loesungen{ background:var(--gruen); border-left:5px solid var(--grueng); border-radius:8px; padding:10px 18px; margin:14px 0; }
+  .loesungen h3{ color:var(--grueng); }
+  details.loes{ margin:12px 0; }
+  details.loes>summary{ cursor:pointer; font-weight:700; color:var(--grueng); background:var(--gruen); padding:8px 14px; border-radius:8px; list-style:none; }
+  details.loes>summary::-webkit-details-marker{ display:none; }
+  details.loes>summary::before{ content:"▶ "; }
+  details.loes[open]>summary::before{ content:"▼ "; }
+  .aufgabe{ margin:10px 0; }
+  .aufgabe .nr{ font-weight:700; color:var(--blau); }
+  .tag{ font-size:.72rem; font-weight:700; padding:1px 7px; border-radius:20px; vertical-align:middle; }
+  .tagA{ background:#fde2e2; color:#a12; } .tagB{ background:#e2ecfd; color:#15489c; }
+  figure.fig{ text-align:center; margin:14px auto; }
+  figure.fig figcaption{ font-size:.85rem; color:var(--grau); margin-top:4px; }
+  svg{ max-width:100%; height:auto; }
+  table.formeln{ border-collapse:collapse; width:100%; margin:8px 0; }
+  table.formeln td{ border:1px solid var(--linie); padding:6px 10px; vertical-align:top; }
+  table.formeln td:first-child{ width:32%; font-weight:600; color:#13355f; background:#fafcff; }
+  .plan{ width:100%; border-collapse:collapse; margin:8px 0; }
+  .plan th,.plan td{ border:1px solid var(--linie); padding:7px 10px; text-align:left; font-size:.95rem; }
+  .plan th{ background:var(--hell); color:var(--blau); }
+  .check li{ margin:3px 0; }
+  .warn{ color:#a12; font-weight:700; }
+  .motivation{ background:var(--hell); border-radius:12px; padding:16px 22px; margin-top:24px; font-size:1.05rem; }
+  .motivation .it{ color:var(--grau); font-style:italic; }
+  .hinweis{ font-size:.85rem; color:var(--grau); border-top:1px solid var(--linie); margin-top:24px; padding-top:10px; }
+  @media print{
+    body{ background:#fff; } .wrap{ max-width:none; padding:0; }
+    section.bereich, .toc, header.kopf{ break-inside:avoid; }
+    section.bereich{ page-break-before:always; border:none; padding:0; }
+    details.loes{ } details.loes>summary{ display:none; } details.loes[open]>*{ }
+    a{ color:#000; text-decoration:none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="kopf">
+  <h1>📐 MATHE-VORBEREITUNG — Gioele</h1>
+  <div class="meta">Prüfung: <b>Montag, 29.06.2026 · 08:30</b> &nbsp;·&nbsp; Realschule Bayern · <b>Mathematik II</b> (Wahlpflichtgruppe IIIa)<br>
+  Format: <b>Teil A</b> (ohne Taschenrechner, nur Formelsammlung) + <b>Teil B</b> (mit Taschenrechner)</div>
+</header>
+
+<nav class="toc">
+  <b>Inhalt</b>
+  <ol>
+    <li><a href="#plan">Lernplan (2 Tage) + Formeln + Tipps</a></li>
+    <li><a href="#b1">Bereich 1 — Funktionen</a></li>
+    <li><a href="#b2">Bereich 2 — Geometrie &amp; Trigonometrie</a></li>
+    <li><a href="#b3">Bereich 3 — Raumgeometrie / Körper ⚠️ Schwerpunkt</a></li>
+    <li><a href="#b4">Bereich 4 — Prozent &amp; Zins</a></li>
+    <li><a href="#b5">Bereich 5 — Stochastik</a></li>
+  </ol>
+  <div style="font-size:.9rem;color:var(--grau)">Tipp: Rechne jede Aufgabe <b>zuerst selbst</b>, dann die Lösung aufklappen (▶) und vergleichen.</div>
+</nav>
+
+<section class="bereich" id="plan">
+  <h2>🗓️ Lernplan · Formeln · Prüfungstipps</h2>
+
+  <h3>2-Tage-Lernplan (Samstag 27. + Sonntag 28.06.)</h3>
+  <table class="plan">
+    <tr><th>Zeit</th><th>Samstag 27.06.</th><th>Sonntag 28.06.</th></tr>
+    <tr><td>09:00–10:30</td><td><b>Raumgeometrie</b> (Bereich 3) — Theorie + Zylinder/Pyramide/Kegel/Kugel</td><td><b>Rotationskörper</b> (3.5/3.6) nochmal + Extremwert (3.7) &amp; zentr. Streckung (3.8)</td></tr>
+    <tr><td>10:30–10:45</td><td>☕ Pause</td><td>☕ Pause</td></tr>
+    <tr><td>10:45–12:00</td><td><b>Funktionen</b> (Bereich 1) — Parabel, Mitternachtsformel, Exponential</td><td><b>Trigonometrie</b> (Bereich 2) — Sinus-/Kosinussatz, Kreissektor</td></tr>
+    <tr><td>12:00–14:00</td><td>🍝 Mittag + Pause</td><td>🍝 Mittag + Pause</td></tr>
+    <tr><td>14:00–15:30</td><td><b>Trigonometrie</b> (Bereich 2) — rechtwinkliges Dreieck, sin/cos/tan</td><td><b>Prozent &amp; Zins</b> (Bereich 4) + <b>Stochastik</b> (Bereich 5)</td></tr>
+    <tr><td>15:30–16:30</td><td><b>Prozent/Zins</b> (Bereich 4) + erste <b>Stochastik</b>-Aufgaben</td><td><b>Gemischte Wiederholung</b>: je 1 Aufgabe pro Bereich unter Zeitdruck</td></tr>
+    <tr><td>Abends</td><td>Kurz die Formelübersicht durchlesen, früh schlafen 😴</td><td><b>Leicht</b> wiederholen, Sachen packen (Taschenrechner, Stifte, Geodreieck, Zirkel), <b>früh schlafen</b> 😴</td></tr>
+  </table>
+  <div class="tipp-it">💡 <b>Auf Italienisch:</b> non studiare tutto all'ultimo. Ogni argomento: prima leggi la spiegazione, poi fai l'esempio guidato, poi gli esercizi <i>da solo</i>. La geometria dei solidi (Bereich 3) è la più importante: dedicaci più tempo.</div>
+
+  <h3>📋 Formelübersicht (das musst du sicher können)</h3>
+  <h4>Funktionen</h4>
+  <table class="formeln">
+    <tr><td>Lineare Funktion</td><td>\(y=m\,x+t\), &nbsp; Steigung \(m=\dfrac{y_2-y_1}{x_2-x_1}\)</td></tr>
+    <tr><td>Parabel Normalform</td><td>\(y=a\,x^2+b\,x+c\)</td></tr>
+    <tr><td>Parabel Scheitelform</td><td>\(y=a\,(x-x_0)^2+y_0\), &nbsp; Scheitel \(S(x_0\mid y_0)\)</td></tr>
+    <tr><td>Mitternachtsformel</td><td>\(x_{1,2}=\dfrac{-b\pm\sqrt{b^2-4ac}}{2a}\)</td></tr>
+    <tr><td>Scheitel-/Extremstelle</td><td>\(x=-\dfrac{b}{2a}\)</td></tr>
+    <tr><td>Exponentialfunktion</td><td>\(y=a\cdot q^{x}\), &nbsp; Änderung pro Schritt \((q-1)\cdot100\,\%\)</td></tr>
+  </table>
+  <h4>Trigonometrie / Dreieck</h4>
+  <table class="formeln">
+    <tr><td>Rechtwinkliges Dreieck</td><td>\(\sin=\dfrac{G}{H}\), \(\cos=\dfrac{A}{H}\), \(\tan=\dfrac{G}{A}\) &nbsp;(G=Gegen-, A=Ankathete, H=Hypotenuse)</td></tr>
+    <tr><td>Pythagoras</td><td>\(c^2=a^2+b^2\) &nbsp;(c=Hypotenuse)</td></tr>
+    <tr><td>Sinussatz</td><td>\(\dfrac{a}{\sin\alpha}=\dfrac{b}{\sin\beta}=\dfrac{c}{\sin\gamma}\)</td></tr>
+    <tr><td>Kosinussatz</td><td>\(a^2=b^2+c^2-2bc\cdot\cos\alpha\)</td></tr>
+    <tr><td>Dreiecksfläche</td><td>\(A=\tfrac12\,a\,b\cdot\sin\gamma\)</td></tr>
+  </table>
+  <h4>Kreis</h4>
+  <table class="formeln">
+    <tr><td>Umfang / Fläche</td><td>\(u=2\pi r\), &nbsp; \(A=\pi r^2\)</td></tr>
+    <tr><td>Kreisbogen</td><td>\(b=2\pi r\cdot\dfrac{\alpha}{360^\circ}\)</td></tr>
+    <tr><td>Kreissektor</td><td>\(A=\pi r^2\cdot\dfrac{\alpha}{360^\circ}\)</td></tr>
+  </table>
+  <h4>Körper (Raumgeometrie) ⚠️</h4>
+  <table class="formeln">
+    <tr><td>Prisma</td><td>\(V=G\cdot h\), &nbsp; \(O=2G+M\), &nbsp; Mantel \(M=u\cdot h\)</td></tr>
+    <tr><td>Zylinder</td><td>\(V=\pi r^2 h\), &nbsp; \(O=2\pi r(r+h)\)</td></tr>
+    <tr><td>Pyramide (quadr.)</td><td>\(V=\tfrac13 G\,h\), &nbsp; Seitenhöhe \(h_s=\sqrt{h^2+(a/2)^2}\)</td></tr>
+    <tr><td>Kegel</td><td>\(V=\tfrac13\pi r^2 h\), &nbsp; \(O=\pi r(r+s)\), &nbsp; Mantellinie \(s=\sqrt{r^2+h^2}\)</td></tr>
+    <tr><td>Kugel</td><td>\(V=\tfrac43\pi r^3\), &nbsp; \(O=4\pi r^2\)</td></tr>
+    <tr><td>Zentrische Streckung (k)</td><td>Flächen \(A'=k^2A\), &nbsp; Volumen \(V'=k^3V\)</td></tr>
+  </table>
+  <h4>Prozent / Zins &amp; Stochastik</h4>
+  <table class="formeln">
+    <tr><td>Prozent</td><td>\(W=G\cdot\tfrac{p}{100}\), &nbsp; \(G=\dfrac{W}{p/100}\), &nbsp; \(p=\tfrac{W}{G}\cdot100\)</td></tr>
+    <tr><td>Zinseszins</td><td>\(K_n=K\cdot\bigl(1+\tfrac{p}{100}\bigr)^{n}\)</td></tr>
+    <tr><td>Wahrscheinlichkeit</td><td>Pfad: <b>multiplizieren</b> · mehrere Pfade: <b>addieren</b> · \(P(\text{mind. 1})=1-P(\text{keins})\)</td></tr>
+  </table>
+
+  <h3>✅ Schnellcheck — „Kann ich das?“</h3>
+  <ul class="check">
+    <li>☐ Nullstellen mit Faktorisieren <i>und</i> Mitternachtsformel</li>
+    <li>☐ Scheitelform ↔ Normalform umrechnen, Scheitel ablesen</li>
+    <li>☐ Extremwert über \(x=-b/2a\)</li>
+    <li>☐ Pythagoras + sin/cos/tan im rechtwinkligen Dreieck (DEG!)</li>
+    <li>☐ Sinussatz &amp; Kosinussatz anwenden</li>
+    <li>☐ Kreisbogen + Kreissektor</li>
+    <li>☐ <span class="warn">Zylinder, Pyramide, Kegel, Kugel — V und O</span></li>
+    <li>☐ <span class="warn">Rotationskörper zerlegen (Zylinder/Kegel + Halbkugel) und Volumina addieren</span></li>
+    <li>☐ Zentrische Streckung \(k^2\)/\(k^3\)</li>
+    <li>☐ Prozent (Rabatt, Originalpreis) + Zinseszins</li>
+    <li>☐ Baumdiagramm: mit/ohne Zurücklegen, „mindestens 1“, Mittelwert/Median</li>
+  </ul>
+
+  <h3>🎯 Prüfungstipps</h3>
+  <ol>
+    <li><b>Teil A zuerst</b> sauber (ohne Taschenrechner): Pythagoras, Nullstellen durch Faktorisieren, Scheitelform↔Normalform, einfache \(n^k\)-Kombinatorik.</li>
+    <li><b>Raumgeometrie</b> ist der größte Block — besonders <b>Rotationskörper</b> (zerlegen → Volumina addieren) und <b>Extremwert</b> üben.</li>
+    <li><b>Rechenweg immer aufschreiben</b> — Punkte gibt es für den Weg, auch wenn das Endergebnis falsch ist.</li>
+    <li><b>Einheiten</b> mitführen: Länge cm, Fläche cm², Volumen cm³.</li>
+    <li><b>Runden</b> erst ganz am Ende (meist 2 Nachkommastellen). Zwischenergebnisse genauer lassen.</li>
+    <li><b>Probe</b> machen, wo möglich (Nullstelle einsetzen, Gegenrechnung bei Prozent).</li>
+    <li>Taschenrechner bei Trig. auf <b>DEG</b> (Grad), nicht RAD!</li>
+  </ol>
+</section>
+
+<section class="bereich" id="b1">
+  <h2>Bereich 1 — Funktionen (linear · quadratisch · exponential)</h2>
+
+  <h3>Wie macht man das?</h3>
+  <p><b>Lineare Funktion</b> \(y=mx+t\): Die <b>Nullstelle</b> findest du, indem du \(y=0\) setzt und nach \(x\) auflöst. Die <b>Steigung</b> aus zwei Punkten: \(m=\dfrac{y_2-y_1}{x_2-x_1}\).</p>
+  <p><b>Parabel</b>: Von der <b>Scheitelform</b> \(y=a(x-x_0)^2+y_0\) liest du den Scheitel \(S(x_0\mid y_0)\) direkt ab. In die <b>Normalform</b> kommst du durch Ausmultiplizieren der Klammer (binomische Formel \((x-x_0)^2=x^2-2x_0x+x_0^2\)).</p>
+  <p><b>Nullstellen einer Parabel</b> \(ax^2+bx+c=0\): entweder <b>faktorisieren</b> (zwei Zahlen mit Produkt \(c/a\) und passender Summe) oder die <b>Mitternachtsformel</b> \(x_{1,2}=\dfrac{-b\pm\sqrt{b^2-4ac}}{2a}\). Ist \(b^2-4ac<0\) → keine Nullstelle.</p>
+  <p><b>Exponentialfunktion</b> \(y=a\cdot q^x\): \(a\) = Startwert, \(q\) = Wachstums-/Zerfallsfaktor. Änderung pro Schritt \((q-1)\cdot100\,\%\) (positiv = Wachstum, negativ = Abnahme).</p>
+  <div class="tipp-it">💡 <b>Auf Italienisch:</b> per le parabole, la <i>Scheitelform</i> = forma vertice: \(S(x_0\mid y_0)\) si legge subito. La <i>Mitternachtsformel</i> è la formula risolutiva \(\frac{-b\pm\sqrt{b^2-4ac}}{2a}\). \(q>1\) cresce, \(q<1\) cala.</div>
+
+  <div class="muster">
+    <span class="titel">Musterbeispiel — Nullstellen + Scheitel</span>
+    <p>Gegeben \(f(x)=x^2-2x-3\). Bestimme Nullstellen, Scheitel und y-Achsenabschnitt.</p>
+    <p><b>Nullstellen</b> (faktorisieren): zwei Zahlen mit Produkt \(-3\) und Summe \(-2\) → \(-3\) und \(+1\). Also \((x-3)(x+1)=0\) → \(x_1=3,\;x_2=-1\).</p>
+    <p><b>Scheitel</b>: \(x_S=-\dfrac{b}{2a}=-\dfrac{-2}{2}=1\); \(y_S=f(1)=1-2-3=-4\) → \(S(1\mid-4)\).</p>
+    <p><b>y-Achsenabschnitt</b>: \(f(0)=-3\). <i>Probe \(x=3\): \(9-6-3=0\) ✓</i></p>
+  </div>
+
+  <figure class="fig">
+  <svg viewBox="0 0 380 320" role="img" aria-label="Parabel y=x^2-2x-3 mit Scheitel S(1|-4), Nullstellen -1 und 3, y-Achsenabschnitt -3">
+    <!-- Gitter -->
+    <g stroke="#e3e9f0" stroke-width="1">
+      <line x1="0" y1="0" x2="0" y2="320"/><!-- placeholder -->
+    </g>
+    <g stroke="#e6ecf3" stroke-width="1">
+      <!-- vertikale Linien alle 30px (1 Einheit) -->
+      <line x1="30" y1="10" x2="30" y2="310"/><line x1="60" y1="10" x2="60" y2="310"/><line x1="90" y1="10" x2="90" y2="310"/><line x1="120" y1="10" x2="120" y2="310"/><line x1="150" y1="10" x2="150" y2="310"/><line x1="210" y1="10" x2="210" y2="310"/><line x1="240" y1="10" x2="240" y2="310"/><line x1="270" y1="10" x2="270" y2="310"/><line x1="300" y1="10" x2="300" y2="310"/><line x1="330" y1="10" x2="330" y2="310"/>
+      <!-- horizontale Linien alle 30px -->
+      <line x1="20" y1="30" x2="360" y2="30"/><line x1="20" y1="60" x2="360" y2="60"/><line x1="20" y1="90" x2="360" y2="90"/><line x1="20" y1="120" x2="360" y2="120"/><line x1="20" y1="180" x2="360" y2="180"/><line x1="20" y1="210" x2="360" y2="210"/><line x1="20" y1="240" x2="360" y2="240"/><line x1="20" y1="270" x2="360" y2="270"/>
+    </g>
+    <!-- Achsen (Ursprung bei 180,150; Skala 30px/Einheit) -->
+    <g stroke="#37424f" stroke-width="1.6">
+      <line x1="20" y1="150" x2="362" y2="150"/><!-- x-Achse -->
+      <line x1="180" y1="10" x2="180" y2="312"/><!-- y-Achse -->
+    </g>
+    <polygon points="362,150 354,146 354,154" fill="#37424f"/>
+    <polygon points="180,10 176,18 184,18" fill="#37424f"/>
+    <text x="350" y="168" font-size="12" fill="#37424f">x</text>
+    <text x="186" y="20" font-size="12" fill="#37424f">y</text>
+    <text x="184" y="164" font-size="11" fill="#37424f">0</text>
+    <!-- Einheiten an x -->
+    <text x="146" y="164" font-size="10" fill="#6b7785">-1</text>
+    <text x="266" y="164" font-size="10" fill="#6b7785">3</text>
+    <text x="206" y="164" font-size="10" fill="#6b7785">1</text>
+    <!-- Parabel y=x^2-2x-3 -->
+    <polyline fill="none" stroke="#1d4e89" stroke-width="2.6"
+      points="120,0 135,75 150,150 165,217 180,240 195,261 210,270 225,261 240,240 255,217 270,150 285,75 300,0"/>
+    <!-- Nullstellen -->
+    <circle cx="150" cy="150" r="4" fill="#c0392b"/><circle cx="270" cy="150" r="4" fill="#c0392b"/>
+    <text x="120" y="142" font-size="11" fill="#c0392b">N₁(-1|0)</text>
+    <text x="250" y="142" font-size="11" fill="#c0392b">N₂(3|0)</text>
+    <!-- Scheitel -->
+    <circle cx="210" cy="270" r="4.5" fill="#2e7d4f"/>
+    <text x="216" y="285" font-size="11" fill="#2e7d4f">S(1|-4)</text>
+    <!-- y-Achsenabschnitt -->
+    <circle cx="180" cy="240" r="3.5" fill="#c98a00"/>
+    <text x="120" y="236" font-size="10" fill="#c98a00">y-Abschn. -3</text>
+  </svg>
+  <figcaption>Parabel \(y=x^2-2x-3\): Scheitel \(S(1\mid-4)\), Nullstellen bei \(x=-1\) und \(x=3\), y-Achsenabschnitt \(-3\). (1 Kästchen = 1 Einheit)</figcaption>
+  </figure>
+
+  <h3>Übungen</h3>
+  <div class="aufgabe"><span class="nr">1.1</span> <span class="tag tagA">Teil A</span> Bestimme die Nullstelle der linearen Funktion \(f(x)=3x-12\).</div>
+  <div class="aufgabe"><span class="nr">1.2</span> <span class="tag tagA">Teil A</span> Berechne die Steigung \(m\) der Geraden durch \(A(2\mid1)\) und \(B(6\mid9)\).</div>
+  <div class="aufgabe"><span class="nr">1.3</span> <span class="tag tagA">Teil A</span> Schreibe \(y=2(x-3)^2-5\) in <b>Normalform</b> und gib den Scheitelpunkt an.</div>
+  <div class="aufgabe"><span class="nr">1.4</span> <span class="tag tagA">Teil A</span> Bestimme die Nullstellen von \(x^2-6x+8=0\) (Faktorisieren oder Mitternachtsformel).</div>
+  <div class="aufgabe"><span class="nr">1.5</span> <span class="tag tagB">Teil B</span> Bestimme die Nullstellen von \(f(x)=2x^2+3x-5\) mit der Mitternachtsformel.</div>
+  <div class="aufgabe"><span class="nr">1.6</span> <span class="tag tagB">Teil B</span> Eine Maschine verliert an Wert: \(y=24000\cdot0{,}85^{x}\) (y in €, x in Jahren). a) Um wie viel % sinkt der Wert pro Jahr? b) Wert nach 4 Jahren?</div>
+  <div class="aufgabe"><span class="nr">1.7</span> <span class="tag tagB">Teil B</span> Eine Bakterienkultur wächst: \(y=500\cdot1{,}2^{x}\) (x in Stunden). Nach wie vielen <b>vollen</b> Stunden überschreitet sie zum ersten Mal <b>2000</b>?</div>
+
+  <details class="loes"><summary>Lösungen Bereich 1 anzeigen</summary>
+  <div class="loesungen">
+    <p><b>1.1</b> \(3x-12=0 \Rightarrow x=4\). Nullstelle \(N(4\mid0)\).</p>
+    <p><b>1.2</b> \(m=\dfrac{9-1}{6-2}=\dfrac{8}{4}=2\).</p>
+    <p><b>1.3</b> \((x-3)^2=x^2-6x+9\) → \(y=2x^2-12x+18-5=2x^2-12x+13\); Scheitel \(S(3\mid-5)\).</p>
+    <p><b>1.4</b> Produkt \(8\), Summe \(-6\) → \(-2\) und \(-4\): \((x-2)(x-4)=0\) → \(x_1=2,\;x_2=4\).</p>
+    <p><b>1.5</b> \(a=2,b=3,c=-5\); \(b^2-4ac=9+40=49,\;\sqrt{49}=7\). \(x_{1,2}=\dfrac{-3\pm7}{4}\) → \(x_1=1,\;x_2=-2{,}5\). <i>Probe \(x=1\): \(2+3-5=0\) ✓</i></p>
+    <p><b>1.6</b> a) \((0{,}85-1)\cdot100=-15\%\) → sinkt um <b>15 % pro Jahr</b>. b) \(0{,}85^4=0{,}52200625\); \(24000\cdot0{,}52200625\approx\) <b>12 528,15 €</b>.</p>
+    <p><b>1.7</b> \(1{,}2^x>4 \Rightarrow x>\dfrac{\ln4}{\ln1{,}2}\approx7{,}60\) → nächste ganze Stunde \(x=8\). <i>Probe: \(500\cdot1{,}2^7\approx1791<2000\); \(500\cdot1{,}2^8\approx2150>2000\) ✓</i> → nach <b>8 Stunden</b>.</p>
+  </div>
+  </details>
+</section>
+
+<section class="bereich" id="b2">
+  <h2>Bereich 2 — Geometrie &amp; Trigonometrie</h2>
+
+  <h3>Wie macht man das?</h3>
+  <p><b>Rechtwinkliges Dreieck</b>: Mit <b>Pythagoras</b> \(c^2=a^2+b^2\) berechnest du eine Seite, wenn zwei bekannt sind (\(c\) = Hypotenuse, liegt dem rechten Winkel gegenüber). Mit <b>sin/cos/tan</b> rechnest du Seiten und Winkel: bezogen auf einen Winkel ist \(\sin=\tfrac{\text{Gegenkathete}}{\text{Hypotenuse}}\), \(\cos=\tfrac{\text{Ankathete}}{\text{Hypotenuse}}\), \(\tan=\tfrac{\text{Gegenkathete}}{\text{Ankathete}}\).</p>
+  <p><b>Beliebiges Dreieck</b> (nicht rechtwinklig): <b>Sinussatz</b> \(\tfrac{a}{\sin\alpha}=\tfrac{b}{\sin\beta}=\tfrac{c}{\sin\gamma}\) (wenn Seite+Gegenwinkel bekannt). <b>Kosinussatz</b> \(a^2=b^2+c^2-2bc\cos\alpha\) (wenn zwei Seiten + eingeschlossener Winkel, oder alle drei Seiten → Winkel).</p>
+  <p><b>Kreis</b>: Bogen \(b=2\pi r\cdot\tfrac{\alpha}{360^\circ}\), Sektorfläche \(A=\pi r^2\cdot\tfrac{\alpha}{360^\circ}\) — also einfach den Anteil \(\tfrac{\alpha}{360^\circ}\) vom ganzen Kreis.</p>
+  <div class="tipp-it">💡 <b>Auf Italienisch:</b> il lato <i>Gegenkathete</i> sta <b>di fronte</b> all'angolo, la <i>Ankathete</i> è <b>accanto</b>. Calcolatrice su <b>DEG</b>! Per trovare un angolo da seno/coseno/tangente usa il tasto inverso (\(\sin^{-1}, \cos^{-1}, \tan^{-1}\)).</div>
+
+  <figure class="fig">
+  <svg viewBox="0 0 360 250" role="img" aria-label="Rechtwinkliges Dreieck mit Ankathete b, Gegenkathete a, Hypotenuse c und Winkel alpha bei B">
+    <polygon points="70,210 290,210 70,70" fill="#eaf2fb" stroke="#1d4e89" stroke-width="2"/>
+    <!-- rechter Winkel bei C (unten links) -->
+    <polyline points="70,192 88,192 88,210" fill="none" stroke="#1d4e89" stroke-width="1.6"/>
+    <!-- Winkel alpha bei B (unten rechts) -->
+    <path d="M 262 210 A 28 28 0 0 0 277 196" fill="none" stroke="#c0392b" stroke-width="1.8"/>
+    <text x="246" y="203" font-size="13" fill="#c0392b">α</text>
+    <!-- Eckpunkte -->
+    <text x="58" y="224" font-size="12" fill="#37424f">C</text>
+    <text x="290" y="224" font-size="12" fill="#37424f">B</text>
+    <text x="58" y="66" font-size="12" fill="#37424f">A</text>
+    <!-- Seiten -->
+    <text x="150" y="228" font-size="12" fill="#13355f">b — Ankathete</text>
+    <text x="6" y="142" font-size="12" fill="#13355f">a — Gegenkathete</text>
+    <text x="184" y="128" font-size="12" fill="#13355f" transform="rotate(-32 184 128)">c — Hypotenuse</text>
+  </svg>
+  <figcaption>Rechtwinkliges Dreieck (rechter Winkel bei C). Bezogen auf \(\alpha\): \(\sin\alpha=\tfrac{a}{c}\), \(\cos\alpha=\tfrac{b}{c}\), \(\tan\alpha=\tfrac{a}{b}\); Pythagoras \(c^2=a^2+b^2\).</figcaption>
+  </figure>
+
+  <figure class="fig">
+  <svg viewBox="0 0 360 230" role="img" aria-label="Beliebiges Dreieck ABC mit Seiten a b c und Winkeln alpha beta gamma">
+    <polygon points="55,195 305,195 175,55" fill="#e7f6ec" stroke="#2e7d4f" stroke-width="2"/>
+    <text x="44" y="210" font-size="12" fill="#37424f">A</text>
+    <text x="305" y="210" font-size="12" fill="#37424f">B</text>
+    <text x="168" y="48" font-size="12" fill="#37424f">C</text>
+    <!-- Seiten: c=AB unten, a=BC rechts, b=AC links -->
+    <text x="172" y="212" font-size="12" fill="#13355f">c</text>
+    <text x="250" y="128" font-size="12" fill="#13355f">a</text>
+    <text x="100" y="128" font-size="12" fill="#13355f">b</text>
+    <!-- Winkel -->
+    <text x="74" y="186" font-size="12" fill="#c0392b">α</text>
+    <text x="284" y="186" font-size="12" fill="#c0392b">β</text>
+    <text x="170" y="78" font-size="12" fill="#c0392b">γ</text>
+  </svg>
+  <figcaption>Beliebiges Dreieck: Seite \(a\) liegt \(\alpha\) gegenüber, \(b\) gegenüber \(\beta\), \(c\) gegenüber \(\gamma\). → Sinussatz / Kosinussatz.</figcaption>
+  </figure>
+
+  <figure class="fig">
+  <svg viewBox="0 0 300 220" role="img" aria-label="Kreissektor mit Radius r und Mittelpunktswinkel 120 Grad">
+    <!-- Sektor 120°: von 0° bis 120° -->
+    <path d="M 90 170 L 190 170 A 100 100 0 0 0 40 83.4 Z" fill="#fff7e0" stroke="#c98a00" stroke-width="2"/>
+    <line x1="90" y1="170" x2="190" y2="170" stroke="#c98a00" stroke-width="2"/>
+    <line x1="90" y1="170" x2="40" y2="83.4" stroke="#c98a00" stroke-width="2"/>
+    <path d="M 120 170 A 30 30 0 0 0 75 144" fill="none" stroke="#c0392b" stroke-width="1.6"/>
+    <text x="118" y="150" font-size="12" fill="#c0392b">120°</text>
+    <text x="135" y="185" font-size="12" fill="#13355f">r</text>
+    <text x="48" y="120" font-size="12" fill="#13355f">r</text>
+    <text x="150" y="100" font-size="12" fill="#c98a00">Bogen b</text>
+    <circle cx="90" cy="170" r="2.5" fill="#37424f"/><text x="76" y="184" font-size="11" fill="#37424f">M</text>
+  </svg>
+  <figcaption>Kreissektor mit Radius \(r\) und Mittelpunktswinkel \(120^\circ\): Anteil \(\tfrac{120}{360}=\tfrac13\) des Kreises.</figcaption>
+  </figure>
+
+  <div class="muster">
+    <span class="titel">Musterbeispiel — Kosinussatz</span>
+    <p>Dreieck mit \(b=6\), \(c=8\), eingeschlossener Winkel \(\alpha=40^\circ\). Berechne \(a\).</p>
+    <p>\(a^2=6^2+8^2-2\cdot6\cdot8\cdot\cos40^\circ=36+64-96\cdot0{,}766=100-73{,}54=26{,}46\). → \(a=\sqrt{26{,}46}\approx \mathbf{5{,}14}\).</p>
+  </div>
+
+  <h3>Übungen</h3>
+  <div class="aufgabe"><span class="nr">2.1</span> <span class="tag tagA">Teil A</span> Rechtwinkliges Dreieck mit Katheten \(a=9\,\text{cm}\), \(b=12\,\text{cm}\). Berechne die Hypotenuse \(c\) (Pythagoras).</div>
+  <div class="aufgabe"><span class="nr">2.2</span> <span class="tag tagB">Teil B</span> Rechtwinkliges Dreieck: Hypotenuse \(c=10\,\text{cm}\), Winkel \(\alpha=35^\circ\). Berechne die Gegenkathete \(a\).</div>
+  <div class="aufgabe"><span class="nr">2.3</span> <span class="tag tagB">Teil B</span> Dreieck mit \(b=7\,\text{cm}\), \(c=9\,\text{cm}\), eingeschlossener Winkel \(\alpha=52^\circ\). Berechne \(a\) (Kosinussatz).</div>
+  <div class="aufgabe"><span class="nr">2.4</span> <span class="tag tagB">Teil B</span> Dreieck mit \(a=8\), \(b=5\), \(c=7\). Berechne \(\alpha\) (gegenüber \(a\)).</div>
+  <div class="aufgabe"><span class="nr">2.5</span> <span class="tag tagB">Teil B</span> Kreissektor mit \(r=6\,\text{cm}\), \(\alpha=120^\circ\). Berechne Bogen \(b\) und Sektorfläche \(A\).</div>
+
+  <details class="loes"><summary>Lösungen Bereich 2 anzeigen</summary>
+  <div class="loesungen">
+    <p><b>2.1</b> \(c^2=9^2+12^2=81+144=225\) → \(c=\sqrt{225}=\mathbf{15\,\text{cm}}\). <i>(9-12-15 = 3·(3-4-5))</i></p>
+    <p><b>2.2</b> \(\sin\alpha=\tfrac{a}{c}\) → \(a=c\cdot\sin\alpha=10\cdot\sin35^\circ=10\cdot0{,}5736\approx\mathbf{5{,}74\,\text{cm}}\).</p>
+    <p><b>2.3</b> \(a^2=7^2+9^2-2\cdot7\cdot9\cdot\cos52^\circ=49+81-126\cdot0{,}6157=130-77{,}57=52{,}43\) → \(a\approx\mathbf{7{,}24\,\text{cm}}\).</p>
+    <p><b>2.4</b> \(\cos\alpha=\dfrac{b^2+c^2-a^2}{2bc}=\dfrac{25+49-64}{70}=\dfrac{10}{70}=0{,}142857\) → \(\alpha=\cos^{-1}(0{,}142857)\approx\mathbf{81{,}79^\circ}\).</p>
+    <p><b>2.5</b> Bogen \(b=2\pi\cdot6\cdot\tfrac{120}{360}=4\pi\approx\mathbf{12{,}57\,\text{cm}}\). Fläche \(A=\pi\cdot6^2\cdot\tfrac{120}{360}=12\pi\approx\mathbf{37{,}70\,\text{cm}^2}\).</p>
+  </div>
+  </details>
+</section>
+
+<section class="bereich" id="b3">
+  <h2>Bereich 3 — Raumgeometrie / Körper <span class="warn">⚠️ Schwerpunkt!</span></h2>
+
+  <h3>Wie macht man das?</h3>
+  <p>Bei jedem Körper brauchst du <b>Volumen \(V\)</b> und oft <b>Oberfläche \(O\)</b>. Lerne die Formeln auswendig (Zeit sparen!):</p>
+  <ul>
+    <li><b>Zylinder</b>: \(V=\pi r^2 h\), \(O=2\pi r(r+h)\) (2 Kreise + Mantel \(2\pi r h\)).</li>
+    <li><b>Pyramide</b> (quadratisch): \(V=\tfrac13 a^2 h\); Seitenhöhe \(h_s=\sqrt{h^2+(a/2)^2}\); \(O=G+M\) mit \(M=\tfrac12\cdot u\cdot h_s=2\,a\,h_s\).</li>
+    <li><b>Kegel</b>: Mantellinie \(s=\sqrt{r^2+h^2}\); \(V=\tfrac13\pi r^2 h\); \(O=\pi r(r+s)\).</li>
+    <li><b>Kugel</b>: \(V=\tfrac43\pi r^3\), \(O=4\pi r^2\). Halbkugel = die Hälfte von \(V\); gewölbte Fläche \(=2\pi r^2\).</li>
+  </ul>
+  <p><b>Rotationskörper / zusammengesetzte Körper</b>: in <b>einfache Teile zerlegen</b> (Zylinder, Kegel, Halbkugel), jedes Teilvolumen einzeln rechnen und dann <b>addieren</b>. Aufpassen: bei gemeinsamen Radien hat z. B. die Halbkugel denselben \(r\).</p>
+  <p><b>Extremwert</b> (größtes Volumen): bei \(V(x)=ax^2+bx\) liegt das Maximum im Scheitel \(x=-\tfrac{b}{2a}\). <b>Zentrische Streckung</b> mit Faktor \(k\): Volumen wird \(k^3\)-fach, Fläche \(k^2\)-fach.</p>
+  <div class="tipp-it">💡 <b>Auf Italienisch:</b> i <i>Rotationskörper</i> (solidi composti) si risolvono <b>a pezzi</b>: dividi in cilindro/cono/semisfera, calcoli ogni volume e li <b>sommi</b>. La semisfera = metà della sfera: \(\tfrac12\cdot\tfrac43\pi r^3=\tfrac23\pi r^3\).</div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:flex-end">
+    <figure class="fig" style="margin:6px">
+    <svg viewBox="0 0 170 210" width="150" role="img" aria-label="Zylinder mit Radius r und Hoehe h">
+      <ellipse cx="85" cy="170" rx="50" ry="15" fill="#dce8f7" stroke="#1d4e89" stroke-width="2"/>
+      <line x1="35" y1="40" x2="35" y2="170" stroke="#1d4e89" stroke-width="2"/>
+      <line x1="135" y1="40" x2="135" y2="170" stroke="#1d4e89" stroke-width="2"/>
+      <ellipse cx="85" cy="40" rx="50" ry="15" fill="#eaf2fb" stroke="#1d4e89" stroke-width="2"/>
+      <line x1="85" y1="40" x2="135" y2="40" stroke="#c0392b" stroke-width="1.6"/><text x="100" y="34" font-size="12" fill="#c0392b">r</text>
+      <line x1="150" y1="40" x2="150" y2="170" stroke="#2e7d4f" stroke-width="1.4" stroke-dasharray="4 3"/><text x="153" y="110" font-size="12" fill="#2e7d4f">h</text>
+    </svg><figcaption>Zylinder</figcaption></figure>
+
+    <figure class="fig" style="margin:6px">
+    <svg viewBox="0 0 190 210" width="160" role="img" aria-label="Quadratische Pyramide mit Grundkante a, Hoehe h, Seitenhoehe hs">
+      <polygon points="40,175 150,175 175,150 65,150" fill="#eef4fb" stroke="#1d4e89" stroke-width="1.6"/>
+      <polygon points="40,175 150,175 100,45" fill="#dce8f7" stroke="#1d4e89" stroke-width="2"/>
+      <line x1="150" y1="175" x2="100" y2="45" stroke="#1d4e89" stroke-width="2"/>
+      <line x1="175" y1="150" x2="100" y2="45" stroke="#1d4e89" stroke-width="1.4" stroke-dasharray="3 3"/>
+      <line x1="100" y1="45" x2="107" y2="162" stroke="#2e7d4f" stroke-width="1.4" stroke-dasharray="4 3"/><text x="110" y="115" font-size="12" fill="#2e7d4f">h</text>
+      <line x1="100" y1="45" x2="95" y2="175" stroke="#c98a00" stroke-width="1.4"/><text x="74" y="115" font-size="12" fill="#c98a00">hₛ</text>
+      <text x="88" y="190" font-size="12" fill="#c0392b">a</text>
+    </svg><figcaption>Pyramide</figcaption></figure>
+
+    <figure class="fig" style="margin:6px">
+    <svg viewBox="0 0 180 210" width="150" role="img" aria-label="Kegel mit Radius r, Hoehe h, Mantellinie s">
+      <ellipse cx="90" cy="170" rx="55" ry="15" fill="#dce8f7" stroke="#1d4e89" stroke-width="2"/>
+      <polygon points="35,170 145,170 90,40" fill="#eaf2fb" stroke="#1d4e89" stroke-width="2" opacity="0.85"/>
+      <line x1="90" y1="40" x2="90" y2="170" stroke="#2e7d4f" stroke-width="1.4" stroke-dasharray="4 3"/><text x="94" y="120" font-size="12" fill="#2e7d4f">h</text>
+      <line x1="90" y1="170" x2="145" y2="170" stroke="#c0392b" stroke-width="1.6"/><text x="112" y="186" font-size="12" fill="#c0392b">r</text>
+      <text x="118" y="100" font-size="12" fill="#c98a00">s</text>
+    </svg><figcaption>Kegel</figcaption></figure>
+
+    <figure class="fig" style="margin:6px">
+    <svg viewBox="0 0 150 210" width="120" role="img" aria-label="Kugel mit Radius r">
+      <circle cx="75" cy="110" r="60" fill="#dce8f7" stroke="#1d4e89" stroke-width="2"/>
+      <ellipse cx="75" cy="110" rx="60" ry="18" fill="none" stroke="#1d4e89" stroke-width="1.2" stroke-dasharray="4 3"/>
+      <line x1="75" y1="110" x2="135" y2="110" stroke="#c0392b" stroke-width="1.6"/><text x="100" y="104" font-size="12" fill="#c0392b">r</text>
+      <circle cx="75" cy="110" r="2.5" fill="#37424f"/>
+    </svg><figcaption>Kugel</figcaption></figure>
+  </div>
+
+  <h4>Rotationskörper (Schwerpunkt!) — zerlegen &amp; addieren</h4>
+  <div style="display:flex;flex-wrap:wrap;gap:18px;justify-content:center;align-items:flex-end">
+    <figure class="fig" style="margin:6px">
+    <svg viewBox="0 0 180 240" width="160" role="img" aria-label="Zusammengesetzt: Zylinder mit Halbkugel oben">
+      <path d="M 35 80 A 50 50 0 0 1 135 80" fill="#cfe0f5" stroke="#1d4e89" stroke-width="2"/>
+      <ellipse cx="85" cy="80" rx="50" ry="15" fill="#eaf2fb" stroke="#1d4e89" stroke-width="1.4"/>
+      <line x1="35" y1="80" x2="35" y2="200" stroke="#1d4e89" stroke-width="2"/>
+      <line x1="135" y1="80" x2="135" y2="200" stroke="#1d4e89" stroke-width="2"/>
+      <ellipse cx="85" cy="200" rx="50" ry="15" fill="#dce8f7" stroke="#1d4e89" stroke-width="2"/>
+      <text x="40" y="55" font-size="11" fill="#2e7d4f">Halbkugel (r)</text>
+      <line x1="155" y1="80" x2="155" y2="200" stroke="#2e7d4f" stroke-width="1.4" stroke-dasharray="4 3"/><text x="158" y="145" font-size="12" fill="#2e7d4f">h</text>
+      <line x1="85" y1="200" x2="135" y2="200" stroke="#c0392b" stroke-width="1.6"/><text x="100" y="216" font-size="12" fill="#c0392b">r</text>
+    </svg><figcaption>Zylinder + Halbkugel (Silo)<br>\(V=\pi r^2 h+\tfrac23\pi r^3\)</figcaption></figure>
+
+    <figure class="fig" style="margin:6px">
+    <svg viewBox="0 0 180 250" width="160" role="img" aria-label="Eis in der Waffel: Kegel mit Halbkugel oben">
+      <path d="M 45 95 A 45 45 0 0 1 135 95" fill="#ffe0b0" stroke="#c98a00" stroke-width="2"/>
+      <ellipse cx="90" cy="95" rx="45" ry="13" fill="#ffeccc" stroke="#c98a00" stroke-width="1.4"/>
+      <polygon points="45,95 135,95 90,215" fill="#e9d3a8" stroke="#1d4e89" stroke-width="2"/>
+      <text x="46" y="72" font-size="11" fill="#c98a00">Halbkugel (r)</text>
+      <line x1="45" y1="95" x2="135" y2="95" stroke="#c0392b" stroke-width="1.6"/><text x="86" y="89" font-size="12" fill="#c0392b">r</text>
+      <line x1="155" y1="95" x2="155" y2="215" stroke="#2e7d4f" stroke-width="1.4" stroke-dasharray="4 3"/><text x="158" y="155" font-size="12" fill="#2e7d4f">h</text>
+      <text x="96" y="170" font-size="11" fill="#1d4e89">Kegel</text>
+    </svg><figcaption>Kegel + Halbkugel (Eis)<br>\(V=\tfrac13\pi r^2 h+\tfrac23\pi r^3\)</figcaption></figure>
+  </div>
+
+  <div class="muster">
+    <span class="titel">Musterbeispiel — Rotationskörper</span>
+    <p>Silo = Zylinder (\(r=2\,\text{m}\), \(h=5\,\text{m}\)) mit Halbkugel (\(r=2\,\text{m}\)) oben. Gesamtvolumen?</p>
+    <p>Zylinder: \(V_1=\pi\cdot2^2\cdot5=20\pi\). Halbkugel: \(V_2=\tfrac23\pi\cdot2^3=\tfrac{16}{3}\pi\). </p>
+    <p>\(V=20\pi+\tfrac{16}{3}\pi=\tfrac{60+16}{3}\pi=\tfrac{76}{3}\pi\approx \mathbf{79{,}59\,\text{m}^3}\).</p>
+  </div>
+
+  <h3>Übungen</h3>
+  <div class="aufgabe"><span class="nr">3.1</span> <span class="tag tagB">Teil B</span> Zylinder mit \(r=4\,\text{cm}\), \(h=10\,\text{cm}\). Berechne \(V\) und \(O\).</div>
+  <div class="aufgabe"><span class="nr">3.2</span> <span class="tag tagB">Teil B</span> Quadratische Pyramide: Grundkante \(a=10\,\text{cm}\), Höhe \(h=12\,\text{cm}\). Berechne \(V\), Seitenhöhe \(h_s\) und \(O\).</div>
+  <div class="aufgabe"><span class="nr">3.3</span> <span class="tag tagB">Teil B</span> Kegel mit \(r=6\,\text{cm}\), \(h=8\,\text{cm}\). Berechne \(s\), \(V\) und \(O\).</div>
+  <div class="aufgabe"><span class="nr">3.4</span> <span class="tag tagA">A/B</span> Kugel mit \(r=5\,\text{cm}\). Berechne \(V\) und \(O\).</div>
+  <div class="aufgabe"><span class="nr">3.5</span> <span class="tag tagB">Teil B</span> Körper aus <b>Zylinder</b> (\(r=5\), \(h=12\)) mit <b>Halbkugel</b> (\(r=5\)) oben. Gesamtvolumen?</div>
+  <div class="aufgabe"><span class="nr">3.6</span> <span class="tag tagB">Teil B</span> „Eis in der Waffel“ = <b>Kegel</b> (\(r=3\), \(h=10\)) mit <b>Halbkugel</b> (\(r=3\)) oben. Gesamtvolumen?</div>
+  <div class="aufgabe"><span class="nr">3.7</span> <span class="tag tagB">Teil B</span> \(V(x)=-0{,}5x^2+6x\) (\(0<x<12\)). Für welches \(x\) ist \(V\) maximal? Wie groß ist \(V_{\max}\)?</div>
+  <div class="aufgabe"><span class="nr">3.8</span> <span class="tag tagB">Teil B</span> Pyramide mit \(V=320\,\text{cm}^3\) wird mit \(k=0{,}5\) verkleinert. Neues Volumen?</div>
+
+  <details class="loes"><summary>Lösungen Bereich 3 anzeigen</summary>
+  <div class="loesungen">
+    <p><b>3.1</b> \(V=\pi\cdot4^2\cdot10=160\pi\approx\mathbf{502{,}65\,\text{cm}^3}\); \(O=2\pi\cdot4\cdot(4+10)=112\pi\approx\mathbf{351{,}86\,\text{cm}^2}\).</p>
+    <p><b>3.2</b> \(G=10^2=100\); \(V=\tfrac13\cdot100\cdot12=\mathbf{400\,\text{cm}^3}\). \(h_s=\sqrt{12^2+5^2}=\sqrt{169}=\mathbf{13\,\text{cm}}\). \(M=2\cdot10\cdot13=260\); \(O=100+260=\mathbf{360\,\text{cm}^2}\).</p>
+    <p><b>3.3</b> \(s=\sqrt{6^2+8^2}=\sqrt{100}=\mathbf{10\,\text{cm}}\). \(V=\tfrac13\pi\cdot36\cdot8=96\pi\approx\mathbf{301{,}59\,\text{cm}^3}\). \(O=\pi\cdot6\cdot(6+10)=96\pi\approx\mathbf{301{,}59\,\text{cm}^2}\). <i>(gleicher Zahlenwert \(96\pi\), aber verschiedene Einheiten!)</i></p>
+    <p><b>3.4</b> \(V=\tfrac43\pi\cdot5^3=\tfrac{500}{3}\pi\approx\mathbf{523{,}60\,\text{cm}^3}\); \(O=4\pi\cdot25=100\pi\approx\mathbf{314{,}16\,\text{cm}^2}\).</p>
+    <p><b>3.5</b> Zylinder \(V_1=\pi\cdot25\cdot12=300\pi\); Halbkugel \(V_2=\tfrac23\pi\cdot125=\tfrac{250}{3}\pi\). \(V=300\pi+\tfrac{250}{3}\pi=\tfrac{1150}{3}\pi\approx\mathbf{1204{,}28\,\text{cm}^3}\).</p>
+    <p><b>3.6</b> Kegel \(V_1=\tfrac13\pi\cdot9\cdot10=30\pi\); Halbkugel \(V_2=\tfrac23\pi\cdot27=18\pi\). \(V=30\pi+18\pi=48\pi\approx\mathbf{150{,}80\,\text{cm}^3}\).</p>
+    <p><b>3.7</b> Maximum im Scheitel: \(x=-\tfrac{b}{2a}=-\tfrac{6}{2\cdot(-0{,}5)}=6\). \(V(6)=-0{,}5\cdot36+36=-18+36=\mathbf{18}\) → \(x=\mathbf{6\,\text{cm}}\), \(V_{\max}=\mathbf{18\,\text{cm}^3}\).</p>
+    <p><b>3.8</b> \(V'=k^3\cdot V=0{,}5^3\cdot320=0{,}125\cdot320=\mathbf{40\,\text{cm}^3}\).</p>
+  </div>
+  </details>
+</section>
+
+<section class="bereich" id="b4">
+  <h2>Bereich 4 — Prozent &amp; Zins</h2>
+  <h3>Wie macht man das?</h3>
+  <p><b>Prozentwert</b> \(W=G\cdot\tfrac{p}{100}\). <b>Rabatt</b>: neuer Preis \(=G\cdot(1-\tfrac{p}{100})\) (z. B. \(-15\%\) → \(\cdot0{,}85\)). <b>Originalpreis</b> aus reduziertem Preis: durch den Faktor <b>teilen</b> (z. B. nach \(-20\%\): \(\div0{,}80\)).</p>
+  <p><b>Zinseszins</b> nach \(n\) Jahren: \(K_n=K\cdot\bigl(1+\tfrac{p}{100}\bigr)^{n}\). Zinsen \(=K_n-K\).</p>
+  <div class="tipp-it">💡 <b>Auf Italienisch:</b> sconto del \(15\%\) → moltiplica per \(0{,}85\). Per tornare al prezzo iniziale, <b>dividi</b> per il fattore (es. dopo \(-20\%\): \(\div0{,}80\)). Interesse composto = moltiplichi per \((1+p/100)\) ogni anno.</div>
+
+  <div class="muster">
+    <span class="titel">Musterbeispiel — Zinseszins</span>
+    <p>\(800\,€\) zu \(4\%\), 3 Jahre: \(K_3=800\cdot1{,}04^3=800\cdot1{,}124864=\mathbf{899{,}89\,€}\) (Zinsen \(\approx99{,}89\,€\)).</p>
+  </div>
+
+  <h3>Übungen</h3>
+  <div class="aufgabe"><span class="nr">4.1</span> <span class="tag tagB">Teil B</span> Ein Pullover kostet \(80\,€\), wird um \(15\%\) reduziert. Neuer Preis?</div>
+  <div class="aufgabe"><span class="nr">4.2</span> <span class="tag tagB">Teil B</span> Ein Handy kostet nach \(20\%\) Rabatt noch \(360\,€\). Originalpreis?</div>
+  <div class="aufgabe"><span class="nr">4.3</span> <span class="tag tagB">Teil B</span> \(2000\,€\) zu \(3\%\) pro Jahr. Wie viel nach 5 Jahren (Zinseszins)?</div>
+
+  <details class="loes"><summary>Lösungen Bereich 4 anzeigen</summary>
+  <div class="loesungen">
+    <p><b>4.1</b> Rabatt \(=80\cdot0{,}15=12\,€\); neuer Preis \(=80-12=\mathbf{68\,€}\) (oder \(80\cdot0{,}85\)).</p>
+    <p><b>4.2</b> \(360\,€\) sind \(80\%\) → \(G=\dfrac{360}{0{,}80}=\mathbf{450\,€}\). <i>Probe: \(450\cdot0{,}80=360\) ✓</i></p>
+    <p><b>4.3</b> \(K_5=2000\cdot1{,}03^5=2000\cdot1{,}159274=\mathbf{2318{,}55\,€}\) (Zinsen \(\approx318{,}55\,€\)).</p>
+  </div>
+  </details>
+</section>
+
+<section class="bereich" id="b5">
+  <h2>Bereich 5 — Stochastik (Daten &amp; Zufall)</h2>
+  <h3>Wie macht man das?</h3>
+  <p><b>Baumdiagramm</b>: entlang eines Pfades die Wahrscheinlichkeiten <b>multiplizieren</b>; mehrere passende Pfade <b>addieren</b>. <b>Mit Zurücklegen</b> bleiben die Wahrscheinlichkeiten gleich; <b>ohne Zurücklegen</b> ändern sich Anzahl und Gesamtzahl im 2. Zug. \(P(\text{mind. 1})=1-P(\text{keins})\). <b>Kombinatorik</b> mit Wiederholung: \(n^k\). <b>Mittelwert</b> = Summe \(/\) Anzahl; <b>Median</b> = mittlerer Wert (bei gerader Anzahl: Mittel der beiden mittleren).</p>
+  <div class="tipp-it">💡 <b>Auf Italienisch:</b> lungo un ramo si <b>moltiplica</b>, tra rami diversi si <b>somma</b>. „mindestens 1“ = \(1-P(\text{nessuno})\). Senza reinserimento (<i>ohne Zurücklegen</i>) il secondo tiro cambia: una pallina in meno.</p></div>
+
+  <figure class="fig">
+  <svg viewBox="0 0 340 240" role="img" aria-label="Baumdiagramm: 4 rote und 6 blaue Kugeln, zweimal ziehen mit Zuruecklegen">
+    <!-- Start -->
+    <circle cx="30" cy="120" r="3" fill="#37424f"/>
+    <!-- Stufe 1 -->
+    <line x1="33" y1="118" x2="150" y2="60" stroke="#c0392b" stroke-width="1.6"/>
+    <line x1="33" y1="122" x2="150" y2="180" stroke="#1d4e89" stroke-width="1.6"/>
+    <text x="78" y="78" font-size="11" fill="#c0392b">0,4</text>
+    <text x="78" y="160" font-size="11" fill="#1d4e89">0,6</text>
+    <text x="153" y="64" font-size="12" fill="#c0392b">rot</text>
+    <text x="153" y="184" font-size="12" fill="#1d4e89">blau</text>
+    <!-- Stufe 2 von rot -->
+    <line x1="180" y1="58" x2="290" y2="30" stroke="#c0392b" stroke-width="1.4"/>
+    <line x1="180" y1="62" x2="290" y2="90" stroke="#1d4e89" stroke-width="1.4"/>
+    <text x="225" y="36" font-size="10" fill="#c0392b">0,4</text>
+    <text x="225" y="86" font-size="10" fill="#1d4e89">0,6</text>
+    <text x="293" y="34" font-size="11" fill="#c0392b">rot</text>
+    <text x="293" y="94" font-size="11" fill="#1d4e89">blau</text>
+    <!-- Stufe 2 von blau -->
+    <line x1="180" y1="178" x2="290" y2="150" stroke="#c0392b" stroke-width="1.4"/>
+    <line x1="180" y1="182" x2="290" y2="210" stroke="#1d4e89" stroke-width="1.4"/>
+    <text x="225" y="156" font-size="10" fill="#c0392b">0,4</text>
+    <text x="225" y="206" font-size="10" fill="#1d4e89">0,6</text>
+    <text x="293" y="154" font-size="11" fill="#c0392b">rot</text>
+    <text x="293" y="214" font-size="11" fill="#1d4e89">blau</text>
+  </svg>
+  <figcaption>Baumdiagramm <b>mit Zurücklegen</b> (4 rot, 6 blau → \(P(\text{rot})=0{,}4\)). \(P(\text{2 rote})=0{,}4\cdot0{,}4=0{,}16\). Ohne Zurücklegen wäre der 2. Ast \(\tfrac{3}{9}\).</figcaption>
+  </figure>
+
+  <h3>Übungen</h3>
+  <div class="aufgabe"><span class="nr">5.1</span> <span class="tag tagA">A/B</span> Urne: 4 rote, 6 blaue Kugeln, 2× ziehen <b>mit Zurücklegen</b>. \(P(\text{2 rote})\) und \(P(\text{mind. 1 rote})\)?</div>
+  <div class="aufgabe"><span class="nr">5.2</span> <span class="tag tagB">Teil B</span> Gleiche Urne, aber <b>ohne Zurücklegen</b>. \(P(\text{2 rote})\)?</div>
+  <div class="aufgabe"><span class="nr">5.3</span> <span class="tag tagA">Teil A</span> Zahlenschloss, 4 Stellen, je Ziffer 0–9. Wie viele Codes?</div>
+  <div class="aufgabe"><span class="nr">5.4</span> <span class="tag tagB">Teil B</span> Mittelwert und Median von: 7, 3, 9, 5, 11, 3.</div>
+
+  <details class="loes"><summary>Lösungen Bereich 5 anzeigen</summary>
+  <div class="loesungen">
+    <p><b>5.1</b> \(P(\text{2 rote})=0{,}4\cdot0{,}4=\mathbf{0{,}16}\). \(P(\text{mind. 1})=1-(0{,}6)^2=1-0{,}36=\mathbf{0{,}64}\).</p>
+    <p><b>5.2</b> \(P(\text{2 rote})=\tfrac{4}{10}\cdot\tfrac{3}{9}=\tfrac{12}{90}=\tfrac{2}{15}\approx\mathbf{0{,}13}\) (\(13{,}3\%\)).</p>
+    <p><b>5.3</b> \(10^4=\mathbf{10\,000}\) Codes.</p>
+    <p><b>5.4</b> Summe \(=7+3+9+5+11+3=38\); Mittelwert \(=\tfrac{38}{6}\approx\mathbf{6{,}33}\). Sortiert \(3,3,5,7,9,11\) → Median \(=\tfrac{5+7}{2}=\mathbf{6}\).</p>
+  </div>
+  </details>
+</section>
+
+<div class="motivation">
+  <p><b>Gioele, du hast alles, was du brauchst.</b> Halte dich an den 2-Tage-Plan, mach die Pausen, rechne jede Aufgabe zuerst selbst und schau dann in die Lösungen. Schreib immer den Rechenweg auf, prüfe die Einheiten, Taschenrechner auf DEG — und atme ruhig. Am Montag um 08:30 zeigst du einfach, was du diese zwei Tage gefestigt hast. Viel Erfolg! 🍀</p>
+  <p class="it">In bocca al lupo, Gioele! Vai con calma, scrivi sempre i passaggi e fidati di quello che hai ripassato. La geometria dei solidi è la più importante: se quella va, vai forte. Ce la fai. 💪</p>
+</div>
+
+<div class="hinweis">Übungsmaterial im Stil der bayerischen Abschlussprüfung (ISB) — keine echten Prüfungstexte. Alle Lösungen unabhängig nachgerechnet (Mehrfach-Verifikation). Erstellt für Gioele · Prüfung 29.06.2026.</div>
+
+</div>
+</body>
+</html>
